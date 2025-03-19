@@ -1,10 +1,14 @@
-import React from "react";
+import Navbar from "../components/Navbar";
+import "../styles/Home.css";
 
-const Home: React.FC = () => {
+const Home = () => {
   return (
     <div>
-      <h1>Home Page - Mr Football ⚽️</h1>
-      <p>Bem-vindo ao projeto Mr. Football!</p>
+      <Navbar />
+      <div className="Home">
+        <h1>Bem-vindo ao Mr Football Lab</h1>
+        <p>Seu e-commerce especializado em chuteiras de futebol.</p>
+      </div>
     </div>
   );
 };

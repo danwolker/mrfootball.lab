@@ -1,0 +1,88 @@
+/* NAVBAR GERAL */
+.navbar {
+    background-color: #003366;
+    padding: 12px 20px;
+    color: white;
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  /* LOGO */
+  .logo img {
+    height: 45px;
+  }
+  
+  /* MENU CENTRAL */
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    flex-grow: 1;
+    justify-content: center;
+  }
+  
+  .nav-links li {
+    display: inline;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* AGRUPANDO PESQUISA + ÍCONES NO FINAL */
+  .right-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  /* PESQUISA */
+  .search-container {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    width: 230px;
+  }
+  
+  .search-input {
+    border: none;
+    outline: none;
+    padding: 6px;
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 5px;
+  }
+  
+  /* ÍCONES */
+  .icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .icon {
+    height: 38px;
+    cursor: pointer;
+  }
+  
