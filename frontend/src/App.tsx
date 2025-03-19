@@ -1,15 +1,12 @@
-import { useState } from 'react'
-import './App.css'
+import React from 'react';
+import AppRoutes from './routes/AppRoutes';
 
-function App() {
-
+const App: React.FC = () => {
   return (
-      <div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div>
+      <AppRoutes />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
