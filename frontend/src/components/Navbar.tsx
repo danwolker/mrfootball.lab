@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "../styles/Navbar.css"; // Importa o CSS
+import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -8,10 +9,10 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="container">
-        
+
         {/* LOGO */}
         <Link to="/" className="logo">
-          <img src="/logo.png" alt="Logo" />
+          <img src="/imagens/logo.jpeg" alt="Logo" />
         </Link>
 
         {/* MENU CENTRAL */}
@@ -25,23 +26,25 @@ const Navbar = () => {
         <div className="right-section">
           {/* CAMPO DE PESQUISA */}
           <div className="search-container">
-            <input 
-              type="text" 
-              className="search-input" 
-              value={search} 
-              onChange={(e) => setSearch(e.target.value)} 
-              placeholder="Buscar no site..."
+            <input
+              type="text"
+              className="search-input"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Pesquisar"
             />
-            <button className="search-btn">🔍</button>
+            <button className="search-btn">
+              <i className="fas fa-search"></i>
+            </button>
           </div>
 
-          {/* ÍCONES (Carrinho e Perfil) */}
+          {/* ÍCONES DO CARRINHO E PERFIL */}
           <div className="icons">
             <Link to="/cart">
-              <img src="/cart.png" alt="Carrinho" className="icon" />
+              <FaShoppingCart className="icon-cart" />
             </Link>
             <Link to="/login">
-              <img src="/profile.png" alt="Perfil" className="icon" />
+              <FaUserCircle className="icon-login" />
             </Link>
           </div>
         </div>

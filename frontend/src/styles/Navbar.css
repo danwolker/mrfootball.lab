@@ -1,6 +1,6 @@
 /* NAVBAR GERAL */
 .navbar {
-    background-color: #003366;
+    background-color: #0e72ae;
     padding: 12px 20px;
     color: white;
   }
@@ -38,7 +38,8 @@
   }
   
   .nav-links a:hover {
-    text-decoration: underline;
+    color: rgba(255, 255, 255, 0.632);
+    
   }
   
   /* AGRUPANDO PESQUISA + ÍCONES NO FINAL */
@@ -48,41 +49,67 @@
     gap: 15px;
   }
   
-  /* PESQUISA */
-  .search-container {
-    display: flex;
-    align-items: center;
-    background: white;
-    padding: 6px 10px;
-    border-radius: 5px;
-    width: 230px;
-  }
-  
-  .search-input {
-    border: none;
-    outline: none;
-    padding: 6px;
-    font-size: 14px;
-    width: 100%;
-  }
-  
-  .search-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin-left: 5px;
-  }
+/* PESQUISA */
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-radius: 9px;
+  width: 220px;
+  border: 3px solid #ccc; 
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  width: 100%;
+  text-align: center;
+  color: black;
+  background-color: white;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.search-btn:hover {
+  color: #000;
+}
   
   /* ÍCONES */
   .icons {
+
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 25px;
   }
   
   .icon {
-    height: 38px;
+    height: 35px;
     cursor: pointer;
   }
+
+  .icon-cart {
+    color: black;
+    height: 35px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .icon-login {
+    color: black;
+    height: 35px;
+    cursor: pointer;
+    position: relative;
+  }
   
+  .icon-cart:hover,
+  .icon-login:hover {
+    color: rgba(255, 255, 255, 0.632); /* Cor rosa ao passar o mouse */
+  }
