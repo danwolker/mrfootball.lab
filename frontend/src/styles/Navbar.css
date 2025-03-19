@@ -1,115 +1,105 @@
-/* NAVBAR GERAL */
+/* NAVBAR */
 .navbar {
-    background-color: #0e72ae;
-    padding: 12px 20px;
-    color: white;
-  }
-  
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    width: 100%;
-  }
-  
-  /* LOGO */
-  .logo img {
-    height: 45px;
-  }
-  
-  /* MENU CENTRAL */
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    flex-grow: 1;
-    justify-content: center;
-  }
-  
-  .nav-links li {
-    display: inline;
-  }
-  
-  .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-  }
-  
-  .nav-links a:hover {
-    color: rgba(255, 255, 255, 0.632);
-    
-  }
-  
-  /* AGRUPANDO PESQUISA + ÍCONES NO FINAL */
-  .right-section {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-/* PESQUISA */
+  width: 100%;
+  background-color: #0e72ae;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  justify-content: space-between;
+}
+
+/* Botão de Menu */
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Logo */
+.logo img {
+  height: 40px;
+}
+
+/* Barra de Pesquisa */
 .search-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   background: white;
-  border-radius: 9px;
-  width: 220px;
-  border: 3px solid #ccc; 
+  border-radius: 5px;
+  width: 300px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
 }
 
 .search-input {
   border: none;
   outline: none;
-  font-size: 14px;
   width: 100%;
-  text-align: center;
-  color: black;
+  font-size: 14px;
+  padding: 5px;
+  color: black;  
   background-color: white;
+}
+
+.search-input::placeholder {
+  color: gray; /* 🔹 Mantém o placeholder visível */
 }
 
 .search-btn {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 18px;
   color: #333;
 }
 
-.search-btn:hover {
-  color: #000;
+
+/* Ícone de Login */
+.login-icon {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
 }
-  
-  /* ÍCONES */
-  .icons {
 
-    display: flex;
-    align-items: center;
-    gap: 25px;
-  }
-  
-  .icon {
-    height: 35px;
-    cursor: pointer;
-  }
+.login-icon svg {
+  font-size: 24px;
+  margin-right: 5px;
+}
 
-  .icon-cart {
-    color: black;
-    height: 35px;
-    cursor: pointer;
-    position: relative;
-  }
+/* Ícones de Contato, Favoritos e Carrinho */
+.icons {
+  display: flex;
+  gap: 20px;
+}
 
-  .icon-login {
-    color: black;
-    height: 35px;
-    cursor: pointer;
-    position: relative;
-  }
-  
-  .icon-cart:hover,
-  .icon-login:hover {
-    color: rgba(255, 255, 255, 0.632); /* Cor rosa ao passar o mouse */
-  }
+.icon {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.icon svg {
+  font-size: 24px;
+  margin-right: 5px;
+}
+
+/* Hover */
+.icon:hover,
+.login-icon:hover,
+.menu-btn:hover,
+.search-btn:hover {
+  color: #ff6600;
+}

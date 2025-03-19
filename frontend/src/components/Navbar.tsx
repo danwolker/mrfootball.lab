@@ -1,54 +1,51 @@
+import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/Navbar.css"; // Importa o CSS
-import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
-import { useState } from "react";
+import { FaBars, FaUserCircle, FaShoppingCart, FaHeart, FaHeadset, FaSearch } from "react-icons/fa";
+import "../styles/Navbar.css";
 
-const Navbar = () => {
-  const [search, setSearch] = useState("");
-
+const Navbar: React.FC = () => {
   return (
     <nav className="navbar">
-      <div className="container">
+      <div className="navbar-container">
+        {/* Botão de Menu */}
+        <button className="menu-btn">
+          <FaBars />
+        </button>
 
-        {/* LOGO */}
+        {/* Logo */}
         <Link to="/" className="logo">
-          <img src="/imagens/logo.jpeg" alt="Logo" />
+          <img src="../../public/imagens/logo.jpeg" alt="Logo" />
         </Link>
 
-        {/* MENU CENTRAL */}
-        <ul className="nav-links">
-          <li><Link to="/products">Produtos</Link></li>
-          <li><Link to="/about">Quem Somos</Link></li>
-          <li><Link to="/faq">Dúvidas</Link></li>
-        </ul>
-
-        {/* PESQUISA + ÍCONES JUNTOS */}
-        <div className="right-section">
-          {/* CAMPO DE PESQUISA */}
-          <div className="search-container">
-            <input
-              type="text"
-              className="search-input"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Pesquisar"
-            />
-            <button className="search-btn">
-              <i className="fas fa-search"></i>
-            </button>
-          </div>
-
-          {/* ÍCONES DO CARRINHO E PERFIL */}
-          <div className="icons">
-            <Link to="/cart">
-              <FaShoppingCart className="icon-cart" />
-            </Link>
-            <Link to="/login">
-              <FaUserCircle className="icon-login" />
-            </Link>
-          </div>
+        {/* Barra de Pesquisa */}
+        <div className="search-container">
+          <input type="text" className="search-input" placeholder="O que você procura?" />
+          <button className="search-btn">
+            <FaSearch />
+          </button>
         </div>
 
+        {/* Login */}
+        <Link to="/login" className="login-icon">
+          <FaUserCircle />
+          <span>Entrar / Cadastrar</span>
+        </Link>
+
+        {/* Ícones de Contato, Favoritos e Carrinho */}
+        <div className="icons">
+          <Link to="/contato" className="icon">
+            <FaHeadset />
+            <span>Fale Conosco</span>
+          </Link>
+          <Link to="/favoritos" className="icon">
+            <FaHeart />
+            <span>Favoritos</span>
+          </Link>
+          <Link to="/cart" className="icon">
+            <FaShoppingCart />
+            <span>Carrinho</span>
+          </Link>
+        </div>
       </div>
     </nav>
   );
