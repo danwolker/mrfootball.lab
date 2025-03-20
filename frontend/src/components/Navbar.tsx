@@ -1,53 +1,102 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaBars, FaUserCircle, FaShoppingCart, FaHeart, FaHeadset, FaSearch } from "react-icons/fa";
+import {
+  FaBars,
+  FaUserCircle,
+  FaShoppingCart,
+  FaHeart,
+  FaHeadset,
+  FaSearch,
+  FaTimes,
+} from "react-icons/fa";
 import "../styles/Navbar.css";
 
 const Navbar: React.FC = () => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        {/* Botão de Menu */}
-        <button className="menu-btn">
-          <FaBars />
-        </button>
-
-        {/* Logo */}
-        <Link to="/" className="logo">
-          <img src="../../public/imagens/logo.jpeg" alt="Logo" />
-        </Link>
-
-        {/* Barra de Pesquisa */}
-        <div className="search-container">
-          <input type="text" className="search-input" placeholder="O que você procura?" />
-          <button className="search-btn">
-            <FaSearch />
+    <>
+      <nav className="navbar">
+        <div className="navbar-container">
+          {/* Botão de Menu */}
+          <button className="menu-btn">
+            <FaBars />
           </button>
-        </div>
 
-        {/* Login */}
-        <Link to="/login" className="login-icon">
-          <FaUserCircle />
-          <span>Entrar / Cadastrar</span>
-        </Link>
+          {/* Logo */}
+          <Link to="/" className="logo">
+            <img src="../../public/imagens/logo.jpeg" alt="Logo" />
+          </Link>
 
-        {/* Ícones de Contato, Favoritos e Carrinho */}
-        <div className="icons">
-          <Link to="/contato" className="icon">
-            <FaHeadset />
-            <span>Fale Conosco</span>
-          </Link>
-          <Link to="/favoritos" className="icon">
-            <FaHeart />
-            <span>Favoritos</span>
-          </Link>
-          <Link to="/cart" className="icon">
-            <FaShoppingCart />
-            <span>Carrinho</span>
-          </Link>
+          {/* Barra de Pesquisa */}
+          <div className="search-container">
+            <input type="text" className="search-input" placeholder="O que você procura?" />
+            <button className="search-btn">
+              <FaSearch />
+            </button>
+          </div>
+
+          {/* Login */}
+          <button className="login-btn" onClick={() => setIsLoginOpen(true)}>
+            <FaUserCircle />
+            <span>Entrar / Cadastrar</span>
+          </button>
+
+          {/* Ícones de Contato, Favoritos e Carrinho */}
+          <div className="icons">
+            <Link to="/contato" className="icon">
+              <FaHeadset />
+              <span>Fale Conosco</span>
+            </Link>
+            <Link to="/favorites" className="icon">
+              <FaHeart />
+              <span>Favoritos</span>
+            </Link>
+            <div className="cart-container">
+              <button className="cart-btn" onClick={() => setIsCartOpen(!isCartOpen)}>
+                <FaShoppingCart />
+                <span>Carrinho</span>
+              </button>
+
+              {/* Sidebar do Carrinho */}
+              {isCartOpen && (
+                <div className="cart-sidebar">
+                  <button className="close-btn" onClick={() => setIsCartOpen(false)}>
+                    <FaTimes />
+                  </button>
+                  <h2>Seu Carrinho</h2>
+                  <p>Ainda não há itens no carrinho.</p>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      {/* Pop-up de Login */}
+      {isLoginOpen && (
+        <div className="login-modal">
+          <div className="login-box">
+            <button className="close-btn" onClick={() => setIsLoginOpen(false)}>
+              <FaTimes />
+            </button>
+            <h2>Entrar</h2>
+            <form>
+              <label>Email</label>
+              <input type="email" placeholder="Digite seu e-mail" required />
+              <label>Senha</label>
+              <input type="password" placeholder="Digite sua senha" required />
+              <button type="submit" className="login-submit">Entrar</button>
+            </form>
+            <div className="login-links">
+              <Link to="/recuperar-senha">Esqueci minha senha</Link>
+              <Link to="/cadastro">Criar conta</Link>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
