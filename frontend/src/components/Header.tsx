@@ -7,10 +7,11 @@ const Header: React.FC = () => {
     <header className="header">
       <nav className="header-nav">
         <ul className="header-menu">
-          <li><Link to="/catalogo">Catálogo</Link></li>
-          <li><Link to="/marcas">Marcas</Link></li>
-          <li><Link to="/quem-somos">Quem Somos?</Link></li>
-          <li><Link to="/duvidas">Dúvidas Frequentes</Link></li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/catalog">Catalogo</Link></li>
+          <li><Link to="/brands">Marcas</Link></li>
+          <li><Link to="/about-us">Sobre nós</Link></li>
+          <li><Link to="/faq">FAQ</Link></li>
         </ul>
       </nav>
     </header>
