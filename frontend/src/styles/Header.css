@@ -1,0 +1,55 @@
+/* HEADER */
+.header {
+    width: 100%;
+    background-color: #0e72ae;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* MENU HORIZONTAL */
+.header-nav {
+    width: 100%;
+    max-width: 1400px;
+}
+
+.header-menu {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.header-menu li {
+    display: inline-block;
+}
+
+.header-menu li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 15px;
+    transition: color 0.3s ease-in-out;
+}
+
+/* HOVER */
+.header-menu li a:hover {
+    color: #ff6600;
+}
+
+/* 🔹 Responsivo para telas menores */
+@media screen and (max-width: 768px) {
+    .header-menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .header-menu li {
+        display: block;
+        text-align: center;
+    }
+}

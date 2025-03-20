@@ -2,7 +2,8 @@
 .navbar {
   width: 100%;
   background-color: #0e72ae;
-  padding: 10px 20px;
+  margin-top: 10px;
+  padding: 25px 0;
   display: flex;
   justify-content: center;
 }
@@ -33,35 +34,43 @@
 .search-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background: white;
-  border-radius: 5px;
-  width: 300px;
+  border-radius: 25px; /* Bordas arredondadas */
+  width: 400px; /* Define largura fixa */
+  height: 30px; /* Mantém altura adequada */
   padding: 5px 10px;
   border: 1px solid #ccc;
+  position: relative;
 }
 
+/* Input da Pesquisa */
 .search-input {
   border: none;
   outline: none;
   width: 100%;
   font-size: 14px;
   padding: 5px;
-  color: black;  
+  color: black;
   background-color: white;
 }
 
 .search-input::placeholder {
-  color: gray; /* 🔹 Mantém o placeholder visível */
+  color: gray;
 }
 
+/* Botão de Pesquisa */
 .search-btn {
   background: none;
   border: none;
   cursor: pointer;
   font-size: 18px;
   color: #333;
+  position: absolute;
+  right: 5px; /* Ajusta a posição da lupa */
+  top: 55%;
+  transform: translateY(-50%);
 }
-
 
 /* Ícone de Login */
 .login-icon {
@@ -102,4 +111,52 @@
 .menu-btn:hover,
 .search-btn:hover {
   color: #ff6600;
+}
+
+/* 🔹 Responsividade para telas menores */
+@media screen and (max-width: 1024px) {
+  .navbar-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-container {
+    width: 90%;
+    max-width: 350px;
+    height: 35px;
+    margin-top: 10px;
+  }
+
+  .search-input {
+    font-size: 12px;
+  }
+
+  .search-btn {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-container {
+    width: 100%;
+    max-width: 280px;
+    height: 35px;
+  }
+
+  .search-input {
+    font-size: 12px;
+  }
+
+  .icons {
+    gap: 10px;
+  }
+
+  .icon svg {
+    font-size: 20px;
+  }
 }
