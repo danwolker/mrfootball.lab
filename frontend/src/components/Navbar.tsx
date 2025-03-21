@@ -9,6 +9,7 @@ import {
   FaSearch,
   FaTimes,
 } from "react-icons/fa";
+// ...imports
 import "../styles/Navbar.css";
 
 const Navbar: React.FC = () => {
@@ -19,32 +20,32 @@ const Navbar: React.FC = () => {
     <>
       <nav className="navbar">
         <div className="navbar-container">
-          {/* Botão de Menu */}
-          <button className="menu-btn">
-            <FaBars />
-          </button>
-
-          {/* Logo */}
-          <Link to="/" className="logo">
-            <img src="../../public/imagens/logo.jpeg" alt="Logo" />
-          </Link>
-
-          {/* Barra de Pesquisa */}
-          <div className="search-container">
-            <input type="text" className="search-input" placeholder="O que você procura?" />
-            <button className="search-btn">
-              <FaSearch />
+          {/* Seção Esquerda */}
+          <div className="left-section">
+            <button className="menu-btn">
+              <FaBars />
             </button>
+            <Link to="/" className="logo">
+              <img src="/imagens/logo.jpeg" alt="Logo" />
+            </Link>
           </div>
 
-          {/* Login */}
-          <button className="login-btn" onClick={() => setIsLoginOpen(true)}>
-            <FaUserCircle />
-            <span>Entrar / Cadastrar</span>
-          </button>
+          {/* Seção Central */}
+          <div className="center-section">
+            <div className="search-container">
+              <input type="text" className="search-input" placeholder="O que você procura?" />
+              <button className="search-btn">
+                <FaSearch />
+              </button>
+            </div>
+          </div>
 
-          {/* Ícones de Contato, Favoritos e Carrinho */}
-          <div className="icons">
+          {/* Seção Direita */}
+          <div className="right-section">
+            <button className="login-btn" onClick={() => setIsLoginOpen(true)}>
+              <FaUserCircle />
+              <span>Entrar / Cadastrar</span>
+            </button>
             <Link to="/contato" className="icon">
               <FaHeadset />
               <span>Fale Conosco</span>
@@ -59,7 +60,6 @@ const Navbar: React.FC = () => {
                 <span>Carrinho</span>
               </button>
 
-              {/* Sidebar do Carrinho */}
               {isCartOpen && (
                 <div className="cart-sidebar">
                   <button className="close-btn" onClick={() => setIsCartOpen(false)}>
@@ -74,7 +74,7 @@ const Navbar: React.FC = () => {
         </div>
       </nav>
 
-      {/* Pop-up de Login */}
+      {/* Modal de Login */}
       {isLoginOpen && (
         <div className="login-modal">
           <div className="login-box">
