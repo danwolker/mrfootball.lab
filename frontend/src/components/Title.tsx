@@ -1,3 +1,4 @@
+// src/components/Title.tsx
 import React, { useEffect, useState } from "react";
 import "../styles/Title.css";
 
@@ -5,59 +6,74 @@ const slides = [
   {
     id: 1,
     title: "Velocidade e Estilo nos Seus Pés",
-    subtitle: "Explore chuteiras que unem leveza, design inovador e explosão nos gramados.",
+    subtitle: "Confira as chuteiras que vão transformar seu jogo",
     image: "/products/amarelo-botinha-campo_0z2NxXJ.jpg",
   },
   {
     id: 2,
-    title: "Domine o Campo com Precisão",
-    subtitle: "Modelos feitos para controle absoluto da bola e performance inigualável.",
+    title: "Explore Performance sem Limites",
+    subtitle: "Modelos projetados para dominar o campo com leveza e potência",
     image: "/products/Azul-botinha-campo-2.png",
   },
   {
     id: 3,
-    title: "Conforto em Cada Movimento",
-    subtitle: "Alta tecnologia para que você jogue com confiança, sem abrir mão do conforto.",
+    title: "Tecnologia e Conforto em Cada Passo",
+    subtitle: "Experimente a nova geração de chuteiras profissionais",
     image: "/products/creme-botinha-campo.png",
   },
 ];
 
 const Title: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [animation, setAnimation] = useState("fade-in");
+  const [fade, setFade] = useState("fade-in");
+
+  const nextSlide = () => {
+    setFade("fade-out");
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      setFade("fade-in");
+    }, 300);
+  };
+
+  const prevSlide = () => {
+    setFade("fade-out");
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+      setFade("fade-in");
+    }, 300);
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setAnimation("fade-out");
-      setTimeout(() => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
-        setAnimation("fade-in");
-      }, 300);
+      nextSlide();
     }, 5000);
-
     return () => clearInterval(interval);
   }, []);
 
-  const slide = slides[currentSlide];
-
   return (
     <section className="title-carousel">
-      <div className={`title-slide ${animation}`}>
+      <button onClick={prevSlide} className="arrow-btn left">❮</button>
+
+      <div className={`title-slide ${fade}`}>
         <div className="title-content">
-          <h1>{slide.title}</h1>
-          <p>{slide.subtitle}</p>
-          <button>Ver Chuteiras</button>
+          <h1>{slides[currentSlide].title}</h1>
+          <p>{slides[currentSlide].subtitle}</p>
+          <button className="title-btn">Ver Chuteiras</button>
         </div>
         <div className="title-image">
-          <img src={slide.image} alt="Chuteira" />
+          <img src={slides[currentSlide].image} alt="Chuteira" />
         </div>
       </div>
+
+      <button onClick={nextSlide} className="arrow-btn right">❯</button>
+
       <div className="carousel-indicators">
         {slides.map((_, index) => (
           <span
             key={index}
-            className={index === currentSlide ? "dot active" : "dot"}
-          ></span>
+            className={`indicator ${currentSlide === index ? "active" : ""}`}
+            onClick={() => setCurrentSlide(index)}
+          />
         ))}
       </div>
     </section>

@@ -1,8 +1,16 @@
+/* src/styles/Title.css */
+
 .title-carousel {
     width: 100%;
-    background-color: #ffffff;
+    max-height: 100vh;
+    background-color: #fffffff3;
     padding: 40px 20px;
     position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   
   .title-slide {
@@ -13,7 +21,8 @@
     margin: auto;
     gap: 30px;
     flex-wrap: wrap;
-    min-height: 350px;
+    min-height: 450px;
+    transition: all 0.3s ease-in-out;
   }
   
   .title-content {
@@ -25,17 +34,17 @@
     font-size: 2.5rem;
     color: #0e72ae;
     margin-bottom: 10px;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Helvetica Neue', sans-serif;
   }
   
   .title-content p {
     font-size: 1.2rem;
     margin-bottom: 20px;
     color: #333;
-    font-family: "Inter", sans-serif;
+    font-family: 'Helvetica Neue', sans-serif;
   }
   
-  .title-content button {
+  .title-btn {
     background-color: #ff6600;
     color: white;
     padding: 10px 20px;
@@ -45,7 +54,7 @@
     font-weight: 600;
   }
   
-  .title-content button:hover {
+  .title-btn:hover {
     background-color: #e65c00;
   }
   
@@ -53,34 +62,66 @@
     flex: 1;
     display: flex;
     justify-content: center;
+    align-items: center;
     min-width: 280px;
   }
   
   .title-image img {
     max-width: 90%;
-    height: 300px;
+    max-height: 380px;
+    height: auto;
     border-radius: 12px;
-    object-fit: cover;
+    object-fit: contain;
   }
   
   /* Indicadores */
   .carousel-indicators {
+    text-align: center;
     margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 8px;
   }
   
-  .dot {
-    width: 10px;
-    height: 10px;
-    background-color: #ccc;
+  .indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: #ddd;
     border-radius: 50%;
-    transition: background 0.3s ease;
+    margin: 0 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
   }
   
-  .dot.active {
-    background-color: #ff6600;
+  .indicator.active {
+    background-color: #0e72ae;
+  }
+  
+  /* Botões de Navegação */
+  .arrow-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 14px;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 2;
+    transition: background-color 0.3s ease;
+  }
+  
+  .arrow-btn.left {
+    left: 15px;
+  }
+  
+  .arrow-btn.right {
+    right: 15px;
+  }
+  
+  .arrow-btn:hover {
+    background-color: #000;
+    color: #fff;
   }
   
   /* Animações */
@@ -129,8 +170,13 @@
       font-size: 1rem;
     }
   
+    .arrow-btn {
+      top: 90%;
+      transform: translateY(-50%);
+    }
+  
     .title-image img {
-      height: auto;
+      max-height: 300px;
     }
   }
   
