@@ -1,0 +1,60 @@
+# ================================
+# Ambiente Python / Django
+# ================================
+backend/.venv/
+backend/env/
+backend/venv/
+backend/__pycache__/
+backend/**/*.py[cod]
+backend/*.sqlite3
+backend/.mypy_cache/
+backend/.pytest_cache/
+backend/db.sqlite3
+backend/*.log
+backend/.coverage
+backend/htmlcov/
+backend/.DS_Store
+
+# ================================
+# Pipenv
+# ================================
+backend/Pipfile.lock
+
+# ================================
+# Node.js / React / Vite
+# ================================
+frontend/node_modules/
+frontend/.yarn/*
+!frontend/.yarn/releases
+!frontend/.yarn/plugins
+!frontend/.yarn/sdks
+!frontend/.yarn/versions
+frontend/.pnp.*
+frontend/dist/
+frontend/.vite/
+
+# ================================
+# Editor e sistema
+# ================================
+*.swp
+*.swo
+*.tmp
+*.log
+*.bak
+*.env
+.env.local
+.env.development
+.env.production
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ================================
+# Arquivos gerais (opcional)
+# ================================
+*.coverage
+coverage.xml
+*.log
+*.lock
