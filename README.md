@@ -24,16 +24,21 @@ mrfootball_lab/
 cd backend
 ```
 
+**Instalar e utilizar versão do Python:**
+```bash
+pyenv install 3.13.2
+pyenv local 3.13.2
+```
+
+**Criar o ambiente local com o Pipfile (instalando dependências):**
+```bash
+pipenv install
+```
+
 **Ativar ambiente virtual:**
 
 ```bash
-source env/bin/activate
-```
-
-**Instalar dependências (se necessário):**
-
-```bash
-pip install -r requirements.txt
+pipenv shell
 ```
 
 **Rodar o servidor backend:**
