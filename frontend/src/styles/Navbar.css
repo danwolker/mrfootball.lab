@@ -248,6 +248,18 @@
   text-decoration: underline;
 }
 
+.login-btn:hover {
+  color: #ff6600;
+}
+
+.icon:hover {
+  color: #ff6600;
+}
+
+.cart-btn:hover {
+  color: #ff6600;
+}
+
 /* 🔹 Responsividade */
 @media screen and (max-width: 768px) {
   .navbar-container {

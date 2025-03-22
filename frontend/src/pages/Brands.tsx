@@ -3,6 +3,9 @@ import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import FooterInfo from "../components/FooterInfo";
 import Footer from "../components/Footer";
+import Banner from "../components/Banner";
+import BrandsSection from "../components/BrandsSection";
+import FooterNewsletter from "../components/FooterNewsletter";
 
 const Brands: React.FC = () => {
   return (
@@ -10,7 +13,10 @@ const Brands: React.FC = () => {
       <Navbar />
       <Header />
       <h1>Brands</h1>
-      <FooterInfo /> 
+      <Banner />
+      <BrandsSection />
+      <FooterNewsletter />
+      <FooterInfo />
       <Footer />
     </div>
     
