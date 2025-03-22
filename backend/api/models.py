@@ -12,16 +12,16 @@ class Addres(models.Model):
     number = models.IntegerField()
     neighborhood = models.CharField(max_length=30)
     address_complement = models.CharField(max_length=6)
-    cep = models.IntegerField(max_length=8)
+    cep = models.IntegerField()
 
-class user(models.Model):
+class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     display_name = models.CharField(max_length=20)
-    address = models.ForeignKey(Addres, on_delete=models.SET_NULL)
-    image = models.ImageField(upload_to='/avatars')
+    address = models.ForeignKey(Addres, on_delete=models.SET_NULL, null=True)
+    image = models.ImageField(upload_to='avatars/')
     birth_date = models.DateField()
-    orders = models.ForeignKey(Order, on_delete=models.SET_NULL)
-    cpf = models.IntegerField(max_length=11)
+    orders = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    cpf = models.IntegerField()
 
     @property
     def name(self):
@@ -35,4 +35,17 @@ class user(models.Model):
             return self.image.url
         return f'{settings.STATIC_URL}images/avatar.svg'
     
-class Color
+class Color(models.Model):
+    color = models.CharField(max_length=10)
+    color_code = models.CharField(max_length=7)
+
+class Brand(models.Model):
+    brand = models.CharField(max_length=10)
+
+class BootType(models.Model):
+    BOOT_TYPES = {
+        'Campo':'Campo',
+        'Salão':'Salão',
+        'Suiço':'Suiço',
+        'Trava Mista': 'Trava Mista',
+    }
