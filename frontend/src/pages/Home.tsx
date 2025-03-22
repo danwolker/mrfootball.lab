@@ -5,6 +5,7 @@ import FooterNewsletter from "../components/FooterNewsletter";
 import FooterInfo from "../components/FooterInfo";
 import Footer from "../components/Footer";
 import Title from "../components/Title";
+import ProductCardCarousel from "../components/ProductCardCarousel";
 
 const Home = () => {
   return (
@@ -12,10 +13,15 @@ const Home = () => {
       <Navbar />
       <Header />
       <Title />
+
+      {/* Carrossel de Produtos em Destaque */}
+      <ProductCardCarousel />
+
       <div className="Home">
         <h1>Bem-vindo ao Mr Football Lab</h1>
         <p>Seu e-commerce especializado em chuteiras de futebol.</p>
       </div>
+
       <FooterNewsletter />
       <FooterInfo />
       <Footer />
