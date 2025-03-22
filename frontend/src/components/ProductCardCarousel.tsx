@@ -100,7 +100,7 @@ const ProductCardCarousel: React.FC = () => {
             <p className="price">{product.price}</p>
             <div className="card-buttons">
               <button className="fav-btn"><FaHeart /></button>
-              <button className="cart-btn"><FaShoppingCart /></button>
+              <button className="cartshoes-btn"><FaShoppingCart /></button>
             </div>
           </div>
         ))}

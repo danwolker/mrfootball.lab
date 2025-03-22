@@ -24,6 +24,8 @@
 }
 
 .newsletter-form input {
+  color: black;
+  background-color: white;
   width: 100%;
   max-width: 350px;
   padding: 8px;
