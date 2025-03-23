@@ -49,3 +49,8 @@ class BootType(models.Model):
         'Suiço':'Suiço',
         'Trava Mista': 'Trava Mista',
     }
+
+class NewsLetter(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField()
+    wpp = models.CharField(max_length=11)
