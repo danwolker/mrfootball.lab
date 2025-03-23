@@ -18,12 +18,12 @@ const FooterNewsletter: React.FC = () => {
         headers : {
           'Content-Type':'application/json'
         },
-        body: JSON.stringify(consumerData)
-      }),
+        body: JSON.stringify(consumerData),
+      });
     } catch (err) {
       console.log(err)
     }
-  }
+  };
   
   return (
     <div className="footer-newsletter">
@@ -32,10 +32,10 @@ const FooterNewsletter: React.FC = () => {
         Fique por dentro de todas as novidades, promoções e muito mais!, inscreva-se em nossa newsletter.
         </p>
       <form className="newsletter-form">
-        <input type="text" placeholder="Seu nome" onChange = {(e)=> setName{e.target.value}}/>
-        <input type="email" placeholder="Seu e-mail" onChange = {(e)=> setEmail{e.target.value}} />
-        <input type="text" placeholder="WhatsApp" onChange = {(e)=> setNumber{e.target.value}}/>
-        <button type="submit">Enviar</button>
+        <input type="text" placeholder="Seu nome" onChange = {(e)=> setName(e.target.value)}/>
+        <input type="email" placeholder="Seu e-mail" onChange = {(e)=> setEmail(e.target.value)} />
+        <input type="text" placeholder="WhatsApp" onChange = {(e)=> setNumber(e.target.value)}/>
+        <button onClick={addNewLetterConsumer}>Enviar</button>
       </form>
     </div>
   );
