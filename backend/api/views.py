@@ -4,6 +4,13 @@ from rest_framework import status
 from .models import NewsLetter
 from .serializer import NewsLetterSerializer
 
+@api_view(['GET'])
+def see_news_consumer(request):
+    news_consumer = NewsLetter.objects.all()
+    serialized_data = NewsLetterSerializer(news_consumer, many=True).data
+    return Response(serialized_data)
+
+
 @api_view(['POST'])
 def register_news_consumer(request):
     data = request.data
