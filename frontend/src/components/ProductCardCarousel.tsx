@@ -56,6 +56,9 @@ const initialProducts = [
 const ProductCardCarousel: React.FC = () => {
   const [products, setProducts] = useState(initialProducts);
   const [fade, setFade] = useState("fade-in");
+  const handleAddToCart = ( product : any ) => {
+    console.log("Product added to cart");
+  };
 
   const rotateLeft = () => {
     setFade("fade-out");
@@ -100,7 +103,8 @@ const ProductCardCarousel: React.FC = () => {
             <p className="price">{product.price}</p>
             <div className="card-buttons">
               <button className="fav-btn"><FaHeart /></button>
-              <button className="cartshoes-btn"><FaShoppingCart /></button>
+              <button onClick={() => handleAddToCart(product)}
+                 className="cartshoes-btn"><FaShoppingCart /></button>
             </div>
           </div>
         ))}
