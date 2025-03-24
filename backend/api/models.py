@@ -57,7 +57,7 @@ class BootType(models.Model):
         'Suiço':'Suiço',
         'Trava Mista': 'Trava Mista',
     }
-    boot_type = models.CharField(max_length=11, choices=BOOT_TYPES)
+    boot_type = models.CharField(max_length=11, choices=BOOT_TYPES, null=True)
     
     def __str__(self):
         return self.boot_type
