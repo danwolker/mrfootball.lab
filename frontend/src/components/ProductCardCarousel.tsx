@@ -2,63 +2,27 @@ import React, { useState, useEffect } from "react";
 import { FaHeart, FaShoppingCart, FaStar } from "react-icons/fa";
 import "../styles/ProductCardCarousel.css";
 
-const initialProducts = [
-  {
-    image: "/products/amarelo-botinha-campo_0z2NxXJ.jpg",
-    name: "Nike Phantom GX",
-    price: "R$ 499,90",
-    rating: 5,
-  },
-  {
-    image: "/products/amarelo-botinha-campo_0z2NxXJ.jpg",
-    name: "Adidas Predator Edge",
-    price: "R$ 459,90",
-    rating: 4,
-  },
-  {
-    image: "/products/amarelo-botinha-campo_0z2NxXJ.jpg",
-    name: "Puma Future Z",
-    price: "R$ 429,90",
-    rating: 4,
-  },
-  {
-    image: "/products/amarelo-botinha-campo_0z2NxXJ.jpg",
-    name: "Mizuno Morelia Neo",
-    price: "R$ 399,90",
-    rating: 5,
-  },
-  {
-    image: "/products/amarelo-botinha-campo_0z2NxXJ.jpg",
-    name: "Nike Mercurial Vapor",
-    price: "R$ 529,90",
-    rating: 5,
-  },
-  {
-    image: "/products/amarelo-botinha-campo_0z2NxXJ.jpg",
-    name: "Adidas X Speedflow",
-    price: "R$ 479,90",
-    rating: 4,
-  },
-  {
-    image: "/products/amarelo-botinha-campo_0z2NxXJ.jpg",
-    name: "Umbro Velocita",
-    price: "R$ 389,90",
-    rating: 3,
-  },
-  {
-    image: "/products/amarelo-botinha-campo_0z2NxXJ.jpg",
-    name: "New Balance Furon",
-    price: "R$ 449,90",
-    rating: 4,
-  },
-];
 
 const ProductCardCarousel: React.FC = () => {
-  const [products, setProducts] = useState(initialProducts);
+  const [products, setProducts] = useState([]);
   const [fade, setFade] = useState("fade-in");
   const handleAddToCart = ( product : any ) => {
     console.log("Product added to cart");
   };
+
+  useEffect(() => {
+    fecthProducts();
+  }, []);
+
+  const fecthProducts = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/get_soccer_boots");
+      const data = await response.json();
+      setProducts(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const rotateLeft = () => {
     setFade("fade-out");
@@ -93,8 +57,8 @@ const ProductCardCarousel: React.FC = () => {
       <div className={`carousel-track ${fade}`}>
         {products.slice(0, 4).map((product, index) => (
           <div className="product-card" key={index}>
-            <img src={product.image} alt={product.name} className="product-img" />
-            <h3>{product.name}</h3>
+            <img src={`http://127.0.0.1:8000${product.image}`} alt={product.brand} className="product-img" />
+            <h3>{product.brand}{product.line}</h3>
             <div className="rating">
               {[...Array(5)].map((_, i) => (
                 <FaStar key={i} color={i < product.rating ? "#ffc107" : "#e4e5e9"} />
