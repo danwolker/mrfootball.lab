@@ -9,7 +9,6 @@ import {
   FaSearch,
   FaTimes,
 } from "react-icons/fa";
-// ...imports
 import "../styles/Navbar.css";
 
 const Navbar: React.FC = () => {
@@ -101,3 +100,5 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
+
