@@ -54,3 +54,6 @@ class NewsLetter(models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField()
     wpp = models.CharField(max_length=11)
+
+    def __str__(self):
+        return f'{self.name} | {self.email} | {self.wpp}'
