@@ -3,7 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import NewsLetter, SoccerBoot
 from .serializer import NewsLetterSerializer, SoccerBootSerializer
-
+from django.http import HttpResponse
+from .models import BootInCart
 @api_view(['GET'])
 def see_news_consumer(request):
     news_consumer = NewsLetter.objects.all()
@@ -24,5 +25,17 @@ def register_news_consumer(request):
 def get_soccer_boots(request):
     soccer_boots = SoccerBoot.objects.all()
     serialized_soccer_boots = SoccerBootSerializer(soccer_boots, many=True).data
-    print(serialized_soccer_boots)
     return Response(serialized_soccer_boots)
+
+@api_view(['POST'])
+def add_boot_to_cart(request):
+    ip = request.META['REMOTE_ADDR']
+    product_id = request.data.get('product', {}).get('id')
+    
+    product = SoccerBoot.objects.get(id=product_id)    
+    print(product)
+    try:
+        BootInCart.objects.create(ip=ip,product=product)
+        return Response('Item adicionado com sucesso!', status=status.HTTP_201_CREATED)
+    except:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
