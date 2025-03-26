@@ -86,8 +86,8 @@ class NewsLetter(models.Model):
         return f'{self.name} | {self.email} | {self.wpp}'
 
 class BootInCart(models.Model):
-    ip = models.GenericIPAddressField()
+    cart_id = models.CharField(max_length=39)
     product = models.ForeignKey(SoccerBoot, on_delete=models.SET_NULL, null=True)
     
     def __str__(self):
-        return f'{self.ip}   ||  {self.product}'
+        return f'{self.cart_id}   ||  {self.product}'

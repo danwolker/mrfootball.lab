@@ -27,8 +27,17 @@ const Catalog: React.FC = () => {
   }
 
   const addToCart = async (productToAdd) => {
+    const getOrCreateCartId = () => {
+      let cartId = localStorage.getItem('cartId');
+      if (!cartId) {
+          cartId = crypto.randomUUID(); 
+          localStorage.setItem('cartId', cartId);
+      }
+      return cartId;
+    }
     const toCartData = {
       product: productToAdd,
+      cart_id: getOrCreateCartId()
     }
     try {
       const response = await fetch("http://127.0.0.1:8000/api/add_boot_to_cart", 

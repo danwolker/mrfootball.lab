@@ -29,13 +29,18 @@ def get_soccer_boots(request):
 
 @api_view(['POST'])
 def add_boot_to_cart(request):
-    ip = request.META['REMOTE_ADDR']
+    cart_id = request.data.get('cart_id')
+    print(request.data)
     product_id = request.data.get('product', {}).get('id')
     
     product = SoccerBoot.objects.get(id=product_id)    
-    print(product)
+    
     try:
-        BootInCart.objects.create(ip=ip,product=product)
+        BootInCart.objects.create(cart_id=cart_id, product=product)
         return Response('Item adicionado com sucesso!', status=status.HTTP_201_CREATED)
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['GET'])
+def get_cart_products(request):
+    pass
