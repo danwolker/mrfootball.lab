@@ -85,9 +85,9 @@ class NewsLetter(models.Model):
     def __str__(self):
         return f'{self.name} | {self.email} | {self.wpp}'
 
-class Order(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
-    addres = models.ForeignKey(Addres, on_delete=models.SET_NULL, null=True)
-    chuteira = models.ForeignKey(SoccerBoot, on_delete=models.SET_NULL, null=True)
-    size = models.CharField(max_length=2)
-
+class BootInCart(models.Model):
+    ip = models.GenericIPAddressField()
+    product = models.ForeignKey(SoccerBoot, on_delete=models.SET_NULL, null=True)
+    
+    def __str__(self):
+        return f'{self.ip}   ||  {self.product}'
