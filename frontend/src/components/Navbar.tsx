@@ -49,10 +49,10 @@ const Navbar: React.FC = () => {
               <FaHeadset />
               <span>Fale Conosco</span>
             </Link>
-            <Link to="/favorites" className="icon">
+            {/* <Link to="/favorites" className="icon">
               <FaHeart />
               <span>Favoritos</span>
-            </Link>
+            </Link> */}
             <div className="cart-container">
               <button className="cart-btn" onClick={() => setIsCartOpen(!isCartOpen)}>
                 <FaShoppingCart />
