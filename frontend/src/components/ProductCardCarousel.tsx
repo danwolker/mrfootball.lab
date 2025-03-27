@@ -64,7 +64,7 @@ const ProductCardCarousel: React.FC = () => {
                 <FaStar key={i} color={i < product.rating ? "#ffc107" : "#e4e5e9"} />
               ))}
             </div>
-            <p className="price">{product.price}</p>
+            <p className="price"> R$: {product.price}</p>
             <div className="card-buttons">
               <button className="fav-btn"><FaHeart /></button>
               <button onClick={() => handleAddToCart(product)}
