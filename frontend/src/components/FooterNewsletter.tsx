@@ -1,5 +1,5 @@
 import React from "react";
-import {useEffetc, useState} from 'react'
+import {useState} from 'react'
 import "../styles/FooterNewsletter.css";
 
 const FooterNewsletter: React.FC = () => {

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../styles/FooterInfo.css";
 
 const FooterInfo: React.FC = () => {
@@ -7,25 +8,24 @@ const FooterInfo: React.FC = () => {
       <div className="footer-column">
         <h4>Institucional</h4>
         <ul>
-          <li>Sobre Nós</li>
-          <li>Política de Privacidade</li>
-          <li>Termos de Uso</li>
+          <li><Link to="/faq#privacidade">Política de Privacidade</Link></li>
+          <li><Link to="/faq#termos">Termos de Uso</Link></li>
         </ul>
       </div>
       <div className="footer-column">
         <h4>Atendimento</h4>
         <ul>
-          <li>Fale Conosco</li>
-          <li>Dúvidas Frequentes</li>
-          <li>Trocas e Devoluções</li>
+          <li><Link to="/faq#fale-conosco">Fale Conosco</Link></li>
+          <li><Link to="/faq#duvidas">Dúvidas Frequentes</Link></li>
+          <li><Link to="/faq#trocas">Trocas e Devoluções</Link></li>
         </ul>
       </div>
       <div className="footer-column">
         <h4>Ajuda</h4>
         <ul>
-          <li>Formas de Pagamento</li>
-          <li>Prazo de Entrega</li>
-          <li>Segurança</li>
+          <li><Link to="/faq#pagamento">Formas de Pagamento</Link></li>
+          <li><Link to="/faq#prazo">Prazo de Entrega</Link></li>
+          <li><Link to="/faq#seguranca">Segurança</Link></li>
         </ul>
       </div>
     </div>
