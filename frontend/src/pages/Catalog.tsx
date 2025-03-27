@@ -11,16 +11,31 @@ import FooterNewsletter from "../components/FooterNewsletter";
 
 const Catalog: React.FC = () => {
   const [products, setProducts] = useState([]);
-  
+  const [brands, setBrands] = useState([]);
   useEffect(() => {
-      fecthProducts();
+      fetchProducts();
+      fetchBrands();
     }, []);
   
-  const fecthProducts = async () => {
+  const fetchProducts = async (brand = '') => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/get_soccer_boots");
+      let url = "http://127.0.0.1:8000/api/get_soccer_boots"
+      if (brand) {
+        url += `?brand=${encodeURIComponent(brand)}`
+      }
+      const response = await fetch(url);
       const data = await response.json();
       setProducts(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const fetchBrands = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/get_brands");
+      const data = await response.json();
+      setBrands(data)
     } catch (err) {
       console.log(err)
     }
@@ -35,6 +50,7 @@ const Catalog: React.FC = () => {
       }
       return cartId;
     }
+
     const toCartData = {
       product: productToAdd,
       cart_id: getOrCreateCartId()
@@ -54,11 +70,22 @@ const Catalog: React.FC = () => {
       console.log(err)
     }
   }
+
   return (
     <div>
       <Navbar />
       <Header />
       <h1>Catalog</h1>
+      {brands.map((brand, index) => 
+        <div key={index}>
+          <button onClick={ () => {
+            fetchProducts(brand.brand)
+            }}>
+              {brand.brand}
+          </button>
+        </div>
+        )
+      }
       {products.map((product, index) => 
         <div className="product-card" key={index}>
           <img src={`http://127.0.0.1:8000${product.image}`} alt={product.brand} className="product-img" />
@@ -77,7 +104,6 @@ const Catalog: React.FC = () => {
           </button>
         </div>
       )}
-      
       <Banner />
       <BrandsSection />
       <FooterNewsletter />

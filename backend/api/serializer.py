@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import NewsLetter, SoccerBoot, BootInCart
+from .models import NewsLetter, SoccerBoot, BootInCart, Brand
 
 class NewsLetterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,3 +26,8 @@ class BookInChartSerializer(serializers.ModelSerializer):
     class Meta:
         model = BootInCart
         fields = '__all__'
+        
+class BrandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = ['brand']
