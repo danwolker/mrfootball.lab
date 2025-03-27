@@ -1,0 +1,63 @@
+.about-us-section {
+    background-color: #eeeeee;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  .about-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: #0e72ae;
+    margin-bottom: 25px;
+  }
+  
+  .about-description {
+    font-size: 15px;
+    color: #095a8e;
+    margin-bottom: 15px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+  
+  .social-container {
+    margin-top: 30px;
+  }
+  
+  .social-container h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #000;
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .social-icon {
+    font-size: 24px;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .social-icon:hover {
+    transform: scale(1.1);
+  }
+  
+  .social-icon.insta {
+    background-color: #e1306c;
+  }
+  
+  .social-icon.face {
+    background-color: #3b5998;
+  }
+  
+  .social-icon.whats {
+    background-color: #25d366;
+  }
+  
