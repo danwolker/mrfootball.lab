@@ -1,68 +1,99 @@
 .brands-section {
-    padding: 80px 10px;
-    background-color: #f9f9f9;
-    text-align: center;
+  padding: 80px 10px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.brands-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #0e72ae;
+  margin-bottom: 70px;
+}
+
+.brands-carousel {
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+  transition: all 0.5s ease-in-out;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+.fade-out {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
   }
-  
-  .brands-title {
-    font-size: 28px;
-    font-weight: bold;
-    color: #0e72ae;
-    margin-bottom: 70px;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-  
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+}
+
+.brand-card {
+  background: #ffffff;
+  padding: 20px 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.brand-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .brands-carousel {
+    display: flex;
+    justify-content: space space-around;
+    transition: all 0.5s ease-in-out;
+    margin: auto;
+    flex-flow: row nowrap;
+    padding: 10px;
+  }
+  .brand-card {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 400px) {
   .brands-carousel {
     display: flex;
     justify-content: center;
-    gap: 70px;
+    gap: 20px;
     transition: all 0.5s ease-in-out;
   }
-  
-  .fade-in {
-    animation: fadeIn 0.5s ease-in forwards;
-  }
-  
-  .fade-out {
-    animation: fadeOut 0.3s ease-out forwards;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateX(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  
-  @keyframes fadeOut {
-    from {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateX(-40px);
-    }
-  }
-  
   .brand-card {
-    background: #ffffff;
-    padding: 20px 20px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    height: 120px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    max-width: 150px;
+    max-height: 100px;
   }
-  
   .brand-logo {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 90%;
+    max-height: 90%;
     object-fit: contain;
   }
-  
+}

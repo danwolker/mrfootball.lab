@@ -45,21 +45,19 @@ useEffect(() => {
   };
 
   const rotateLeft = () => {
-    setFade("fade-out");
-    setTimeout(() => {
-      const first = products[0];
-      setProducts([...products.slice(1), first]);
-      setFade("fade-in");
-    }, 100);
+ 
+    const first = products[0];
+    setProducts([...products.slice(1), first]);
+    setFade("fade-in");
+   
   };
 
   const rotateRight = () => {
-    setFade("fade-out");
-    setTimeout(() => {
-      const last = products[products.length - 1];
-      setProducts([last, ...products.slice(0, products.length - 1)]);
-      setFade("fade-in");
-    }, 100);
+   
+    const last = products[products.length - 1];
+    setProducts([last, ...products.slice(0, products.length - 1)]);
+    setFade("fade-in");
+    
   };
 
   useEffect(() => {
@@ -71,12 +69,14 @@ useEffect(() => {
 
 
   const handleVisibleProducts = () => {
-    if (windowWidth <= 400) {
+    if (windowWidth <= 550) {
       return products.slice(0, 1);
     } else if (windowWidth <= 768) {
       return products.slice(0, 2);
+    } else if (windowWidth <= 1500) {
+      return products.slice(0, 3);
     } else {
-      return products.slice(0, 4);
+      return products.slice(0,4)
     }
   };
   const visibleProducts = handleVisibleProducts();

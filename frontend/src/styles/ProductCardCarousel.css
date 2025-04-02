@@ -3,6 +3,7 @@
   padding: 40px 20px;
   background-color: #f9f9f9;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .carousel-title {
@@ -18,6 +19,7 @@
   justify-content: center;
   flex-wrap: nowrap;
 
+  
   min-height: 420px;
   transition: all 0.5s ease-in-out;
 }
@@ -130,7 +132,7 @@
   padding: 10px 14px;
   border-radius: 50%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  
   transition: background 0.3s;
 }
 
@@ -155,5 +157,13 @@
   .arrow-btn {
     display: none;
   }
+  .arrow-btn.left {
+    left: 0px;
+  }
+  
+  .arrow-btn.right {
+    right: 0px;
+  }
+  
 }
 

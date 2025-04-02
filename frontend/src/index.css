@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Inter:wght@400;700&display=swap');
 
+* {
+  margin: 0px;
+  padding: 0px;
+}
 :root {
   font-family: 'Poppins', 'Inter', sans-serif;
   line-height: 1.5;
@@ -56,5 +60,11 @@ body {
 
   button {
     font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  body {
+    padding: 2px;
   }
 }
