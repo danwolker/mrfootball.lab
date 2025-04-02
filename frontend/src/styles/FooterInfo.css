@@ -1,17 +1,17 @@
 .footer-info {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: #f8f8f8;
-  padding: 25px 15px;
+
   flex-wrap: wrap;
   font-size: 13px;
+  margin: auto;
 }
 
 .footer-column {
   flex: 1;
   min-width: 180px;
-  margin: 10px;
-  margin-left: 14.5rem;
+  margin: 3rem;
 }
 
 .footer-column h4 {
@@ -35,4 +35,11 @@
 
 .footer-column li:hover {
   color: #0e72ae;
+}
+
+@media screen and (max-width: 768px) {
+  .footer-info {
+    display: flex;
+    flex-flow: row wrap;
+  }
 }

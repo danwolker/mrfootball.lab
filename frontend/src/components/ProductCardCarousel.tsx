@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaHeart, FaShoppingCart, FaStar } from "react-icons/fa";
+import { FaShoppingCart, FaStar } from "react-icons/fa";
 import "../styles/ProductCardCarousel.css";
 
 interface Product {
@@ -13,19 +13,30 @@ interface Product {
 
 const ProductCardCarousel: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [fade, setFade] = useState("fade-in");
-
+  const [fade, setFade] = useState<"fade-in" | "fade-out">("fade-in");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const handleAddToCart = (product: Product) => {
     console.log("Product added to cart:", product);
   };
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+  
+
+useEffect(() => {
+  fetchProducts();
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+  
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/get_soccer_boots");
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/get_soccer_boots"
+      );
       const data = await response.json();
       setProducts(data);
     } catch (err) {
@@ -58,31 +69,63 @@ const ProductCardCarousel: React.FC = () => {
     return () => clearInterval(interval);
   }, [products]);
 
+
+  const handleVisibleProducts = () => {
+    if (windowWidth <= 400) {
+      return products.slice(0, 1);
+    } else if (windowWidth <= 768) {
+      return products.slice(0, 2);
+    } else {
+      return products.slice(0, 4);
+    }
+  };
+  const visibleProducts = handleVisibleProducts();
+
+   
+
+
+  
   return (
     <section className="product-carousel-horizontal">
+      
       <h2 className="carousel-title">Nossas Chuteiras</h2>
-      <button className="arrow-btn left" onClick={rotateRight}>❮</button>
-
+      <button className="arrow-btn left" onClick={rotateRight}>
+        ❮
+      </button>
       <div className={`carousel-track ${fade}`}>
-        {products.slice(0, 4).map((product, index) => (
-          <div className="product-card" key={index}>
-            <img src={`http://127.0.0.1:8000${product.image}`} alt={product.brand} className="product-img" />
-            <h3>{product.brand} {product.line}</h3>
+        {visibleProducts.map((product) => (
+          <div className="product-card" key={product.id}>
+            <img
+              src={`http://127.0.0.1:8000${product.image}`}
+              alt={product.brand}
+              className="product-img"
+            />
+            <h3>
+              {product.brand} {product.line}
+            </h3>
             <div className="rating">
               {[...Array(5)].map((_, i) => (
-                <FaStar key={i} color={i < product.rating ? "#ffc107" : "#e4e5e9"} />
+                <FaStar
+                  key={i}
+                  color={i < product.rating ? "#ffc107" : "#e4e5e9"}
+                />
               ))}
             </div>
             <p className="price">R$: {product.price}</p>
             <div className="card-buttons">
-              <button className="fav-btn"><FaHeart /></button>
-              <button onClick={() => handleAddToCart(product)} className="cartshoes-btn"><FaShoppingCart /></button>
+              <button
+                onClick={() => handleAddToCart(product)}
+                className="cartshoes-btn"
+              >
+                <FaShoppingCart />
+              </button>
             </div>
           </div>
         ))}
       </div>
-
-      <button className="arrow-btn right" onClick={rotateLeft}>❯</button>
+      <button className="arrow-btn right" onClick={rotateLeft}>
+        ❯
+      </button>
     </section>
   );
 };
