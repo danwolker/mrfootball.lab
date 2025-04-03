@@ -9,38 +9,51 @@ import Banner from "../components/Banner";
 import BrandsSection from "../components/BrandsSection";
 import FooterNewsletter from "../components/FooterNewsletter";
 
-const Catalog: React.FC = () => {
-  const [products, setProducts] = useState([]);
-  
-  useEffect(() => {
-      fecthProducts();
-    }, []);
-  
-  const fecthProducts = async () => {
-    try {
-      const response = await fetch("http://127.0.0.1:8000/api/get_soccer_boots");
-      const data = await response.json();
-      setProducts(data)
-    } catch (err) {
-      console.log(err)
-    }
+interface Product {
+  id: number;
+  brand: string;
+  line: string;
+  image: string;
+  color:string;
+  price: number;
+  rating: number;
   }
 
-  const addToCart = async (productToAdd) => {
+const Catalog: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    fecthProducts();
+  }, []);
+
+  const fecthProducts = async () => {
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/get_soccer_boots"
+      );
+      const data = await response.json();
+      setProducts(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const addToCart = async (productToAdd:Product) => {
     const getOrCreateCartId = () => {
-      let cartId = localStorage.getItem('cartId');
+      let cartId = localStorage.getItem("cartId");
       if (!cartId) {
-          cartId = crypto.randomUUID(); 
-          localStorage.setItem('cartId', cartId);
+        cartId = crypto.randomUUID();
+        localStorage.setItem("cartId", cartId);
       }
       return cartId;
-    }
+    };
     const toCartData = {
       product: productToAdd,
-      cart_id: getOrCreateCartId()
-    }
+      cart_id: getOrCreateCartId(),
+    };
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/add_boot_to_cart", 
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/add_boot_to_cart",
         {
           method: "POST",
           headers: {
@@ -48,36 +61,49 @@ const Catalog: React.FC = () => {
           },
           body: JSON.stringify(toCartData),
         }
-      )
-      console.log('Produto Adicionado ao carrinho!')
+      );
+      console.log("Produto Adicionado ao carrinho!");
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
+
   return (
     <div>
       <Navbar />
       <Header />
       <h1>Catalog</h1>
-      {products.map((product, index) => 
+      {products.map((product, index) => (
         <div className="product-card" key={index}>
-          <img src={`http://127.0.0.1:8000${product.image}`} alt={product.brand} className="product-img" />
-          <h3>{product.brand}{product.line}</h3>
+          <img
+            src={`http://127.0.0.1:8000${product.image}`}
+            alt={product.brand}
+            className="product-img"
+          />
+          <h3>
+            {product.brand}
+            {product.line}
+          </h3>
           <p>{product.color}</p>
           <div className="rating">
             {[...Array(5)].map((_, i) => (
-              <FaStar key={i} color={i < product.rating ? "#ffc107" : "#e4e5e9"} />
+              <FaStar
+                key={i}
+                color={i < product.rating ? "#ffc107" : "#e4e5e9"}
+              />
             ))}
           </div>
           <p className="price">{product.price}</p>
-          <button onClick={ async () => {
-            addToCart(product);
-          }}>
+          <button
+            onClick={async () => {
+              addToCart(product);
+            }}
+          >
             Adicionar ao carrinho
           </button>
         </div>
-      )}
-      
+      ))}
+
       <Banner />
       <BrandsSection />
       <FooterNewsletter />
