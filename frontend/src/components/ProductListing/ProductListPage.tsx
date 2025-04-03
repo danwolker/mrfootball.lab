@@ -4,17 +4,14 @@ import TopFilters from "./TopFilters";
 import ProductGrid from "./ProductGrid";
 import "../../styles/ProductListPage.css";
 
-interface Props {
-  brand: string;
-}
 
-const ProductListPage: React.FC<Props> = ({ brand }) => {
+const ProductListPage: React.FC = () => {
   return (
     <div className="product-listing-container">
       <SidebarFilters />
       <div className="product-main-content">
         <TopFilters />
-        <ProductGrid brand={brand} />
+        <ProductGrid />
       </div>
     </div>
   );
