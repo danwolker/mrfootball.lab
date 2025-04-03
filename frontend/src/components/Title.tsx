@@ -7,19 +7,19 @@ const slides = [
     id: 1,
     title: "Velocidade e Estilo nos Seus Pés",
     subtitle: "Confira as chuteiras que vão transformar seu jogo",
-    image: "/products/amarelo-botinha-campo_0z2NxXJ.jpg",
+    image: "./products/nikeverde.jpg",
   },
   {
     id: 2,
     title: "Explore Performance sem Limites",
     subtitle: "Modelos projetados para dominar o campo com leveza e potência",
-    image: "/products/Azul-botinha-campo-2.png",
+    image: "./products/adidasvermelha.png",
   },
   {
     id: 3,
     title: "Tecnologia e Conforto em Cada Passo",
     subtitle: "Experimente a nova geração de chuteiras profissionais",
-    image: "/products/creme-botinha-campo.png",
+    image: "/products/adidascreme.png",
   },
 ];
 
