@@ -62,6 +62,7 @@ class SoccerBoot(models.Model):
         'Salao':'Salão',
         'Suico':'Suiço',
         'Trava-Mista': 'Trava Mista',
+        'Todas': 'Todas',
     }
     image = models.ImageField(upload_to='soccer_boots/', null=True)     
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True)
