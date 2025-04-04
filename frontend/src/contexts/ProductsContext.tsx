@@ -1,4 +1,4 @@
-import { SaladIcon } from "lucide-react";
+
 import {
   createContext,
   ReactNode,
@@ -34,6 +34,7 @@ interface ProductsContextType {
   changeSelectedBrand: (selectedBrand: string) => void;
   changeSelectedColor: (selectedColor: string) => void;
   changeBootType: (selectedBootType: string) => void;
+  changeBootie: (selectedBootie: string) => void;
 }
 
 const ProductContext = createContext<ProductsContextType | undefined>(
@@ -47,6 +48,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [brands, setBrands] = useState<Brand[]>([]);
   const [brand, setBrand] = useState("");
   const [type, setType] = useState("");
+  const [bootie, setBootie] = useState("")
 
   const changeBootType = (selectedBootType: string) => {
     setType(selectedBootType);
@@ -60,9 +62,13 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     setBrand(seletedBrand);
   };
 
+  const changeBootie = (selectedBootie:string) => {
+    setBootie(selectedBootie)
+  }
+
   useEffect(() => {
     fetch(
-      `http://127.0.0.1:8000/api/get_soccer_boots?color=${color}&brand=${brand}&type=${type}`
+      `http://127.0.0.1:8000/api/get_soccer_boots?color=${color}&brand=${brand}&type=${type}&bootie=${bootie}`
     )
       .then((res) => res.json())
       .then((data) => setProducts(data))
@@ -86,6 +92,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
         changeSelectedColor,
         changeSelectedBrand,
         changeBootType,
+        changeBootie,
         products,
         colors,
         brands,

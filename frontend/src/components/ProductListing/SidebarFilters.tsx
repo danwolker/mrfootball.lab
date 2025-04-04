@@ -1,11 +1,11 @@
 // src/components/ProductListing/SidebarFilters.tsx
 import React from "react";
-import { useState, useEffect } from "react";
+
 import "../../styles/SideBarFilters.css";
 import { useProducts } from "../../contexts/ProductsContext";
 
 const SidebarFilters: React.FC = () => {
-  const {changeBootType, changeSelectedColor, changeSelectedBrand, colors, brands } =
+  const {changeBootType, changeBootie, changeSelectedColor, changeSelectedBrand, colors, brands } =
     useProducts();
 
   function handleColorFilter(selectedColor: string) {
@@ -27,6 +27,13 @@ const SidebarFilters: React.FC = () => {
       console.log(selectedBootType)
     }
     changeBootType(selectedBootType)
+  }
+
+  function handleSelectedBootie(selectedValue:string) {
+    if (selectedValue) {
+      console.log(selectedValue)
+    }
+    changeBootie(selectedValue)
   }
 
   return (
@@ -89,12 +96,12 @@ const SidebarFilters: React.FC = () => {
           <div className="filter-group">
             <h2>Botinha</h2>
             <div>
-              <input type="radio" name="bootie" id="true" />
+              <input onChange={() => handleSelectedBootie('true')} type="radio" name="bootie" id="true" />
               <label htmlFor="true">Com Botinha</label>
             </div>
             <div>
-              <input type="radio" name="bootie" id="false" />
-              <label htmlFor="true">Sem Botinha</label>
+              <input onChange={() => handleSelectedBootie('false')} type="radio" name="bootie" id="false" />
+              <label htmlFor="false">Sem Botinha</label>
             </div>
 
           </div>
