@@ -93,6 +93,10 @@ const SidebarFilters: React.FC = () => {
             <input onChange={() => handleSelectedType('Trava-Mista')} className="label" type="radio" name="type" id="mista"/>
             <label htmlFor="mista">Trava Mista</label>
           </div>
+          <div>
+            <input onChange={() => handleSelectedType('Todas')} className="label" type="radio" name="type" id="todas"/>
+            <label htmlFor="todas">Todas</label>
+          </div>
           <div className="filter-group">
             <h2>Botinha</h2>
             <div>

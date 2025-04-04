@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color
 from .serializer import NewsLetterSerializer, SoccerBootSerializer, BrandSerializer, ColorSerializer
-from django.http import HttpResponse
+
  
 @api_view(['GET'])
 def see_news_consumer(request):
@@ -23,24 +23,25 @@ def register_news_consumer(request):
 
 @api_view(['GET'])
 def get_soccer_boots(request):
-    
+    filters = {} 
     if request.GET.get('color') and request.GET.get('color') != 'Todas':
-        print(request.GET.get('color'))
-        color = request.GET.get('color')
-        soccer_boots = SoccerBoot.objects.filter(color__color=color)
-        serialized_soccer_boots = SoccerBootSerializer(soccer_boots, many=True).data
-        return Response(serialized_soccer_boots)
+        filters['color__color'] = request.GET.get('color')
     
     if request.GET.get('brand') and request.GET.get('brand') != 'Todas':
-        print(request.GET)
-        brand = request.GET.get('brand')
-        soccer_boots = SoccerBoot.objects.filter(brand__brand=brand)
-        serialized_soccer_boots = SoccerBootSerializer(soccer_boots, many=True).data
-        return Response(serialized_soccer_boots)
+        filters['brand__brand'] = request.GET.get('brand')
+      
+    if request.GET.get('type') and request.GET.get('type') != 'Todas':
+       filters['boot_type']= request.GET.get('type')
     
-    soccer_boots = SoccerBoot.objects.all()
+    if 'bootie' in request.GET:
+        bootie_value = request.GET['bootie'].lower()
+        if bootie_value == 'true':
+            filters['bootie'] = True
+        elif bootie_value == 'false':
+            filters['bootie'] = False     
+    soccer_boots = SoccerBoot.objects.filter(**filters)
     serialized_soccer_boots = SoccerBootSerializer(soccer_boots, many=True).data
-    return Response(serialized_soccer_boots)
+    return Response(serialized_soccer_boots)   
 
 @api_view(['POST'])
 def add_boot_to_cart(request):
