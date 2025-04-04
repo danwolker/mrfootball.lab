@@ -16,7 +16,7 @@ const ProductGrid: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/get_soccer_boots`)
+    fetch(`http://127.0.0.1:8000/api/get_soccer_boots?`)
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((err) => console.error(err));

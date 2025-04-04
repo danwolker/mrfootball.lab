@@ -9,6 +9,7 @@ interface Color {
 
 const SidebarFilters: React.FC = () => {
   const [colors, setColors] = useState<Color[]>([]);
+  const[ color, setColor] = useState('')
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/get_colors")
@@ -17,13 +18,20 @@ const SidebarFilters: React.FC = () => {
       .catch((err) => console.error(err));
   }, []);
 
+  function handleColorFilter(selectedColor:string) {
+    if (selectedColor){
+      console.log(selectedColor)
+    }
+    setColor(selectedColor)
+  }
+
   return (
     <aside className="sidebar">
       <h3>Filtrar por</h3>
       <div className="filter-group">
         {colors.map((color) => (
           <div key={color.color}>
-            <input type="radio" name="color" id={color.color} />
+            <input type="radio" name="color" onChange={() => handleColorFilter(color.color)} id={color.color} />
             <label className="label" htmlFor={color.color}>
               {color.color}
             </label>

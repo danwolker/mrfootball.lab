@@ -29,6 +29,12 @@ def get_soccer_boots(request):
         soccer_boots = SoccerBoot.objects.filter(brand__brand=brand)
         serialized_soccer_boots = SoccerBootSerializer(soccer_boots, many=True).data
         return Response(serialized_soccer_boots)
+    if request.GET.get('color') and request.GET.get('color') != 'Todas':
+        print(request.GET.get('color'))
+        color = request.GET.get('color')
+        soccer_boots = SoccerBoot.objects.filter(color__color=color)
+        serialized_soccer_boots = SoccerBootSerializer(soccer_boots, many=True).data
+        return Response(serialized_soccer_boots)
     soccer_boots = SoccerBoot.objects.all()
     serialized_soccer_boots = SoccerBootSerializer(soccer_boots, many=True).data
     return Response(serialized_soccer_boots)
@@ -38,11 +44,11 @@ def add_boot_to_cart(request):
     
     print(request.data)
     product_id = request.data.get('product', {}).get('id')
-    
+    cart_id = request.data.get('cart_id')
     product = SoccerBoot.objects.get(id=product_id)    
     
     try:
-        BootInCart.objects.create(product=product)
+        BootInCart.objects.create(cart_id=cart_id, product=product)
         return Response('Item adicionado com sucesso!', status=status.HTTP_201_CREATED)
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
