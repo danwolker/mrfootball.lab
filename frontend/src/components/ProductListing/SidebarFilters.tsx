@@ -2,27 +2,18 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "../../styles/SideBarFilters.css";
+import { useProducts } from "../../contexts/ProductsContext";
 
-interface Color {
-  color: string;
-}
+
 
 const SidebarFilters: React.FC = () => {
-  const [colors, setColors] = useState<Color[]>([]);
-  const[ color, setColor] = useState('')
-
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/get_colors")
-      .then((res) => res.json())
-      .then((data) => setColors(data))
-      .catch((err) => console.error(err));
-  }, []);
+  const {colors, changeSelectedColor,} = useProducts()
 
   function handleColorFilter(selectedColor:string) {
     if (selectedColor){
       console.log(selectedColor)
     }
-    setColor(selectedColor)
+    changeSelectedColor(selectedColor)
   }
 
   return (

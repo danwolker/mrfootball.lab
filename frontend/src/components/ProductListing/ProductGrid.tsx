@@ -1,6 +1,7 @@
 // src/components/ProductListing/ProductGrid.tsx
 import React, { useEffect, useState } from "react";
 import { FaShoppingCart} from "react-icons/fa";
+import { useProducts } from "../../contexts/ProductsContext";
 
 
 interface Product {
@@ -13,14 +14,8 @@ interface Product {
 }
 
 const ProductGrid: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/get_soccer_boots?`)
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error(err));
-  }, []);
+  
+  const {products} = useProducts()
 
   const handleAddToCart = async (productToAdd: Product) => {
     const getOrCreateCartId = () => {
