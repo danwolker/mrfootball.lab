@@ -1,8 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import NewsLetter, SoccerBoot, BootInCart, Brand
-from .serializer import NewsLetterSerializer, SoccerBootSerializer, BrandSerializer
+from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color
+from .serializer import NewsLetterSerializer, SoccerBootSerializer, BrandSerializer, ColorSerializer
 from django.http import HttpResponse
  
 @api_view(['GET'])
@@ -35,14 +35,14 @@ def get_soccer_boots(request):
 
 @api_view(['POST'])
 def add_boot_to_cart(request):
-    cart_id = request.data.get('cart_id')
+    
     print(request.data)
     product_id = request.data.get('product', {}).get('id')
     
     product = SoccerBoot.objects.get(id=product_id)    
     
     try:
-        BootInCart.objects.create(cart_id=cart_id, product=product)
+        BootInCart.objects.create(product=product)
         return Response('Item adicionado com sucesso!', status=status.HTTP_201_CREATED)
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -56,3 +56,10 @@ def get_brands(request):
     brands = Brand.objects.all()
     serialized_soccer_boots = BrandSerializer(brands, many=True).data
     return Response(serialized_soccer_boots)
+
+@api_view(['GET'])
+def get_colors(request):
+    colors = Color.objects.all()
+    serialized_colors = ColorSerializer(colors, many=True).data
+    print(serialized_colors)
+    return Response(serialized_colors)

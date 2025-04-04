@@ -15,22 +15,36 @@ const ProductCardCarousel: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [fade, setFade] = useState<"fade-in" | "fade-out">("fade-in");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const handleAddToCart = (product: Product) => {
-    console.log("Product added to cart:", product);
+
+  const handleAddToCart = async (productToAdd: Product) => {
+    {
+      const toCartData = {
+        product: productToAdd,
+      };
+      try {
+        await fetch("http://127.0.0.1:8000/api/add_boot_to_cart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(toCartData),
+        });
+        console.log("Produto Adicionado ao carrinho!");
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
-  
+  useEffect(() => {
+    fetchProducts();
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
 
-useEffect(() => {
-  fetchProducts();
-  const handleResize = () => {
-    setWindowWidth(window.innerWidth);
-  };
-  
-  window.addEventListener('resize', handleResize);
-  return () => window.removeEventListener('resize', handleResize);
-}, []);
-
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const fetchProducts = async () => {
     try {
@@ -45,19 +59,15 @@ useEffect(() => {
   };
 
   const rotateLeft = () => {
- 
     const first = products[0];
     setProducts([...products.slice(1), first]);
     setFade("fade-in");
-   
   };
 
   const rotateRight = () => {
-   
     const last = products[products.length - 1];
     setProducts([last, ...products.slice(0, products.length - 1)]);
     setFade("fade-in");
-    
   };
 
   useEffect(() => {
@@ -67,7 +77,6 @@ useEffect(() => {
     return () => clearInterval(interval);
   }, [products]);
 
-
   const handleVisibleProducts = () => {
     if (windowWidth <= 550) {
       return products.slice(0, 1);
@@ -76,18 +85,13 @@ useEffect(() => {
     } else if (windowWidth <= 1500) {
       return products.slice(0, 3);
     } else {
-      return products.slice(0,4)
+      return products.slice(0, 4);
     }
   };
   const visibleProducts = handleVisibleProducts();
 
-   
-
-
-  
   return (
     <section className="product-carousel-horizontal">
-      
       <h2 className="carousel-title">Nossas Chuteiras</h2>
       <button className="arrow-btn left" onClick={rotateRight}>
         ❮

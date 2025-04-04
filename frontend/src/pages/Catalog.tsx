@@ -20,23 +20,8 @@ interface Product {
   }
 
 const Catalog: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+ 
 
-  useEffect(() => {
-    fecthProducts();
-  }, []);
-
-  const fecthProducts = async () => {
-    try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/get_soccer_boots"
-      );
-      const data = await response.json();
-      setProducts(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
 
   return (
