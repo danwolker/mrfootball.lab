@@ -22,7 +22,7 @@ const ProductGrid: React.FC = () => {
       let cartId = localStorage.getItem("cartId");
       if (!cartId) {
         cartId = crypto.randomUUID();
-        localStorage.setItem("cartId", cartId);
+        sessionStorage.setItem("cartId", cartId);
       }
       return cartId;
     };

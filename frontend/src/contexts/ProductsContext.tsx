@@ -1,3 +1,4 @@
+import { SaladIcon } from "lucide-react";
 import {
   createContext,
   ReactNode,
@@ -19,10 +20,20 @@ export interface Color {
   color: string;
 }
 
+export interface Brand {
+  brand: string;
+}
+
+
+
 interface ProductsContextType {
   products: Product[];
-  changeSelectedColor: (selectedColor: string) => void;
   colors: Color[];
+  brands: Brand[];
+  
+  changeSelectedBrand: (selectedBrand: string) => void;
+  changeSelectedColor: (selectedColor: string) => void;
+  changeBootType: (selectedBootType: string) => void;
 }
 
 const ProductContext = createContext<ProductsContextType | undefined>(
@@ -33,19 +44,36 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [colors, setColors] = useState<Color[]>([]);
   const [color, setColor] = useState("");
+  const [brands, setBrands] = useState<Brand[]>([]);
+  const [brand, setBrand] = useState("");
+  const [type, setType] = useState("");
+
+  const changeBootType = (selectedBootType: string) => {
+    setType(selectedBootType);
+  };
 
   const changeSelectedColor = (selectedColor: string) => {
     setColor(selectedColor);
   };
 
+  const changeSelectedBrand = (seletedBrand: string) => {
+    setBrand(seletedBrand);
+  };
+
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/get_soccer_boots?color=${color}`)
+    fetch(
+      `http://127.0.0.1:8000/api/get_soccer_boots?color=${color}&brand=${brand}&type=${type}`
+    )
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((err) => console.error(err));
-  }, [color]);
+  }, [color, brand, type]);
 
   useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/get_brands")
+      .then((res) => res.json())
+      .then((data) => setBrands(data))
+      .catch((err) => console.error(err));
     fetch("http://127.0.0.1:8000/api/get_colors")
       .then((res) => res.json())
       .then((data) => setColors(data))
@@ -53,7 +81,16 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <ProductContext.Provider value={{ changeSelectedColor, products, colors }}>
+    <ProductContext.Provider
+      value={{
+        changeSelectedColor,
+        changeSelectedBrand,
+        changeBootType,
+        products,
+        colors,
+        brands,
+      }}
+    >
       {children}
     </ProductContext.Provider>
   );

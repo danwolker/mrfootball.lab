@@ -59,9 +59,9 @@ class Line(models.Model):
 class SoccerBoot(models.Model):
     BOOT_TYPES = {
         'Campo':'Campo',
-        'Salão':'Salão',
-        'Suiço':'Suiço',
-        'Trava Mista': 'Trava Mista',
+        'Salao':'Salão',
+        'Suico':'Suiço',
+        'Trava-Mista': 'Trava Mista',
     }
     image = models.ImageField(upload_to='soccer_boots/', null=True)     
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True)
