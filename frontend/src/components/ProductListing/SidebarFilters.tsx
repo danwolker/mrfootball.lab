@@ -100,12 +100,16 @@ const SidebarFilters: React.FC = () => {
           <div className="filter-group">
             <h2>Botinha</h2>
             <div>
-              <input onChange={() => handleSelectedBootie('true')} type="radio" name="bootie" id="true" />
-              <label htmlFor="true">Com Botinha</label>
+              <input onChange={() => handleSelectedBootie('com')} type="radio" name="bootie" id="com" />
+              <label htmlFor="com">Com Botinha</label>
             </div>
             <div>
-              <input onChange={() => handleSelectedBootie('false')} type="radio" name="bootie" id="false" />
-              <label htmlFor="false">Sem Botinha</label>
+              <input onChange={() => handleSelectedBootie('sem')} type="radio" name="bootie" id="sem" />
+              <label htmlFor="sem">Sem Botinha</label>
+            </div>
+            <div>
+              <input onChange={() => handleSelectedBootie('todas')} type="radio" name="bootie" id="todas" />
+              <label htmlFor="todas">Todas</label>
             </div>
 
           </div>

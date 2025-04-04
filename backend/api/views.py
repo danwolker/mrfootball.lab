@@ -35,10 +35,14 @@ def get_soccer_boots(request):
     
     if 'bootie' in request.GET:
         bootie_value = request.GET['bootie'].lower()
-        if bootie_value == 'true':
+        if bootie_value == 'com':
             filters['bootie'] = True
-        elif bootie_value == 'false':
-            filters['bootie'] = False     
+        if bootie_value == 'sem':
+            filters['bootie'] = False
+        if bootie_value == 'todas':
+            pass
+            
+            
     soccer_boots = SoccerBoot.objects.filter(**filters)
     serialized_soccer_boots = SoccerBootSerializer(soccer_boots, many=True).data
     return Response(serialized_soccer_boots)   
