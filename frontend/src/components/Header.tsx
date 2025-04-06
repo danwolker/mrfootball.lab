@@ -1,13 +1,8 @@
-import React, { useState } from "react";
+
 import { Link } from "react-router-dom";
 import "../styles/Header.css";
 
 const Header: React.FC = () => {
-  const [isBrandsOpen, setIsBrandsOpen] = useState(false);
-
-  const toggleBrandsMenu = () => {
-    setIsBrandsOpen(!isBrandsOpen);
-  };
 
   return (
     <header className="header">
