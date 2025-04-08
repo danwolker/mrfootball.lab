@@ -19,7 +19,7 @@ const slides = [
     id: 3,
     title: "Tecnologia e Conforto em Cada Passo",
     subtitle: "Experimente a nova geração de chuteiras profissionais",
-    image: "/products/adidascreme.png",
+    image: "./products/adidascreme.png",
   },
 ];
 

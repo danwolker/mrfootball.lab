@@ -9,30 +9,18 @@ const SidebarFilters: React.FC = () => {
     useProducts();
 
   function handleColorFilter(selectedColor: string) {
-    if (selectedColor) {
-      console.log(selectedColor);
-    }
     changeSelectedColor(selectedColor);
   }
 
   function handleBrandFilter(selectedBrand: string) {
-    if (selectedBrand) {
-      console.log(selectedBrand);
-    }
     changeSelectedBrand(selectedBrand);
   }
 
   function handleSelectedType(selectedBootType:string) {
-    if (selectedBootType) {
-      console.log(selectedBootType)
-    }
     changeBootType(selectedBootType)
   }
 
   function handleSelectedBootie(selectedValue:string) {
-    if (selectedValue) {
-      console.log(selectedValue)
-    }
     changeBootie(selectedValue)
   }
 
