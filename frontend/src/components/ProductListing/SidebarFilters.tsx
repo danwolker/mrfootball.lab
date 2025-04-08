@@ -1,13 +1,13 @@
 // src/components/ProductListing/SidebarFilters.tsx
 import React from "react";
-
 import "../../styles/SideBarFilters.css";
 import { useProducts } from "../../contexts/ProductsContext";
+import { RadioButton } from "./RadioColor.Style";
 
 const SidebarFilters: React.FC = () => {
   const {changeBootType, changeBootie, changeSelectedColor, changeSelectedBrand, colors, brands } =
     useProducts();
-
+  console.log(colors)
   function handleColorFilter(selectedColor: string) {
     changeSelectedColor(selectedColor);
   }
@@ -23,14 +23,21 @@ const SidebarFilters: React.FC = () => {
   function handleSelectedBootie(selectedValue:string) {
     changeBootie(selectedValue)
   }
-
+  console.log(colors)
   return (
     <aside className="sidebar">
       <h3>Filtrar por</h3>
       <div className="filter-group">
         <h2>Cores</h2>
-        {colors.map((color) => (
+        
+        {colors.map((color) => ( 
+          
           <div key={color.color}>
+          <div>
+            
+            <RadioButton buttoncolor={color.color_code} />
+          </div>
+
             <input
               type="radio"
               name="color"

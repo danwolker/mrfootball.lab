@@ -18,6 +18,7 @@ export interface Product {
 
 export interface Color {
   color: string;
+  color_code:string;
 }
 
 export interface Brand {
@@ -49,7 +50,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [brand, setBrand] = useState("");
   const [type, setType] = useState("");
   const [bootie, setBootie] = useState("")
-
+  console.log(colors)
   const changeBootType = (selectedBootType: string) => {
     setType(selectedBootType);
   };
@@ -83,7 +84,8 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     fetch("http://127.0.0.1:8000/api/get_colors")
       .then((res) => res.json())
       .then((data) => setColors(data))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+    
   }, []);
 
   return (

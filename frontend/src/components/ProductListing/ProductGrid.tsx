@@ -1,8 +1,8 @@
 // src/components/ProductListing/ProductGrid.tsx
-import React, { useEffect, useState } from "react";
+
 import { FaShoppingCart} from "react-icons/fa";
 import { useProducts } from "../../contexts/ProductsContext";
-import "../../styles/ProductGrid.css";
+
 
 
 interface Product {
