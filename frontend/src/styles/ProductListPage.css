@@ -44,7 +44,7 @@ label {
   cursor: pointer;
 }
 
-.colors-title {
+.button-title {
   border: 0;
   background-color: transparent;
 }
@@ -58,10 +58,14 @@ label {
   border: 0;
 }
 
-.colors-button::after {
-  content: '';
-  
-} 
+.colors-button > h2 {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  line-height: 1.6;
+  gap: 0.5rem;
+}
+
 
 .product-main-content {
   flex: 1;

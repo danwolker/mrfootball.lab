@@ -1,9 +1,8 @@
 // src/components/ProductListing/SidebarFilters.tsx
-import React, { useEffect } from "react";
 import "../../styles/SideBarFilters.css";
 import { useProducts } from "../../contexts/ProductsContext";
 import { BaseRadioButton, RadioButtonColor } from "./RadioColor.Style";
-import { CaseUpper, Container } from "lucide-react";
+import { ArrowBendRightDown } from "@phosphor-icons/react";
 
 const SidebarFilters: React.FC = () => {
   const {
@@ -31,23 +30,36 @@ const SidebarFilters: React.FC = () => {
     changeBootie(selectedValue);
   }
 
-
   function handleColorsDisplay() {
-    const filtersColorsDiv = document.getElementById('filters-colors') as HTMLElement
-    if (filtersColorsDiv.style.display == 'flex') {
-      filtersColorsDiv.style.display = 'none'
+    const filtersColorsDiv = document.getElementById(
+      "filters-colors"
+    ) as HTMLElement;
+    if (filtersColorsDiv.style.display == "flex") {
+      filtersColorsDiv.style.display = "none";
     } else {
-      filtersColorsDiv.style.display = 'flex'
+      filtersColorsDiv.style.display = "flex";
     }
   }
 
+  function handleBrandsDisplay() {
+    const filtersBrandsDiv = document.getElementById(
+      "filters-brands"
+    ) as HTMLElement;
+    if (filtersBrandsDiv.style.display == "flex") {
+      filtersBrandsDiv.style.display = "none";
+    } else {
+      filtersBrandsDiv.style.display = "flex";
+    }
+  }
 
   return (
     <aside className="sidebar">
-       <button className="colors-button" onClick={handleColorsDisplay}>
-         <h2 className="colors-title">Cores <i class="ph ph-arrow-bend-right-down"></i></h2>
-       </button>
-      <div id='filters-colors' className="filter-group-colors">
+      <button className="colors-button" onClick={handleColorsDisplay}>
+        <h2 className="button-title">
+          Cores <ArrowBendRightDown size={20} weight="bold" />
+        </h2>
+      </button>
+      <div id="filters-colors" className="filter-group-colors">
         {colors.map((color) => (
           <div className="radio-container" key={color.color}>
             <RadioButtonColor
@@ -57,17 +69,18 @@ const SidebarFilters: React.FC = () => {
               id={color.color}
               buttoncolor={color.color_code}
             />
-
             <label className="label" htmlFor={color.color}>
               {color.color}
             </label>
           </div>
         ))}
-
-
       </div>
-      <div className="filter-group">
-        <h2>Marcas</h2>
+      <button className="colors-button" onClick={handleBrandsDisplay}>
+        <h2 className="button-title">
+          Marcas <ArrowBendRightDown size={20} weight="bold" />
+        </h2>
+      </button>
+      <div id='filters-brands' className="filter-group">
         {brands.map((brand) => (
           <div className="radio-container" key={brand.brand}>
             <BaseRadioButton
@@ -83,11 +96,10 @@ const SidebarFilters: React.FC = () => {
         ))}
       </div>
 
-
       <div className="filter-group">
         <h2>Tipos</h2>
 
-        <div className="radio-container" >
+        <div className="radio-container">
           <BaseRadioButton
             onChange={() => handleSelectedType("Campo")}
             type="radio"
@@ -99,7 +111,7 @@ const SidebarFilters: React.FC = () => {
           </label>
         </div>
 
-        <div className="radio-container" >
+        <div className="radio-container">
           <BaseRadioButton
             onChange={() => handleSelectedType("Salao")}
             type="radio"
@@ -111,7 +123,7 @@ const SidebarFilters: React.FC = () => {
           </label>
         </div>
 
-        <div className="radio-container" >
+        <div className="radio-container">
           <BaseRadioButton
             onChange={() => handleSelectedType("Suico")}
             type="radio"
@@ -123,7 +135,7 @@ const SidebarFilters: React.FC = () => {
           </label>
         </div>
 
-        <div className="radio-container" >
+        <div className="radio-container">
           <BaseRadioButton
             onChange={() => handleSelectedType("Trava-Mista")}
             className="label"
@@ -133,7 +145,7 @@ const SidebarFilters: React.FC = () => {
           />
           <label htmlFor="mista">Trava Mista</label>
         </div>
-        <div className="radio-container" >
+        <div className="radio-container">
           <BaseRadioButton
             onChange={() => handleSelectedType("Todas")}
             className="label"
@@ -145,7 +157,7 @@ const SidebarFilters: React.FC = () => {
         </div>
         <div className="filter-group">
           <h2>Botinha</h2>
-          <div className="radio-container" >
+          <div className="radio-container">
             <BaseRadioButton
               onChange={() => handleSelectedBootie("com")}
               type="radio"
@@ -154,7 +166,7 @@ const SidebarFilters: React.FC = () => {
             />
             <label htmlFor="with">Com Botinha</label>
           </div>
-          <div className="radio-container" >
+          <div className="radio-container">
             <BaseRadioButton
               onChange={() => handleSelectedBootie("sem")}
               type="radio"
@@ -163,7 +175,7 @@ const SidebarFilters: React.FC = () => {
             />
             <label htmlFor="without">Sem Botinha</label>
           </div>
-          <div className="radio-container" >
+          <div className="radio-container">
             <BaseRadioButton
               onChange={() => handleSelectedBootie("todas")}
               type="radio"
