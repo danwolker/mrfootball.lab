@@ -42,5 +42,5 @@ class BootInCartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BootInCart
-        fields = ['cart_id', 'product']
+        fields = ['cart_id', 'amount', 'product']
         

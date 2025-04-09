@@ -8,13 +8,13 @@ import { ProductProvider } from "../../contexts/ProductsContext";
 const ProductListPage: React.FC = () => {
   return (
     <div className="product-listing-container">
-      <ProductProvider>
+
         <SidebarFilters />
         <div className="product-main-content">
           <TopFilters />
           <ProductGrid />
         </div>
-      </ProductProvider>
+    
     </div>
   );
 };

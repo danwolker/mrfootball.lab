@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   FaBars,
@@ -9,34 +9,23 @@ import {
   FaTimes,
 } from "react-icons/fa";
 import "../styles/Navbar.css";
-
-
-interface CartItem {
-  cart_id: string;
-  product: number;
+import { useProducts } from "../contexts/ProductsContext";
+export interface Product {
+  id: number;
+  brand: string;
+  line: string;
+  image: string;
+  price: number;
+  rating: number;
+  color: string;
+  amount: number;
 }
-
 
 
 const Navbar: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [bootsInCart, setBootInCart] = useState<CartItem[]>()
-  console.log(bootsInCart)
-  
-  useEffect(() => {
-    const fetchBootsInCart = async () => {
-      try {
-        const response = await fetch(`http://127.0.0.1:8000/api/get_boots_in_cart`);
-        const data = await response.json();
-        setBootInCart(data);
-      } catch (err) {
-        console.error("Erro ao buscar itens do carrinho:", err);
-      }
-    };
-  
-    fetchBootsInCart();
-  }, []); // Removi bootsInCart das dependências para evitar loop infinito
+  const { cartItems, fetchCartItems } = useProducts();
   
 
   return (
@@ -118,27 +107,35 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       )}
-     
-        {isCartOpen && (
-          <div className="cart-modal">
-            <div className="cart-sidebar">
-              <button
-                className="close-btn"
-                onClick={() => setIsCartOpen(false)}
-              >
-                <FaTimes />
-              </button>
-              <h2>Seu Carrinho</h2>
-              <p>Ainda não há itens no carrinho.</p>
-              {bootsInCart?.map((boot) => (
-                <div key={boot.product}>
-                  {boot.product}
+
+      {isCartOpen && (
+        <div className="cart-modal">
+          <div className="cart-sidebar">
+            <button className="close-btn" onClick={() => setIsCartOpen(false)}>
+              <FaTimes />
+            </button>
+            <h2>Seu Carrinho</h2>
+            <p>Ainda não há itens no carrinho.</p>
+            {cartItems?.map((boot) => (
+              <div className="boots-in-cart-container" key={boot.product.id}>
+                <div className="boots-in-cart-info-container">
+                  <img
+                    className="boots-in-cart-img"
+                    src={`http://127.0.0.1:8000${boot.product.image}`}
+                    alt=""
+                  />
+                  {boot.product.brand}-{boot.product.line}-{boot.product.color}-
+                  Preço: R${boot.product.price.toFixed(2)}-{boot.amount}-----
                 </div>
-              ))}
-            </div>
+                <div className="boots-in-cart-buttons-container">
+                  <button>+</button>
+                  <button>-</button>
+                </div>
+              </div>
+            ))}
           </div>
-        )}
-   
+        </div>
+      )}
     </>
   );
 };

@@ -1,4 +1,3 @@
-
 import {
   createContext,
   ReactNode,
@@ -14,28 +13,36 @@ export interface Product {
   image: string;
   price: number;
   rating: number;
+  color: string;
+  amount: number;
 }
 
 export interface Color {
   color: string;
-  color_code:string;
+  color_code: string;
 }
 
 export interface Brand {
   brand: string;
 }
 
-
+interface CartItem {
+  cart_id: string;
+  product: Product;
+  amount: number;
+}
 
 interface ProductsContextType {
   products: Product[];
   colors: Color[];
   brands: Brand[];
-  
+  cartItems: CartItem[];
+  fetchCartItems: () => void;
   changeSelectedBrand: (selectedBrand: string) => void;
   changeSelectedColor: (selectedColor: string) => void;
   changeBootType: (selectedBootType: string) => void;
   changeBootie: (selectedBootie: string) => void;
+  handleAddToCartContext: (productToadd: Product) => void;
 }
 
 const ProductContext = createContext<ProductsContextType | undefined>(
@@ -49,7 +56,55 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [brands, setBrands] = useState<Brand[]>([]);
   const [brand, setBrand] = useState("");
   const [type, setType] = useState("");
-  const [bootie, setBootie] = useState("")
+  const [bootie, setBootie] = useState("");
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  const fetchCartItems = async () => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/get_boots_in_cart`
+      );
+      const data = await response.json();
+      setCartItems(data);
+    } catch (err) {
+      console.error("Erro ao buscar itens do carrinho:", err);
+    }
+  };
+
+  const handleAddToCartContext = async (productToAdd: Product) => {
+    const getOrCreateCartId = () => {
+      let cartId = localStorage.getItem("cartId");
+      if (!cartId) {
+        cartId = crypto.randomUUID();
+        localStorage.setItem("cartId", cartId);
+      }
+      return cartId;
+    };
+
+    const toCartData = {
+      product: productToAdd,
+      cart_id: getOrCreateCartId(),
+    };
+
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/add_boot_to_cart",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(toCartData),
+        }
+      );
+      console.log("Produto Adicionado ao carrinho!");
+
+      // Após adicionar, atualize o carrinho
+      await fetchCartItems();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const changeBootType = (selectedBootType: string) => {
     setType(selectedBootType);
@@ -63,9 +118,9 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     setBrand(seletedBrand);
   };
 
-  const changeBootie = (selectedBootie:string) => {
-    setBootie(selectedBootie)
-  }
+  const changeBootie = (selectedBootie: string) => {
+    setBootie(selectedBootie);
+  };
 
   useEffect(() => {
     fetch(
@@ -84,18 +139,21 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     fetch("http://127.0.0.1:8000/api/get_colors")
       .then((res) => res.json())
       .then((data) => setColors(data))
-      .catch((err) => console.error(err))
-    
+      .catch((err) => console.error(err));
   }, []);
 
   return (
     <ProductContext.Provider
       value={{
+         
+        fetchCartItems, 
         changeSelectedColor,
         changeSelectedBrand,
         changeBootType,
         changeBootie,
+        handleAddToCartContext,
         products,
+        cartItems,
         colors,
         brands,
       }}
