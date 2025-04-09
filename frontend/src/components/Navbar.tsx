@@ -1,19 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   FaBars,
   FaUserCircle,
   FaShoppingCart,
-  FaHeart,
   FaHeadset,
   FaSearch,
   FaTimes,
 } from "react-icons/fa";
 import "../styles/Navbar.css";
 
+
+interface CartItem {
+  cart_id: string;
+  product: number;
+}
+
+
+
 const Navbar: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [bootsInCart, setBootInCart] = useState<CartItem[]>()
+  console.log(bootsInCart)
+  
+  useEffect(() => {
+    const fetchBootsInCart = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/get_boots_in_cart`);
+        const data = await response.json();
+        setBootInCart(data);
+      } catch (err) {
+        console.error("Erro ao buscar itens do carrinho:", err);
+      }
+    };
+  
+    fetchBootsInCart();
+  }, []); // Removi bootsInCart das dependências para evitar loop infinito
+  
 
   return (
     <>
@@ -32,7 +56,11 @@ const Navbar: React.FC = () => {
           {/* Seção Central */}
           <div className="center-section">
             <div className="search-container">
-              <input type="text" className="search-input" placeholder="O que você procura?" />
+              <input
+                type="text"
+                className="search-input"
+                placeholder="O que você procura?"
+              />
               <button className="search-btn">
                 <FaSearch />
               </button>
@@ -54,20 +82,13 @@ const Navbar: React.FC = () => {
               <span>Favoritos</span>
             </Link> */}
             <div className="cart-container">
-              <button className="cart-btn" onClick={() => setIsCartOpen(!isCartOpen)}>
+              <button
+                className="cart-btn"
+                onClick={() => setIsCartOpen(!isCartOpen)}
+              >
                 <FaShoppingCart />
                 <span>Carrinho</span>
               </button>
-
-              {isCartOpen && (
-                <div className="cart-sidebar">
-                  <button className="close-btn" onClick={() => setIsCartOpen(false)}>
-                    <FaTimes />
-                  </button>
-                  <h2>Seu Carrinho</h2>
-                  <p>Ainda não há itens no carrinho.</p>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -86,7 +107,9 @@ const Navbar: React.FC = () => {
               <input type="email" placeholder="Digite seu e-mail" required />
               <label>Senha</label>
               <input type="password" placeholder="Digite sua senha" required />
-              <button type="submit" className="login-submit">Entrar</button>
+              <button type="submit" className="login-submit">
+                Entrar
+              </button>
             </form>
             <div className="login-links">
               <Link to="/recuperar-senha">Esqueci minha senha</Link>
@@ -95,10 +118,29 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       )}
+     
+        {isCartOpen && (
+          <div className="cart-modal">
+            <div className="cart-sidebar">
+              <button
+                className="close-btn"
+                onClick={() => setIsCartOpen(false)}
+              >
+                <FaTimes />
+              </button>
+              <h2>Seu Carrinho</h2>
+              <p>Ainda não há itens no carrinho.</p>
+              {bootsInCart?.map((boot) => (
+                <div key={boot.product}>
+                  {boot.product}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+   
     </>
   );
 };
 
 export default Navbar;
-
-

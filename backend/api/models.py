@@ -38,14 +38,14 @@ class Addres(models.Model):
         return self.user
 
 class Color(models.Model):
-    color = models.CharField(max_length=10)
+    color = models.CharField(max_length=11)
     color_code = models.CharField(max_length=7)
 
     def __str__(self):
         return self.color
 
 class Brand(models.Model):
-    brand = models.CharField(max_length=10)
+    brand = models.CharField(max_length=15)
 
     def __str__(self):
         return self.brand
@@ -88,7 +88,7 @@ class NewsLetter(models.Model):
 
 class BootInCart(models.Model):
     cart_id = models.CharField(max_length=39)
-    product = models.ForeignKey(SoccerBoot, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(SoccerBoot, related_name='soccer_boots', on_delete=models.SET_NULL, null=True)
     
     def __str__(self):
         return f'{self.cart_id}   ||  {self.product}'

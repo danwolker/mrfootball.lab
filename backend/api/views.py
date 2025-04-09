@@ -1,8 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color
-from .serializer import NewsLetterSerializer, SoccerBootSerializer, BrandSerializer, ColorSerializer
+from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color, BootInCart
+from .serializer import NewsLetterSerializer, SoccerBootSerializer, BrandSerializer, ColorSerializer, BootInCartSerializer
 
  
 @api_view(['GET'])
@@ -75,5 +75,11 @@ def get_brands(request):
 def get_colors(request):
     colors = Color.objects.all()
     serialized_colors = ColorSerializer(colors, many=True).data
-    print(serialized_colors)
     return Response(serialized_colors)
+
+@api_view(['GET'])
+def get_boots_in_cart(request):
+    boot_in_chart = BootInCart.objects.all()
+    serialized_boots_in_cart = BootInCartSerializer(boot_in_chart, many=True).data
+    
+    return Response(serialized_boots_in_cart)    
