@@ -43,6 +43,8 @@ interface ProductsContextType {
   changeBootType: (selectedBootType: string) => void;
   changeBootie: (selectedBootie: string) => void;
   handleAddToCartContext: (productToadd: Product) => void;
+  handleIncreaseBootAmountInCart: (bootToIncrease: CartItem) => void;
+  handleDecreaseBootAmountInCart: (bootToDecrease: CartItem) => void;
 }
 
 const ProductContext = createContext<ProductsContextType | undefined>(
@@ -70,6 +72,8 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       console.error("Erro ao buscar itens do carrinho:", err);
     }
   };
+
+
 
   const handleAddToCartContext = async (productToAdd: Product) => {
     const getOrCreateCartId = () => {
@@ -106,6 +110,50 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const handleIncreaseBootAmountInCart = async (bootToIncrease:CartItem) => { 
+    const data = {
+      cart_id: bootToIncrease.cart_id,
+      boot_id: bootToIncrease.product.id,
+      amount: bootToIncrease.amount,
+    }
+    try{
+      const response = await fetch('http://127.0.0.1:8000/api/increase_boot_amount_in_cart',
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        }
+      )
+      await fetchCartItems();
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+  const handleDecreaseBootAmountInCart = async (bootToDecrease:CartItem) => { 
+    const data = {
+      cart_id: bootToDecrease.cart_id,
+      boot_id: bootToDecrease.product.id,
+      amount: bootToDecrease.amount,
+    }
+    try{
+      const response = await fetch('http://127.0.0.1:8000/api/decrease_boot_amount_in_cart',
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        }
+      )
+      await fetchCartItems();
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
   const changeBootType = (selectedBootType: string) => {
     setType(selectedBootType);
   };
@@ -140,18 +188,21 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       .then((res) => res.json())
       .then((data) => setColors(data))
       .catch((err) => console.error(err));
-  }, []);
+  
+    fetchCartItems()
+    }, []);
 
   return (
     <ProductContext.Provider
       value={{
-         
         fetchCartItems, 
         changeSelectedColor,
         changeSelectedBrand,
         changeBootType,
         changeBootie,
         handleAddToCartContext,
+        handleIncreaseBootAmountInCart,
+        handleDecreaseBootAmountInCart,
         products,
         cartItems,
         colors,

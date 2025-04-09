@@ -89,6 +89,6 @@ class NewsLetter(models.Model):
 class BootInCart(models.Model):
     cart_id = models.CharField(max_length=39)
     product = models.ForeignKey(SoccerBoot, related_name='soccer_boots', on_delete=models.SET_NULL, null=True)
-    amount = models.IntegerField(null=True, blank=True)
+    amount = models.IntegerField(default=0)
     def __str__(self):
         return f'{self.cart_id}   ||  {self.product}'

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+
 
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
@@ -10,15 +10,6 @@ import FooterNewsletter from "../components/FooterNewsletter";
 import ProductListPage from "../components/ProductListing/ProductListPage";
 import { ProductProvider } from "../contexts/ProductsContext";
 
-interface Product {
-  id: number;
-  brand: string;
-  line: string;
-  image: string;
-  color: string;
-  price: number;
-  rating: number;
-}
 
 const Catalog: React.FC = () => {
   return (

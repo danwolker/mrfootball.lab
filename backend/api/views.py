@@ -65,53 +65,48 @@ def get_colors(request):
     return Response(serialized_colors)
 
 
-@api_view(['PATCH'])
-def update_boot_in_cart(request, cart_id):
-    try:
-        # Busca o item do carrinho pelo cart_id e product_id
-        boot_in_cart = BootInCart.objects.get(cart_id=cart_id)
-        
-        # Atualiza apenas os campos enviados na requisição
-        serializer = BootInCartSerializer(boot_in_cart, data=request.data, partial=True)
-        
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    except BootInCart.DoesNotExist:
-        return Response(
-            {"error": "Item do carrinho não encontrado"},
-            status=status.HTTP_404_NOT_FOUND
-        )
-    except Exception as e:
-        return Response(
-            {"error": str(e)},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
-
 @api_view(['POST'])
 def add_boot_to_cart(request):
     product_id = request.data.get('product', {}).get('id')
     cart_id = request.data.get('cart_id')
     product = SoccerBoot.objects.get(id=product_id)    
-    already_exists = BootInCart.objects.filter(cart_id=cart_id, product=product)
+    already_exists = BootInCart.objects.filter(cart_id=cart_id, product=product).first()
     if already_exists:
-        print(already_exists)
+        already_exists.amount += 1
+        already_exists.save()
+        return Response('Quantidade de items modificada!', status=status.HTTP_200_OK)
         
     try:
-        BootInCart.objects.create(cart_id=cart_id, product=product)
+        BootInCart.objects.create(cart_id=cart_id, product=product, amount=1)
         return Response('Item adicionado com sucesso!', status=status.HTTP_201_CREATED)
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
     
     
     
+@api_view(['PATCH'])
+def increase_boot_amount_in_cart(request):
+    
+    cart_id = request.data.get('cart_id')
+    product = request.data.get('boot_id')
+    boot = BootInCart.objects.filter(cart_id=cart_id, product=product).first()
+    boot.amount += 1
+    boot.save()
+    return Response('Quantidade de items aumentada!', status=status.HTTP_200_OK)
+    
+    
+@api_view(['PATCH'])
+def decrease_boot_amount_in_cart(request):
+    cart_id = request.data.get('cart_id')
+    product = request.data.get('boot_id')
+    boot = BootInCart.objects.filter(cart_id=cart_id, product=product).first()
+    boot.amount -= 1
+    boot.save()
+    return Response('Quantidade de items subtraída!', status=status.HTTP_200_OK)
+
 @api_view(['GET'])
 def get_boots_in_cart(request):
     boot_in_chart = BootInCart.objects.all()
     serialized_boots_in_cart = BootInCartSerializer(boot_in_chart, many=True).data
-    
     return Response(serialized_boots_in_cart)    
 

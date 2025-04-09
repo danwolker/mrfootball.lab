@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { Link } from "react-router-dom";
 import {
   FaBars,
@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import "../styles/Navbar.css";
 import { useProducts } from "../contexts/ProductsContext";
+
 export interface Product {
   id: number;
   brand: string;
@@ -21,12 +22,25 @@ export interface Product {
   amount: number;
 }
 
+interface CartItem {
+  cart_id: string;
+  product: Product;
+  amount: number;
+}
+
 
 const Navbar: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const { cartItems, fetchCartItems } = useProducts();
+  const { cartItems, fetchCartItems, handleIncreaseBootAmountInCart, handleDecreaseBootAmountInCart } = useProducts();
   
+  function increaseBootAmountInCart(boot:CartItem) {
+    handleIncreaseBootAmountInCart(boot);
+  }
+
+  function decreaseBootAmountInCart(boot:CartItem) {
+    handleDecreaseBootAmountInCart(boot);
+  }
 
   return (
     <>
@@ -128,8 +142,8 @@ const Navbar: React.FC = () => {
                   Preço: R${boot.product.price.toFixed(2)}-{boot.amount}-----
                 </div>
                 <div className="boots-in-cart-buttons-container">
-                  <button>+</button>
-                  <button>-</button>
+                  <button onClick={() => increaseBootAmountInCart(boot)}>+</button>
+                  <button onClick={() => decreaseBootAmountInCart(boot)}>-</button>
                 </div>
               </div>
             ))}
