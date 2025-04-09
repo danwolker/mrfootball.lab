@@ -50,7 +50,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [brand, setBrand] = useState("");
   const [type, setType] = useState("");
   const [bootie, setBootie] = useState("")
-  console.log(colors)
+
   const changeBootType = (selectedBootType: string) => {
     setType(selectedBootType);
   };
