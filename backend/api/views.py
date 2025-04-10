@@ -86,7 +86,6 @@ def add_boot_to_cart(request):
     
 @api_view(['PATCH'])
 def increase_boot_amount_in_cart(request):
-    
     cart_id = request.data.get('cart_id')
     product = request.data.get('boot_id')
     boot = BootInCart.objects.filter(cart_id=cart_id, product=product).first()
@@ -100,10 +99,13 @@ def decrease_boot_amount_in_cart(request):
     cart_id = request.data.get('cart_id')
     product = request.data.get('boot_id')
     boot = BootInCart.objects.filter(cart_id=cart_id, product=product).first()
-    boot.amount -= 1
-    boot.save()
-    return Response('Quantidade de items subtraída!', status=status.HTTP_200_OK)
-
+    if boot.amount >= 2:
+        boot.amount -= 1
+        boot.save()
+        return Response('Quantidade de items subtraída!', status=status.HTTP_200_OK)
+    else:
+        return Response('Quantidade de itens no carrinho não pode ser menores que 1', status=status.HTTP_200_OK)
+        
 @api_view(['GET'])
 def get_boots_in_cart(request):
     boot_in_chart = BootInCart.objects.all()

@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   FaBars,
@@ -28,18 +28,26 @@ interface CartItem {
   amount: number;
 }
 
-
 const Navbar: React.FC = () => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const { cartItems, fetchCartItems, handleIncreaseBootAmountInCart, handleDecreaseBootAmountInCart } = useProducts();
-  
-  function increaseBootAmountInCart(boot:CartItem) {
+  const {
+    cartItems,
+    isCartOpen,
+    handleIncreaseBootAmountInCart,
+    handleDecreaseBootAmountInCart,
+    handleOpenCart,
+  } = useProducts();
+
+  function increaseBootAmountInCart(boot: CartItem) {
     handleIncreaseBootAmountInCart(boot);
   }
 
-  function decreaseBootAmountInCart(boot:CartItem) {
+  function decreaseBootAmountInCart(boot: CartItem) {
     handleDecreaseBootAmountInCart(boot);
+  }
+
+  function openCloseCart(value: boolean) {
+    handleOpenCart(value);
   }
 
   return (
@@ -87,7 +95,7 @@ const Navbar: React.FC = () => {
             <div className="cart-container">
               <button
                 className="cart-btn"
-                onClick={() => setIsCartOpen(!isCartOpen)}
+                onClick={() => openCloseCart(!isCartOpen)}
               >
                 <FaShoppingCart />
                 <span>Carrinho</span>
@@ -125,7 +133,7 @@ const Navbar: React.FC = () => {
       {isCartOpen && (
         <div className="cart-modal">
           <div className="cart-sidebar">
-            <button className="close-btn" onClick={() => setIsCartOpen(false)}>
+            <button className="close-btn" onClick={() => openCloseCart(false)}>
               <FaTimes />
             </button>
             <h2>Seu Carrinho</h2>
@@ -138,12 +146,23 @@ const Navbar: React.FC = () => {
                     src={`http://127.0.0.1:8000${boot.product.image}`}
                     alt=""
                   />
-                  {boot.product.brand}-{boot.product.line}-{boot.product.color}-
-                  Preço: R${boot.product.price.toFixed(2)}-{boot.amount}-----
+                  <p>
+                    {boot.product.brand} {boot.product.line}{" "}
+                    {boot.product.color} R$:
+                    {boot.product.price.toFixed(2)} 
+                  </p>
                 </div>
-                <div className="boots-in-cart-buttons-container">
-                  <button onClick={() => increaseBootAmountInCart(boot)}>+</button>
-                  <button onClick={() => decreaseBootAmountInCart(boot)}>-</button>
+
+                <div className="boots-in-cart-amount-container">
+                  <p className="cart-amount">Qtdade:{boot.amount}</p>
+                  <div className="buttons-in-cart-container">
+                    <button onClick={() => increaseBootAmountInCart(boot)}>
+                      +
+                    </button>
+                    <button onClick={() => decreaseBootAmountInCart(boot)}>
+                      -
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}

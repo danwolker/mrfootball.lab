@@ -8,10 +8,11 @@ import { Product, useProducts } from "../../contexts/ProductsContext";
 
 const ProductGrid: React.FC = () => {
   
-  const {products, handleAddToCartContext} = useProducts()
+  const {products, handleAddToCartContext, handleOpenCart} = useProducts()
   
   function handleAddToCart(productToAdd:Product) {
     handleAddToCartContext(productToAdd)
+    handleOpenCart(true)
   }
 
   return (
