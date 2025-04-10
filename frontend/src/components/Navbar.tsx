@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Plus } from '@phosphor-icons/react'
 import {
   FaBars,
   FaUserCircle,
@@ -157,7 +158,7 @@ const Navbar: React.FC = () => {
                   <p className="cart-amount">Qtdade:{boot.amount}</p>
                   <div className="buttons-in-cart-container">
                     <button onClick={() => increaseBootAmountInCart(boot)}>
-                      +
+                    <Plus size={32} color="#150a19" />
                     </button>
                     <button onClick={() => decreaseBootAmountInCart(boot)}>
                       -

@@ -15,7 +15,7 @@ const Catalog: React.FC = () => {
   return (
     <div>
       
-      <ProductProvider>
+    
         <Navbar />
         <Header />
         <ProductListPage />
@@ -24,7 +24,7 @@ const Catalog: React.FC = () => {
         <FooterNewsletter />
         <FooterInfo />
         <Footer />
-      </ProductProvider>
+     
     </div>
   );
 };
