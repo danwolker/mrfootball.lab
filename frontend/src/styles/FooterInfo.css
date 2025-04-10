@@ -37,6 +37,10 @@
   color: #0e72ae;
 }
 
+span {
+  color: #555;
+}
+
 @media screen and (max-width: 768px) {
   .footer-info {
     display: flex;

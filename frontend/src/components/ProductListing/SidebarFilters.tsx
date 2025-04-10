@@ -3,7 +3,7 @@ import "../../styles/SideBarFilters.css";
 import { useProducts } from "../../contexts/ProductsContext";
 import { BaseRadioButton, RadioButtonColor } from "./RadioColor.Style";
 import { ArrowBendRightDown } from "@phosphor-icons/react";
-
+import { FaAngleDown } from 'react-icons/fa'
 const SidebarFilters: React.FC = () => {
   const {
     changeBootType,
@@ -78,7 +78,7 @@ const SidebarFilters: React.FC = () => {
     <aside className="sidebar">
       <button className="display-button" onClick={handleColorsDisplay}>
         <h2 className="button-title">
-          Cores <ArrowBendRightDown size={20} weight="bold" />
+          Cores<FaAngleDown />
         </h2>
       </button>
       <div id="filters-colors" className="filter-group-colors">
@@ -99,7 +99,7 @@ const SidebarFilters: React.FC = () => {
       </div>
       <button className="display-button" onClick={handleBrandsDisplay}>
         <h2 className="button-title">
-          Marcas <ArrowBendRightDown size={20} weight="bold" />
+          Marcas <FaAngleDown />
         </h2>
       </button>
       <div id="filters-brands" className="filter-group">
@@ -121,7 +121,7 @@ const SidebarFilters: React.FC = () => {
       <div>
         <button className="display-button" onClick={handleTypesDisplay}>
           <h2 className="button-title">
-            Tipos <ArrowBendRightDown size={20} weight="bold" />
+            Tipos <FaAngleDown />
           </h2>
         </button>
         <div id="filters-types" className="filter-group">
@@ -183,7 +183,7 @@ const SidebarFilters: React.FC = () => {
         <div>
           <button className="display-button" onClick={handleBootieDisplay}>
             <h2 className="button-title">
-              Botinha <ArrowBendRightDown size={20} weight="bold" />
+              Botinha <FaAngleDown />
             </h2>
           </button>
           <div id="bootie-type" className="filter-group">

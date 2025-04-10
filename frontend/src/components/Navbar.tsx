@@ -164,19 +164,26 @@ const Navbar: React.FC = () => {
                 <div className="boots-in-cart-amount-container">
                   <p className="cart-amount">{boot.amount}</p>
                   <div className="buttons-in-cart-container">
-                    <button className="plus-minus-trash-button" onClick={() => increaseBootAmountInCart(boot)}>
-                      <Plus size={16} color="#ff6600"/>
+                    <button
+                      className="plus-minus-trash-button"
+                      onClick={() => increaseBootAmountInCart(boot)}
+                    >
+                      <Plus size={16} color="#ff6600" />
                     </button>
-                    <button className="plus-minus-trash-button" onClick={() => decreaseBootAmountInCart(boot)}>
-                      <Minus size={16} color="#ff6600"/>
+                    <button
+                      className="plus-minus-trash-button"
+                      onClick={() => decreaseBootAmountInCart(boot)}
+                    >
+                      <Minus size={16} color="#ff6600" />
                     </button>
-                    <button className="plus-minus-trash-button" >
+                    <button className="plus-minus-trash-button">
                       <Trash size={16} color="#858282" />
                     </button>
                   </div>
                 </div>
               </div>
             ))}
+            <button className="finish-shopping-button"><Link to={"/finish"}><span>Finalizar Compra</span></Link></button>
           </div>
         </div>
       )}
