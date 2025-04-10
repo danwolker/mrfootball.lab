@@ -150,6 +150,11 @@
   display: flex;
   flex-flow: row wrap;
   flex-grow: 1;
+  text-align: center;
+}
+
+.cart-modal h2 {
+  padding: 1rem;
 }
 
 .cart-sidebar {
@@ -165,59 +170,100 @@
   display: flex;
   flex-flow: column wrap;
   justify-content: space-between;
-  
+  min-width: 60%;
 }
-  
+
+.cart-labels {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  justify-items: center;
+  align-items: end;
+  border-bottom: 1px solid black;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.875rem;
+}
+
+.cart-label-price,
+.cart-label-amount,
+.cart-label-product {
+  margin: auto;
+  font-size: 0.7rem;
+}
+
+.cart-label-procuct {
+  justify-self: start;
+  padding-left: 2rem;
+  margin-bottom: 0px;
+  font-size: 0.7rem;
+}
 
 .boots-in-cart-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  padding: 10px;
-  max-height: 80px;
-  gap: 20px;
-}
-
-.boots-in-cart-img {
-  width: 70px;
-  height: 50px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 2px;
+  height: 80px;
+  border-bottom: 0.5px solid rgb(185, 178, 178);
 }
 
 .boots-in-cart-info-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 2fr 4fr;
 }
 
 .boots-in-cart-info-container > p {
-  margin-bottom: 0px;
+  justify-self: start;
+  align-self: self-end;
+  font-size: 0.7rem;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
+.boots-in-cart-img {
+  margin: auto;
+  width: 70px;
+  height: 50px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.boots-in-cart-price {
+  align-self: self-end;
+  font-size: 0.7rem;
+  margin-bottom: 10px;
 }
 
 .boots-in-cart-amount-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #ccc;
-  border-radius: 8px;
-  padding: 0px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
 }
 
-
-
 .buttons-in-cart-container {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: flex-start;
-  align-items: center;
-  
+  justify-self: start;
+  align-self: center;
+  margin-bottom: 10px;
+  align-self: self-end ;
 }
 
 .cart-amount {
-
-  display: inline;
-  padding: 5px;
   margin: auto;
+  font-size: 0.7rem;
+  margin-bottom: 10px;
+}
+
+.plus-minus-trash-button {
+  background-color: transparent;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 1px 1px 0.5px rgba(201, 200, 200, 0.486);
+  padding-top: 4px;
+  margin: 2px;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.plus-minus-trash-button > svg {
+  justify-content: center;
 }
 
 .close-btn {

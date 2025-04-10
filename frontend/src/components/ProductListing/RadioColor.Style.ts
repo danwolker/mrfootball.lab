@@ -9,8 +9,8 @@ export const RadioButtonColor = styled.input<RadioButtonProps>`
   border: 1px solid black;
   border-radius: 50%;
   cursor: pointer;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1rem;
+  height: 1rem;
   gap: 10px;
   background: ${(props) => props.buttoncolor};
   text-align: center;
@@ -26,8 +26,8 @@ export const BaseRadioButton = styled.input`
   border: 1px solid black;
   border-radius: 50%;
   cursor: pointer;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1rem;
+  height: 1rem;
   gap: 10px;
   text-align: center;
   line-height: 1.6;

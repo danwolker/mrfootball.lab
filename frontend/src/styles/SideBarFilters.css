@@ -4,9 +4,15 @@ label {
 
 h2 {
   color: black;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .type-form {
   display: flex;
   flex-flow: row nowrap;
+}
+
+.label {
+  font-size: 0.875rem;
 }

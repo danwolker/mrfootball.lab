@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Plus } from '@phosphor-icons/react'
+import { Plus, Minus, Trash } from "@phosphor-icons/react";
 import {
   FaBars,
   FaUserCircle,
@@ -137,8 +137,12 @@ const Navbar: React.FC = () => {
             <button className="close-btn" onClick={() => openCloseCart(false)}>
               <FaTimes />
             </button>
-            <h2>Seu Carrinho</h2>
-            <p>Ainda não há itens no carrinho.</p>
+            <h2>MEU CARRINHO</h2>
+            <div className="cart-labels">
+              <p className="cart-label-procuct">Produto</p>
+              <p className="cart-label-price">Preço</p>
+              <p className="cart-label-amount">Quantidade</p>
+            </div>
             {cartItems?.map((boot) => (
               <div className="boots-in-cart-container" key={boot.product.id}>
                 <div className="boots-in-cart-info-container">
@@ -149,19 +153,25 @@ const Navbar: React.FC = () => {
                   />
                   <p>
                     {boot.product.brand} {boot.product.line}{" "}
-                    {boot.product.color} R$:
-                    {boot.product.price.toFixed(2)} 
+                    {boot.product.color}
                   </p>
+                </div>
+                <div className="boots-in-cart-price">
+                  R$:
+                  {boot.product.price.toFixed(2)}{" "}
                 </div>
 
                 <div className="boots-in-cart-amount-container">
-                  <p className="cart-amount">Qtdade:{boot.amount}</p>
+                  <p className="cart-amount">{boot.amount}</p>
                   <div className="buttons-in-cart-container">
-                    <button onClick={() => increaseBootAmountInCart(boot)}>
-                    <Plus size={32} color="#150a19" />
+                    <button className="plus-minus-trash-button" onClick={() => increaseBootAmountInCart(boot)}>
+                      <Plus size={16} color="#ff6600"/>
                     </button>
-                    <button onClick={() => decreaseBootAmountInCart(boot)}>
-                      -
+                    <button className="plus-minus-trash-button" onClick={() => decreaseBootAmountInCart(boot)}>
+                      <Minus size={16} color="#ff6600"/>
+                    </button>
+                    <button className="plus-minus-trash-button" >
+                      <Trash size={16} color="#858282" />
                     </button>
                   </div>
                 </div>

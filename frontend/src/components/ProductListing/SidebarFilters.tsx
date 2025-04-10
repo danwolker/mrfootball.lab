@@ -52,9 +52,31 @@ const SidebarFilters: React.FC = () => {
     }
   }
 
+  function handleTypesDisplay() {
+    const filtersBrandsDiv = document.getElementById(
+      "filters-types"
+    ) as HTMLElement;
+    if (filtersBrandsDiv.style.display == "flex") {
+      filtersBrandsDiv.style.display = "none";
+    } else {
+      filtersBrandsDiv.style.display = "flex";
+    }
+  }
+
+  function handleBootieDisplay() {
+    const filtersBrandsDiv = document.getElementById(
+      "bootie-type"
+    ) as HTMLElement;
+    if (filtersBrandsDiv.style.display == "flex") {
+      filtersBrandsDiv.style.display = "none";
+    } else {
+      filtersBrandsDiv.style.display = "flex";
+    }
+  }
+
   return (
     <aside className="sidebar">
-      <button className="colors-button" onClick={handleColorsDisplay}>
+      <button className="display-button" onClick={handleColorsDisplay}>
         <h2 className="button-title">
           Cores <ArrowBendRightDown size={20} weight="bold" />
         </h2>
@@ -75,12 +97,12 @@ const SidebarFilters: React.FC = () => {
           </div>
         ))}
       </div>
-      <button className="colors-button" onClick={handleBrandsDisplay}>
+      <button className="display-button" onClick={handleBrandsDisplay}>
         <h2 className="button-title">
           Marcas <ArrowBendRightDown size={20} weight="bold" />
         </h2>
       </button>
-      <div id='filters-brands' className="filter-group">
+      <div id="filters-brands" className="filter-group">
         {brands.map((brand) => (
           <div className="radio-container" key={brand.brand}>
             <BaseRadioButton
@@ -96,93 +118,102 @@ const SidebarFilters: React.FC = () => {
         ))}
       </div>
 
-      <div className="filter-group">
-        <h2>Tipos</h2>
-
-        <div className="radio-container">
-          <BaseRadioButton
-            onChange={() => handleSelectedType("Campo")}
-            type="radio"
-            name="type"
-            id="campo"
-          />
-          <label className="label" htmlFor="campo">
-            Campo
-          </label>
-        </div>
-
-        <div className="radio-container">
-          <BaseRadioButton
-            onChange={() => handleSelectedType("Salao")}
-            type="radio"
-            name="type"
-            id="salao"
-          />
-          <label className="label" htmlFor="salao">
-            Salão
-          </label>
-        </div>
-
-        <div className="radio-container">
-          <BaseRadioButton
-            onChange={() => handleSelectedType("Suico")}
-            type="radio"
-            name="type"
-            id="suico"
-          />
-          <label className="label" htmlFor="suico">
-            Suiço
-          </label>
-        </div>
-
-        <div className="radio-container">
-          <BaseRadioButton
-            onChange={() => handleSelectedType("Trava-Mista")}
-            className="label"
-            type="radio"
-            name="type"
-            id="mista"
-          />
-          <label htmlFor="mista">Trava Mista</label>
-        </div>
-        <div className="radio-container">
-          <BaseRadioButton
-            onChange={() => handleSelectedType("Todas")}
-            className="label"
-            type="radio"
-            name="type"
-            id="all"
-          />
-          <label htmlFor="all">Todas</label>
-        </div>
-        <div className="filter-group">
-          <h2>Botinha</h2>
+      <div>
+        <button className="display-button" onClick={handleTypesDisplay}>
+          <h2 className="button-title">
+            Tipos <ArrowBendRightDown size={20} weight="bold" />
+          </h2>
+        </button>
+        <div id="filters-types" className="filter-group">
           <div className="radio-container">
             <BaseRadioButton
-              onChange={() => handleSelectedBootie("com")}
+              onChange={() => handleSelectedType("Campo")}
               type="radio"
-              name="bootie"
-              id="with"
+              name="type"
+              id="campo"
             />
-            <label htmlFor="with">Com Botinha</label>
+            <label className="label" htmlFor="campo">
+              Campo
+            </label>
           </div>
           <div className="radio-container">
             <BaseRadioButton
-              onChange={() => handleSelectedBootie("sem")}
+              onChange={() => handleSelectedType("Salao")}
               type="radio"
-              name="bootie"
-              id="without"
+              name="type"
+              id="salao"
             />
-            <label htmlFor="without">Sem Botinha</label>
+            <label className="label" htmlFor="salao">
+              Salão
+            </label>
           </div>
           <div className="radio-container">
             <BaseRadioButton
-              onChange={() => handleSelectedBootie("todas")}
+              onChange={() => handleSelectedType("Suico")}
               type="radio"
-              name="bootie"
-              id="with-and-without"
+              name="type"
+              id="suico"
             />
-            <label htmlFor="with-and-without">Todas</label>
+            <label className="label" htmlFor="suico">
+              Suiço
+            </label>
+          </div>
+          <div className="radio-container">
+            <BaseRadioButton
+              onChange={() => handleSelectedType("Trava-Mista")}
+              className="label"
+              type="radio"
+              name="type"
+              id="mista"
+            />
+            <label htmlFor="mista">Trava Mista</label>
+          </div>
+          <div className="radio-container">
+            <BaseRadioButton
+              onChange={() => handleSelectedType("Todas")}
+              className="label"
+              type="radio"
+              name="type"
+              id="all"
+            />
+            <label htmlFor="all">Todas</label>
+          </div>
+        </div>
+
+        <div>
+          <button className="display-button" onClick={handleBootieDisplay}>
+            <h2 className="button-title">
+              Botinha <ArrowBendRightDown size={20} weight="bold" />
+            </h2>
+          </button>
+          <div id="bootie-type" className="filter-group">
+            <div className="radio-container">
+              <BaseRadioButton
+                onChange={() => handleSelectedBootie("com")}
+                type="radio"
+                name="bootie"
+                id="with"
+              />
+              <label htmlFor="with">Com Botinha</label>
+            </div>
+            <div className="radio-container">
+              <BaseRadioButton
+                onChange={() => handleSelectedBootie("sem")}
+                type="radio"
+                name="bootie"
+                id="without"
+              />
+              <label htmlFor="without">Sem Botinha</label>
+            </div>
+            <div className="radio-container">
+              <BaseRadioButton
+                onChange={() => handleSelectedBootie("todas")}
+                type="radio"
+                name="bootie"
+                id="with-and-without"
+              />
+              <label htmlFor="with-and-without">Todas</label>
+            </div>
           </div>
         </div>
       </div>
