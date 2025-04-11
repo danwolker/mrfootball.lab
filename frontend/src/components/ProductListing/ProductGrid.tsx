@@ -1,18 +1,18 @@
-// src/components/ProductListing/ProductGrid.tsx
-
-import { FaShoppingCart} from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 import { Product, useProducts } from "../../contexts/ProductsContext";
-
-
-
+import React, { useState } from "react";
 
 const ProductGrid: React.FC = () => {
+  const { products, handleAddToCartContext, handleOpenCart } = useProducts();
+  const [ size, setSize ] = useState(38)
   
-  const {products, handleAddToCartContext, handleOpenCart} = useProducts()
-  
-  function handleAddToCart(productToAdd:Product) {
-    handleAddToCartContext(productToAdd)
-    handleOpenCart(true)
+  function handleAddToCart(productToAdd: Product, size:number) {
+    handleAddToCartContext(productToAdd, size);
+    handleOpenCart(true);
+  }
+
+  function handleSizeChange(e:React.ChangeEvent<HTMLSelectElement>) {
+    setSize(parseInt(e.target.value))
   }
 
   return (
@@ -24,11 +24,29 @@ const ProductGrid: React.FC = () => {
             alt={product.brand}
           />
           <h4>
-            {product.brand} {product.line} 
+            {product.brand} {product.line}
           </h4>
-          <p>R$ {product.price.toFixed(2)}</p>
+          <p className="product-price">R$ {product.price.toFixed(2)}</p>
+          <p className="size-label">
+            Tamanho:
+            <select onChange={handleSizeChange}>
+              <option value="35">35</option>
+              <option value="36">36</option>
+              <option value="37">37</option>
+              <option value="38">38</option>
+              <option value="39" selected>39</option>
+              <option value="40">40</option>
+              <option value="41">41</option>
+              <option value="42">42</option>
+              <option value="43">43</option>
+              <option value="44">44</option>
+              <option value="45">45</option>
+              <option value="46">46</option>
+            </select>
+          </p>
+
           <button
-            onClick={() => handleAddToCart(product)}
+            onClick={() => handleAddToCart(product, size)}
             className="cartshoes-btn"
           >
             <FaShoppingCart />

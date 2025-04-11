@@ -40,6 +40,10 @@
   gap: 10px;
 }
 
+.right-section span {
+  color: white;
+}
+
 /* Botão de Menu */
 .menu-btn {
   background: none;

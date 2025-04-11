@@ -24,7 +24,7 @@ class Profile(models.Model):
     def __str__(self):
         return self.name
 
-class Addres(models.Model):
+class Address(models.Model):
     state = models.CharField(max_length=15)
     city = models.CharField(max_length=30)
     street = models.CharField(max_length=50)
@@ -74,6 +74,7 @@ class SoccerBoot(models.Model):
     sold = models.IntegerField(null=True, blank=True)
     stock = models.IntegerField(null=True, blank=True)
     boot_type = models.CharField(max_length=11, choices=BOOT_TYPES, null=True)
+   
 
     def __str__(self):
         return f'{self.brand} | {self.line} | {self.boot_type} | {self.color}'
@@ -90,5 +91,9 @@ class BootInCart(models.Model):
     cart_id = models.CharField(max_length=39)
     product = models.ForeignKey(SoccerBoot, related_name='soccer_boots', on_delete=models.SET_NULL, null=True)
     amount = models.IntegerField(default=0)
+    size = models.IntegerField(null=True, blank=True)
     def __str__(self):
         return f'{self.cart_id}   ||  {self.product}'
+
+class Order(models.Model):
+    pass

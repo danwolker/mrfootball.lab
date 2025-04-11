@@ -27,6 +27,7 @@ interface CartItem {
   cart_id: string;
   product: Product;
   amount: number;
+  size:number;  
 }
 
 const Navbar: React.FC = () => {
@@ -153,7 +154,7 @@ const Navbar: React.FC = () => {
                   />
                   <p>
                     {boot.product.brand} {boot.product.line}{" "}
-                    {boot.product.color}
+                    {boot.product.color} T: {boot.size}
                   </p>
                 </div>
                 <div className="boots-in-cart-price">

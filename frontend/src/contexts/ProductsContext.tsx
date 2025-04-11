@@ -15,6 +15,7 @@ export interface Product {
   rating: number;
   color: string;
   amount: number;
+  
 }
 
 export interface Color {
@@ -30,6 +31,7 @@ interface CartItem {
   cart_id: string;
   product: Product;
   amount: number;
+  size: number;
 }
 
 interface ProductsContextType {
@@ -43,10 +45,10 @@ interface ProductsContextType {
   changeSelectedColor: (selectedColor: string) => void;
   changeBootType: (selectedBootType: string) => void;
   changeBootie: (selectedBootie: string) => void;
-  handleAddToCartContext: (productToadd: Product) => void;
+  handleAddToCartContext: (productToadd: Product, size: number) => void;
   handleIncreaseBootAmountInCart: (bootToIncrease: CartItem) => void;
   handleDecreaseBootAmountInCart: (bootToDecrease: CartItem) => void;
-  handleOpenCart: (value:boolean) => void;
+  handleOpenCart: (value: boolean) => void;
 }
 
 const ProductContext = createContext<ProductsContextType | undefined>(
@@ -76,7 +78,11 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const handleAddToCartContext = async (productToAdd: Product) => {
+  const handleAddToCartContext = async (
+    productToAdd: Product,
+    size: number,
+    
+  ) => {
     const getOrCreateCartId = () => {
       let cartId = localStorage.getItem("cartId");
       if (!cartId) {
@@ -89,6 +95,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     const toCartData = {
       product: productToAdd,
       cart_id: getOrCreateCartId(),
+      size,
     };
 
     try {
@@ -116,6 +123,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       cart_id: bootToIncrease.cart_id,
       boot_id: bootToIncrease.product.id,
       amount: bootToIncrease.amount,
+      size: bootToIncrease.size,
     };
     try {
       const response = await fetch(
@@ -139,6 +147,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       cart_id: bootToDecrease.cart_id,
       boot_id: bootToDecrease.product.id,
       amount: bootToDecrease.amount,
+      
     };
     try {
       const response = await fetch(
@@ -173,9 +182,9 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     setBootie(selectedBootie);
   };
 
-  const handleOpenCart = (value:boolean) => {
-    setIsCartOpen(!isCartOpen)
-  }
+  const handleOpenCart = (value: boolean) => {
+    setIsCartOpen(!isCartOpen);
+  };
 
   useEffect(() => {
     fetch(

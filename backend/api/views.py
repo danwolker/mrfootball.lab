@@ -69,15 +69,16 @@ def get_colors(request):
 def add_boot_to_cart(request):
     product_id = request.data.get('product', {}).get('id')
     cart_id = request.data.get('cart_id')
+    product_size = request.data.get('size')
     product = SoccerBoot.objects.get(id=product_id)    
-    already_exists = BootInCart.objects.filter(cart_id=cart_id, product=product).first()
+    already_exists = BootInCart.objects.filter(cart_id=cart_id, product=product, size=product_size).first()
     if already_exists:
         already_exists.amount += 1
         already_exists.save()
         return Response('Quantidade de items modificada!', status=status.HTTP_200_OK)
         
     try:
-        BootInCart.objects.create(cart_id=cart_id, product=product, amount=1)
+        BootInCart.objects.create(cart_id=cart_id, product=product, size=product_size, amount=1)
         return Response('Item adicionado com sucesso!', status=status.HTTP_201_CREATED)
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -112,3 +113,7 @@ def get_boots_in_cart(request):
     serialized_boots_in_cart = BootInCartSerializer(boot_in_chart, many=True).data
     return Response(serialized_boots_in_cart)    
 
+
+@api_view(['POST'])
+def save_address(request):
+    pass

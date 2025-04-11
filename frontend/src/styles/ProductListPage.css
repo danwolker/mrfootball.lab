@@ -64,6 +64,7 @@ label {
   align-items: center;
   line-height: 1.6;
   gap: 0.5rem;
+  margin: 0.25rem;
 }
 
 
@@ -92,17 +93,36 @@ label {
   gap: 10px;
 }
 
+
+
 .product-card {
   background: #fff;
   padding: 16px;
   border-radius: 10px;
   text-align: center;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
-
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08); 
   display: flex;
   flex-flow: column wrap;
 }
 
+select {
+  width: 40px;
+  border-radius: 4px;
+  margin-left: 2px;
+}
+
+.product-price {
+  font-size: 0.875rem;
+  font-weight: bold;
+  margin: 0.25rem;
+}
+
+.size-label {
+  font-weight: 100;
+  font-size: 0.875rem;
+  margin: 0.25rem;
+
+}
 .product-card img {
   width: 100%;
   height: 160px;
