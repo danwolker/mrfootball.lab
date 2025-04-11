@@ -1,0 +1,96 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import { Plus, Minus, Trash } from "@phosphor-icons/react";
+import "../styles/CheckProducts.css";
+import { useProducts } from "../contexts/ProductsContext";
+
+interface Product {
+  id: number;
+  brand: string;
+  line: string;
+  image: string;
+  price: number;
+  rating: number;
+  color: string;
+  amount: number;
+}
+
+interface CartItem {
+  cart_id: string;
+  product: Product;
+  amount: number;
+  size: number;
+}
+
+const CheckProducts: React.FC = () => {
+  
+  const {
+    cartItems,
+    handleIncreaseBootAmountInCart,
+    handleDecreaseBootAmountInCart,
+    
+  } = useProducts();
+
+  function increaseBootAmountInCart(boot: CartItem) {
+    handleIncreaseBootAmountInCart(boot);
+  }
+
+  function decreaseBootAmountInCart(boot: CartItem) {
+    handleDecreaseBootAmountInCart(boot);
+  }
+
+  return (
+    <div className="cart-sidebar-check">
+  
+      <h2>Conferir Produtos</h2>
+      <div className="cart-labels-check">
+        <p className="cart-label-procuct-check">Produto</p>
+        <p className="cart-label-price-check">Preço</p>
+        <p className="cart-label-amount-check">Quantidade</p>
+      </div>
+      {cartItems?.map((boot) => (
+        <div className="boots-in-cart-container-check" key={boot.product.id}>
+          <div className="boots-in-cart-info-container-check">
+            <img
+              className="boots-in-cart-img-check"
+              src={`http://127.0.0.1:8000${boot.product.image}`}
+              alt=""
+            />
+            <p>
+              {boot.product.brand} {boot.product.line} {boot.product.color} T:{" "}
+              {boot.size}
+            </p>
+          </div>
+          <div className="boots-in-cart-price-check">
+            R$:
+            {boot.product.price.toFixed(2)}{" "}
+          </div>
+
+          <div className="boots-in-cart-amount-container-check">
+            <p className="cart-amount-check">{boot.amount}</p>
+            <div className="buttons-in-cart-container-check">
+              <button
+                className="plus-minus-trash-button-check"
+                onClick={() => increaseBootAmountInCart(boot)}
+              >
+                <Plus size={16} color="#ff6600" />
+              </button>
+              <button
+                className="plus-minus-trash-button-check"
+                onClick={() => decreaseBootAmountInCart(boot)}
+              >
+                <Minus size={16} color="#ff6600" />
+              </button>
+              <button className="plus-minus-trash-button-check">
+                <Trash size={16} color="#858282" />
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+   
+    </div>
+  );
+};
+
+export default CheckProducts;

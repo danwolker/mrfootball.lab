@@ -1,0 +1,133 @@
+.cart-sidebar-check {
+  color: black;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+}
+
+/* Títulos carrinho */
+h2 {
+    margin-top: 0.875rem;
+}
+
+.cart-labels-check {
+  width: 50%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  justify-items: center;
+  align-items: end;
+  border-bottom: 1px solid black;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.875rem;
+  margin-top: 0.875rem;
+}
+
+.cart-label-price-check,
+.cart-label-amount-check,
+.cart-label-product {
+  margin: auto;
+  font-size: 0.7rem;
+}
+
+.cart-label-procuct-check {
+  justify-self: start;
+  padding-left: 2rem;
+  margin-bottom: 0px;
+  font-size: 0.7rem;
+}
+
+/* Containers de produtos no carrinho */
+
+.boots-in-cart-container-check {
+  width: 50%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 2px;
+  height: 80px;
+  border-bottom: 0.5px solid rgb(185, 178, 178);
+}
+
+.boots-in-cart-info-container-check {
+  display: grid;
+  grid-template-columns: 2fr 4fr;
+}
+
+.boots-in-cart-info-container-check > p {
+  justify-self: start;
+  align-self: self-end;
+  font-size: 0.7rem;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
+.boots-in-cart-img-check {
+  margin: auto;
+  width: 70px;
+  height: 50px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.boots-in-cart-price-check {
+  align-self: self-end;
+  font-size: 0.7rem;
+  margin-bottom: 10px;
+}
+
+.boots-in-cart-amount-container-check {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+}
+
+.buttons-in-cart-container-check {
+  justify-self: start;
+  align-self: center;
+  margin-bottom: 10px;
+  align-self: self-end;
+}
+
+.cart-amount-check {
+  margin: auto;
+  font-size: 0.7rem;
+  margin-bottom: 10px;
+}
+
+.plus-minus-trash-button-check {
+  background-color: transparent;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 1px 1px 0.5px rgba(201, 200, 200, 0.486);
+  padding-top: 4px;
+  margin: 2px;
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+}
+
+.plus-minus-trash-button-check > svg {
+  justify-content: center;
+}
+
+/* Botão de fechar carrinho*/
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.close-btn:hover {
+  color: #ff6600;
+}
