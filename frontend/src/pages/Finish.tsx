@@ -13,7 +13,6 @@ const Finish: React.FC = () => {
             <Header />
             <CheckProducts />
             <AddressForm />
-            
             <FooterInfo />
             <Footer />
 
