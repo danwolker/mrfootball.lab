@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 
+
+    
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     display_name = models.CharField(max_length=20)
@@ -56,6 +58,15 @@ class Line(models.Model):
     def __str__(self):
         return self.line
 
+class Order(models.Model):
+    name = models.CharField(max_length=15, null=True)
+    last_name = models.CharField(max_length=40, null=True)
+    address = models.ForeignKey(Address, related_name='order_address', on_delete=models.SET_NULL, null=True)
+    total_price = models.FloatField(null=True)
+    
+    def __str__(self):
+        return f'{self.name} | {self.last_name}'
+    
 class SoccerBoot(models.Model):
     BOOT_TYPES = {
         'Campo':'Campo',
@@ -74,7 +85,7 @@ class SoccerBoot(models.Model):
     sold = models.IntegerField(null=True, blank=True)
     stock = models.IntegerField(null=True, blank=True)
     boot_type = models.CharField(max_length=11, choices=BOOT_TYPES, null=True)
-   
+    oders = models.ForeignKey(Order, related_name='boots', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f'{self.brand} | {self.line} | {self.boot_type} | {self.color}'
@@ -89,19 +100,9 @@ class NewsLetter(models.Model):
 
 class BootInCart(models.Model):
     cart_id = models.CharField(max_length=39)
-    product = models.ForeignKey(SoccerBoot, related_name='soccer_boots', on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(SoccerBoot, related_name='soccer_boots', on_delete=models.CASCADE, null=True)
     amount = models.IntegerField(default=0)
     size = models.IntegerField(null=True, blank=True)
     
     def __str__(self):
         return f'{self.cart_id}   ||  {self.product}'
-
-class Order(models.Model):
-    boots = models.ManyToManyField(BootInCart, related_name='orders')
-    name = models.CharField(max_length=15, null=True)
-    last_name = models.CharField(max_length=40, null=True)
-    address = models.ForeignKey(Address, related_name='order_address', on_delete=models.SET_NULL, null=True)
-    total_price = models.FloatField(null=True)
-    
-    def __str__(self):
-        return f'{self.name} | {self.last_name}'

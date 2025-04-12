@@ -143,14 +143,18 @@ def finish_order(request):
             address=address,
             total_price=total_price
         )
-        
-        for boot_data in data.get('boots', []):
-            boot = BootInCart.objects.get(id=boot_data['id'])
-            print(boot)
+    
+        for product_data in data.get('boots', []):
+            product = product_data['product']
+            print(product)
+            pid = product.get('id')
+            boot = SoccerBoot.objects.get(id=pid)
             order.boots.add(boot)
-          
-            
-        BootInCart.objects.filter(cart_id=boot_data['cart_id']).delete() 
+            cart_id = product_data['cart_id']
+            print(cart_id)
+        print(cart_id)
+        boots_to_delete = BootInCart.objects.filter(cart_id=cart_id)
+        boots_to_delete.delete()
         return Response({
             'success': True,
             'order_id': order.id,
