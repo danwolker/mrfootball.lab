@@ -1,4 +1,3 @@
-// src/components/ProductListing/SidebarFilters.tsx
 import "../../styles/SideBarFilters.css";
 import { useProducts } from "../../contexts/ProductsContext";
 import { BaseRadioButton, RadioButtonColor } from "./RadioColor.Style";
