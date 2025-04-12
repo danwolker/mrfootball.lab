@@ -49,7 +49,7 @@ const ProductGrid: React.FC = () => {
             onClick={() => handleAddToCart(product, size)}
             className="cartshoes-btn"
           >
-            <FaShoppingCart />
+            <FaShoppingCart size={14}/>
           </button>
         </div>
       ))}

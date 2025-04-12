@@ -2,8 +2,8 @@
 import "../../styles/SideBarFilters.css";
 import { useProducts } from "../../contexts/ProductsContext";
 import { BaseRadioButton, RadioButtonColor } from "./RadioColor.Style";
-import { ArrowBendRightDown } from "@phosphor-icons/react";
-import { FaAngleDown } from 'react-icons/fa'
+
+import { FaAngleDown } from "react-icons/fa";
 const SidebarFilters: React.FC = () => {
   const {
     changeBootType,
@@ -76,46 +76,51 @@ const SidebarFilters: React.FC = () => {
 
   return (
     <aside className="sidebar">
-      <button className="display-button" onClick={handleColorsDisplay}>
-        <h2 className="button-title">
-          Cores<FaAngleDown />
-        </h2>
-      </button>
-      <div id="filters-colors" className="filter-group-colors">
-        {colors.map((color) => (
-          <div className="radio-container" key={color.color}>
-            <RadioButtonColor
-              type="radio"
-              name="color"
-              onChange={() => handleColorFilter(color.color)}
-              id={color.color}
-              buttoncolor={color.color_code}
-            />
-            <label className="label" htmlFor={color.color}>
-              {color.color}
-            </label>
-          </div>
-        ))}
+      <div>
+        <button className="display-button" onClick={handleColorsDisplay}>
+          <h2 className="button-title">
+            Cores
+            <FaAngleDown />
+          </h2>
+        </button>
+        <div id="filters-colors" className="filter-group-colors">
+          {colors.map((color) => (
+            <div className="radio-container" key={color.color}>
+              <RadioButtonColor
+                type="radio"
+                name="color"
+                onChange={() => handleColorFilter(color.color)}
+                id={color.color}
+                buttoncolor={color.color_code}
+              />
+              <label className="label" htmlFor={color.color}>
+                {color.color}
+              </label>
+            </div>
+          ))}
+        </div>
       </div>
-      <button className="display-button" onClick={handleBrandsDisplay}>
-        <h2 className="button-title">
-          Marcas <FaAngleDown />
-        </h2>
-      </button>
-      <div id="filters-brands" className="filter-group">
-        {brands.map((brand) => (
-          <div className="radio-container" key={brand.brand}>
-            <BaseRadioButton
-              type="radio"
-              name="brand"
-              onChange={() => handleBrandFilter(brand.brand)}
-              id={brand.brand}
-            />
-            <label className="label" htmlFor={brand.brand}>
-              {brand.brand}
-            </label>
-          </div>
-        ))}
+      <div>
+        <button className="display-button" onClick={handleBrandsDisplay}>
+          <h2 className="button-title">
+            Marcas <FaAngleDown />
+          </h2>
+        </button>
+        <div id="filters-brands" className="filter-group">
+          {brands.map((brand) => (
+            <div className="radio-container" key={brand.brand}>
+              <BaseRadioButton
+                type="radio"
+                name="brand"
+                onChange={() => handleBrandFilter(brand.brand)}
+                id={brand.brand}
+              />
+              <label className="label" htmlFor={brand.brand}>
+                {brand.brand}
+              </label>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div>
@@ -179,41 +184,41 @@ const SidebarFilters: React.FC = () => {
             <label htmlFor="all">Todas</label>
           </div>
         </div>
+      </div>
 
-        <div>
-          <button className="display-button" onClick={handleBootieDisplay}>
-            <h2 className="button-title">
-              Botinha <FaAngleDown />
-            </h2>
-          </button>
-          <div id="bootie-type" className="filter-group">
-            <div className="radio-container">
-              <BaseRadioButton
-                onChange={() => handleSelectedBootie("com")}
-                type="radio"
-                name="bootie"
-                id="with"
-              />
-              <label htmlFor="with">Com Botinha</label>
-            </div>
-            <div className="radio-container">
-              <BaseRadioButton
-                onChange={() => handleSelectedBootie("sem")}
-                type="radio"
-                name="bootie"
-                id="without"
-              />
-              <label htmlFor="without">Sem Botinha</label>
-            </div>
-            <div className="radio-container">
-              <BaseRadioButton
-                onChange={() => handleSelectedBootie("todas")}
-                type="radio"
-                name="bootie"
-                id="with-and-without"
-              />
-              <label htmlFor="with-and-without">Todas</label>
-            </div>
+      <div>
+        <button className="display-button" onClick={handleBootieDisplay}>
+          <h2 className="button-title">
+            Botinha <FaAngleDown />
+          </h2>
+        </button>
+        <div id="bootie-type" className="filter-group">
+          <div className="radio-container">
+            <BaseRadioButton
+              onChange={() => handleSelectedBootie("com")}
+              type="radio"
+              name="bootie"
+              id="with"
+            />
+            <label htmlFor="with">Com Botinha</label>
+          </div>
+          <div className="radio-container">
+            <BaseRadioButton
+              onChange={() => handleSelectedBootie("sem")}
+              type="radio"
+              name="bootie"
+              id="without"
+            />
+            <label htmlFor="without">Sem Botinha</label>
+          </div>
+          <div className="radio-container">
+            <BaseRadioButton
+              onChange={() => handleSelectedBootie("todas")}
+              type="radio"
+              name="bootie"
+              id="with-and-without"
+            />
+            <label htmlFor="with-and-without">Todas</label>
           </div>
         </div>
       </div>

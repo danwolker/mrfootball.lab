@@ -98,16 +98,16 @@ const ProductCardCarousel: React.FC = () => {
       </button>
       <div className={`carousel-track ${fade}`}>
         {visibleProducts.map((product) => (
-          <div className="product-card" key={product.id}>
+          <div className="product-card-carroussel" key={product.id}>
             <img
               src={`http://127.0.0.1:8000${product.image}`}
               alt={product.brand}
-              className="product-img"
+              className="product-img-caroussel"
             />
-            <h3>
+            <h3 className="product-info-caroussel">
               {product.brand} {product.line}
             </h3>
-            <div className="rating">
+            <div className="rating-caroussel">
               {[...Array(5)].map((_, i) => (
                 <FaStar
                   key={i}
@@ -115,11 +115,11 @@ const ProductCardCarousel: React.FC = () => {
                 />
               ))}
             </div>
-            <p className="price">R$: {product.price}</p>
-            <div className="card-buttons">
+            <p className="price-caroussel">R$: {product.price}</p>
+            <div className="card-buttons-caroussel">
               <button
                 onClick={() => handleAddToCart(product)}
-                className="cartshoes-btn"
+                className="cartshoes-btn-caroussel"
               >
                 <FaShoppingCart />
               </button>
