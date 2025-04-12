@@ -45,6 +45,7 @@ interface ProductsContextType {
   changeSelectedColor: (selectedColor: string) => void;
   changeBootType: (selectedBootType: string) => void;
   changeBootie: (selectedBootie: string) => void;
+  clearCartItems: () => void;
   handleAddToCartContext: (productToadd: Product, size: number) => void;
   handleIncreaseBootAmountInCart: (bootToIncrease: CartItem) => void;
   handleDecreaseBootAmountInCart: (bootToDecrease: CartItem) => void;
@@ -77,6 +78,10 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       console.error("Erro ao buscar itens do carrinho:", err);
     }
   };
+
+  const clearCartItems = async () => {
+    setCartItems([])
+  }
 
   const handleAddToCartContext = async (
     productToAdd: Product,
@@ -216,6 +221,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
         changeSelectedBrand,
         changeBootType,
         changeBootie,
+        clearCartItems,
         handleAddToCartContext,
         handleIncreaseBootAmountInCart,
         handleDecreaseBootAmountInCart,

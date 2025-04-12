@@ -3,7 +3,7 @@ import "../styles/AddressForm.css";
 import { useProducts } from "../contexts/ProductsContext";
 
 const AddressForm: React.FC = () => {
-  const { cartItems, fetchCartItems } = useProducts();
+  const { cartItems, fetchCartItems, clearCartItems} = useProducts();
 
   const handleFinishOrder = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,6 +21,7 @@ const AddressForm: React.FC = () => {
       cep: formData.get("cep") as string,
       boots: cartItems,
     };
+ 
     try {
       const response = await fetch("http://127.0.0.1:8000/api/finish_order", {
         method: "POST",
@@ -34,18 +35,38 @@ const AddressForm: React.FC = () => {
         console.error("Erro:", result.error);
         alert(`Erro ao finalizar pedido: ${result.error}`);
       } else {
-        alert("Pedido finalizado com sucesso!");
+        alert("Você será encaminhado(a) ao whatsapp para efetuar o pagamento");
         // Redirecionar ou limpar o carrinho
       }
     } catch (err) {
       console.error("Erro:", err);
       alert("Erro ao conectar com o servidor");
     }
+
+    const pedido = cartItems
+      .map(
+        (i) =>
+          `${i.product.brand} ${i.product.line} ${i.product.color} http://localhost:8000${i.product.image} \nQuantidade: ${i.amount}\n------------------`
+      )
+      .join("\n"); // Adiciona quebra entre itens
+
+    const defaultMessage =
+      `*NOVO PEDIDO*\n\n` +
+      `*Cliente:* ${data.name} ${data.last_name}\n` +
+      `*Endereço:* ${data.street}, ${data.number}\n` +
+      `*Complemento:* ${data.address_complement}` +
+      `${data.neighborhood}, ${data.city}/${data.state}\n` +
+      `CEP: ${data.cep}\n\n` +
+      `*Produtos:*\n${pedido}\n\n`;
+
+    const phoneNumber = "5548988770408";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      defaultMessage
+    )}`;
+    window.open(whatsappUrl, "_blank");
+    clearCartItems()
   };
 
-  useEffect(() => {
-    fetchCartItems();
-  }, [handleFinishOrder]);
 
   return (
     <div className="form-container">
@@ -66,23 +87,23 @@ const AddressForm: React.FC = () => {
         <div className="address-container">
           <div className="item-div">
             <label htmlFor="street">Rua: </label>
-            <input name="street" id="street" type="text" required/>
+            <input name="street" id="street" type="text" required />
           </div>
           <div className="item-div">
             <label htmlFor="number">Número: </label>
-            <input name="number" id="number" type="number" required/>
+            <input name="number" id="number" type="number" required />
           </div>
           <div className="item-div">
             <label htmlFor="neighborhood">Bairro: </label>
-            <input name="neighborhood" id="neighborhood" type="text" required/>
+            <input name="neighborhood" id="neighborhood" type="text" required />
           </div>
           <div className="item-div">
             <label htmlFor="city">Cidade: </label>
-            <input name="city" id="city" type="text" required/>
+            <input name="city" id="city" type="text" required />
           </div>
           <div className="item-div">
             <label htmlFor="state">Estado: </label>
-            <input name="state" id="state" type="text" required/>
+            <input name="state" id="state" type="text" required />
           </div>
           <div className="item-div">
             <label htmlFor="complement">Complemento: </label>
@@ -90,7 +111,7 @@ const AddressForm: React.FC = () => {
           </div>
           <div className="item-div">
             <label htmlFor="cep">CEP: </label>
-            <input name="cep" id="cep" type="text" required/>
+            <input name="cep" id="cep" type="text" required />
           </div>
         </div>
         <button className="finish-shopping-button" type="submit">
