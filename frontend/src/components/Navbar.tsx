@@ -144,8 +144,8 @@ const Navbar: React.FC = () => {
               <p className="cart-label-price">Preço</p>
               <p className="cart-label-amount">Quantidade</p>
             </div>
-            {cartItems?.map((boot) => (
-              <div className="boots-in-cart-container" key={boot.product.id}>
+            {cartItems?.map((boot, index) => (
+              <div className="boots-in-cart-container" key={index}>
                 <div className="boots-in-cart-info-container">
                   <img
                     className="boots-in-cart-img"
@@ -184,7 +184,7 @@ const Navbar: React.FC = () => {
                 </div>
               </div>
             ))}
-            <button className="finish-shopping-button"><Link to={"/finish"}><span>Finalizar Compra</span></Link></button>
+            <button onClick={() => openCloseCart(false)} className="finish-shopping-button"><Link to={"/finish"}><span>Finalizar Compra</span></Link></button>
           </div>
         </div>
       )}

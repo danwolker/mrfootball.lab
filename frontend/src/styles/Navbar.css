@@ -44,6 +44,12 @@
   color: white;
 }
 
+.right-section span:hover {
+  color: #ff6600;
+}
+
+
+
 /* Botão de Menu */
 .menu-btn {
   background: none;

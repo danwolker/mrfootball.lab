@@ -31,11 +31,11 @@ class Address(models.Model):
     number = models.IntegerField()
     neighborhood = models.CharField(max_length=30)
     address_complement = models.CharField(max_length=6)
-    cep = models.IntegerField()
+    cep = models.CharField(max_length=20)
     user = models.ForeignKey(Profile, related_name='user_address' ,on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return self.user
+        return f'{self.street} | {self.state} | {self.neighborhood}'
 
 class Color(models.Model):
     color = models.CharField(max_length=11)
@@ -92,8 +92,16 @@ class BootInCart(models.Model):
     product = models.ForeignKey(SoccerBoot, related_name='soccer_boots', on_delete=models.SET_NULL, null=True)
     amount = models.IntegerField(default=0)
     size = models.IntegerField(null=True, blank=True)
+    
     def __str__(self):
         return f'{self.cart_id}   ||  {self.product}'
 
 class Order(models.Model):
-    pass
+    boots = models.ManyToManyField(BootInCart, related_name='orders')
+    name = models.CharField(max_length=15, null=True)
+    last_name = models.CharField(max_length=40, null=True)
+    address = models.ForeignKey(Address, related_name='order_address', on_delete=models.SET_NULL, null=True)
+    total_price = models.FloatField(null=True)
+    
+    def __str__(self):
+        return f'{self.name} | {self.last_name}'

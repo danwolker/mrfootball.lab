@@ -29,12 +29,12 @@ const ProductGrid: React.FC = () => {
           <p className="product-price">R$ {product.price.toFixed(2)}</p>
           <p className="size-label">
             Tamanho:
-            <select onChange={handleSizeChange}>
+            <select defaultValue={'40'} onChange={handleSizeChange}>
               <option value="35">35</option>
               <option value="36">36</option>
               <option value="37">37</option>
               <option value="38">38</option>
-              <option value="39" selected>39</option>
+              <option value="39">39</option>
               <option value="40">40</option>
               <option value="41">41</option>
               <option value="42">42</option>

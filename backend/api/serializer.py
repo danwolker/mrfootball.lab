@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color, BootInCart, Address
+from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color, BootInCart, Address, Order
 
 class NewsLetterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -48,3 +48,11 @@ class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
         fields = '__all__'
+        
+class OrderSerializer(serializers.ModelSerializer):
+    boots = BootInCartSerializer(many=True, read_only=True)
+    address = AddressSerializer(many=True, read_only=True)
+    class Meta:
+        model = Order
+        fields = '__all__'
+    

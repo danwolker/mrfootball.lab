@@ -1,7 +1,7 @@
 .cart-sidebar-check {
   color: black;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
   align-items: center;
   background: white;
   border: 1px solid #ccc;

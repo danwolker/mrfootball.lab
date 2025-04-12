@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile,Address,Brand,Color,NewsLetter,SoccerBoot,Line,BootInCart
+from .models import Profile,Address,Brand,Color,NewsLetter,SoccerBoot,Line,BootInCart, Order
 # Register your models here.
 admin.site.register(Profile)
 admin.site.register(Address)
@@ -9,3 +9,4 @@ admin.site.register(NewsLetter)
 admin.site.register(SoccerBoot)
 admin.site.register(Line)
 admin.site.register(BootInCart)
+admin.site.register(Order)

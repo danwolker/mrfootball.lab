@@ -1,7 +1,7 @@
 .footer-info {
   display: flex;
   justify-content: space-between;
-  background-color: #f8f8f8;
+  background-color: #0e72ae;
 
   flex-wrap: wrap;
   font-size: 13px;
@@ -17,7 +17,7 @@
 .footer-column h4 {
   font-size: 14px;
   margin-bottom: 10px;
-  color: #0e72ae;
+  color: gray;
 }
 
 .footer-column ul {
@@ -26,15 +26,15 @@
   margin: 0;
 }
 
-.footer-column li {
+.footer-column span {
   margin-bottom: 6px;
-  color: #555;
+  color: #f8f8f8;
   transition: color 0.2s ease-in-out;
   cursor: pointer;
 }
 
-.footer-column li:hover {
-  color: #0e72ae;
+.footer-column span:hover {
+  color: black;
 }
 
 span {

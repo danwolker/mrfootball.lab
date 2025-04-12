@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color, BootInCart
+from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color, BootInCart, Order, Address
 from .serializer import NewsLetterSerializer, SoccerBootSerializer, BrandSerializer, ColorSerializer, BootInCartSerializer
 
  
@@ -115,5 +115,48 @@ def get_boots_in_cart(request):
 
 
 @api_view(['POST'])
-def save_address(request):
-    pass
+def finish_order(request):
+    data = request.data
+    
+    try:
+        address = Address.objects.create(
+            state=data.get('state'),
+            city=data.get('city'),
+            street=data.get('street'),
+            number=int(data.get('number')),
+            neighborhood=data.get('neighborhood'),
+            address_complement=data.get('complement', ''),
+            cep=data.get('cep'),
+            user=None,
+        )
+    except Exception as e:
+        return Response({'error': f'Erro ao criar endereço: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    total_price = sum(boot['amount'] * boot['product']['price']
+        for boot in data.get('boots', [])
+    )
+    
+    try:
+        order = Order.objects.create(
+            name=data.get('name'),
+            last_name=data.get('last_name'),
+            address=address,
+            total_price=total_price
+        )
+        
+        for boot_data in data.get('boots', []):
+            boot = BootInCart.objects.get(id=boot_data['id'])
+            print(boot)
+            order.boots.add(boot)
+          
+            
+        BootInCart.objects.filter(cart_id=boot_data['cart_id']).delete() 
+        return Response({
+            'success': True,
+            'order_id': order.id,
+            'total_price': total_price
+        }, status=status.HTTP_201_CREATED)
+        
+    except Exception as e:
+        address.delete()  
+        return Response({'error': f'Erro ao criar pedido: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
