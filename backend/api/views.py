@@ -27,7 +27,7 @@ def get_soccer_boots(request):
     if request.GET.get('color') and request.GET.get('color') != 'Todas':
         filters['color__color'] = request.GET.get('color')
     
-    if request.GET.get('brand') and request.GET.get('brand') != 'Todas':
+    if request.GET.get('brand') and request.GET.get('brand') != 'Todas Marcas':
         filters['brand__brand'] = request.GET.get('brand')
       
     if request.GET.get('type') and request.GET.get('type') != 'Todas':

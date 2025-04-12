@@ -42,10 +42,10 @@ export const BaseRadioButton = styled.input`
   &::before {
     content:'';
     position: absolute;
-    top: 3px;
-    left: 7px;
-    width: 4px;
-    height: 9px;
+    top: 1px;
+    left: 4px;
+    width: 3px;
+    height: 7px;
     border: 2px solid transparent;
     border-left: none;
     border-top: none;
