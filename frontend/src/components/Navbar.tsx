@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import { Plus, Minus, Trash } from "@phosphor-icons/react";
 import {
   FaBars,
-  FaUserCircle,
   FaShoppingCart,
-  FaHeadset,
   FaSearch,
   FaTimes,
 } from "react-icons/fa";
@@ -27,11 +25,11 @@ interface CartItem {
   cart_id: string;
   product: Product;
   amount: number;
-  size:number;  
+  size: number;
 }
 
 const Navbar: React.FC = () => {
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const {
     cartItems,
     isCartOpen,
@@ -56,17 +54,34 @@ const Navbar: React.FC = () => {
     <>
       <nav className="navbar">
         <div className="navbar-container">
-          {/* Seção Esquerda */}
-          <div className="left-section">
-            <button className="menu-btn">
-              <FaBars />
-            </button>
-            <Link to="/" className="logo">
-              <img src="/imagens/logo.jpeg" alt="Logo" />
-            </Link>
+          {/* Topo: Menu, Logo, Carrinho (fora do menu se o menu estiver fechado) */}
+          <div className="top-bar">
+            <div className="left-section">
+              <button
+                className="menu-btn mobile-only"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+              </button>
+              <Link to="/" className="logo">
+                <img src="/imagens/logo.jpeg" alt="Logo" />
+              </Link>
+            </div>
+
+            {!isMobileMenuOpen && (
+              <div className="cart-container">
+                <button
+                  className="cart-btn"
+                  onClick={() => openCloseCart(!isCartOpen)}
+                >
+                  <FaShoppingCart />
+                  <span>Carrinho</span>
+                </button>
+              </div>
+            )}
           </div>
 
-          {/* Seção Central */}
+          {/* Campo de busca */}
           <div className="center-section">
             <div className="search-container">
               <input
@@ -79,22 +94,12 @@ const Navbar: React.FC = () => {
               </button>
             </div>
           </div>
+        </div>
 
-          {/* Seção Direita */}
-          <div className="right-section">
-            <button className="login-btn" onClick={() => setIsLoginOpen(true)}>
-              <FaUserCircle />
-              <span>Entrar / Cadastrar</span>
-            </button>
-            <Link to="/contato" className="icon">
-              <FaHeadset />
-              <span>Fale Conosco</span>
-            </Link>
-            {/* <Link to="/favorites" className="icon">
-              <FaHeart />
-              <span>Favoritos</span>
-            </Link> */}
-            <div className="cart-container">
+        {/* Menu Mobile com carrinho dentro */}
+        {isMobileMenuOpen && (
+          <div className="mobile-menu">
+            <div className="cart-container inside-menu">
               <button
                 className="cart-btn"
                 onClick={() => openCloseCart(!isCartOpen)}
@@ -103,35 +108,16 @@ const Navbar: React.FC = () => {
                 <span>Carrinho</span>
               </button>
             </div>
+            <ul className="mobile-header-links">
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/about-us">Sobre nós</Link></li>
+              <li><Link to="/faq">FAQ</Link></li>
+            </ul>
           </div>
-        </div>
+        )}
       </nav>
 
-      {/* Modal de Login */}
-      {isLoginOpen && (
-        <div className="login-modal">
-          <div className="login-box">
-            <button className="close-btn" onClick={() => setIsLoginOpen(false)}>
-              <FaTimes />
-            </button>
-            <h2>Entrar</h2>
-            <form>
-              <label>Email</label>
-              <input type="email" placeholder="Digite seu e-mail" required />
-              <label>Senha</label>
-              <input type="password" placeholder="Digite sua senha" required />
-              <button type="submit" className="login-submit">
-                Entrar
-              </button>
-            </form>
-            <div className="login-links">
-              <Link to="/recuperar-senha">Esqueci minha senha</Link>
-              <Link to="/cadastro">Criar conta</Link>
-            </div>
-          </div>
-        </div>
-      )}
-
+      {/* Modal Carrinho */}
       {isCartOpen && (
         <div className="cart-modal">
           <div className="cart-sidebar">
@@ -153,15 +139,12 @@ const Navbar: React.FC = () => {
                     alt=""
                   />
                   <p>
-                    {boot.product.brand} {boot.product.line}{" "}
-                    {boot.product.color} T: {boot.size}
+                    {boot.product.brand} {boot.product.line} {boot.product.color} T: {boot.size}
                   </p>
                 </div>
                 <div className="boots-in-cart-price">
-                  R$:
-                  {boot.product.price.toFixed(2)}{" "}
+                  R$:{boot.product.price.toFixed(2)}
                 </div>
-
                 <div className="boots-in-cart-amount-container">
                   <p className="cart-amount">{boot.amount}</p>
                   <div className="buttons-in-cart-container">
@@ -184,7 +167,9 @@ const Navbar: React.FC = () => {
                 </div>
               </div>
             ))}
-            <button onClick={() => openCloseCart(false)} className="finish-shopping-button"><Link to={"/finish"}><span>Finalizar Compra</span></Link></button>
+            <button onClick={() => openCloseCart(false)} className="finish-shopping-button">
+              <Link to="/finish"><span>Finalizar Compra</span></Link>
+            </button>
           </div>
         </div>
       )}
