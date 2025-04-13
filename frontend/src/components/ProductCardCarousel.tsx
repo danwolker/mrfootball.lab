@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaShoppingCart, FaStar } from "react-icons/fa";
 import "../styles/ProductCardCarousel.css";
+import { useProducts } from "../contexts/ProductsContext";
 
 interface Product {
   id: number;
@@ -15,25 +16,10 @@ const ProductCardCarousel: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [fade, setFade] = useState<"fade-in" | "fade-out">("fade-in");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const { handleAddToCartContext } = useProducts()
 
-  const handleAddToCart = async (productToAdd: Product) => {
-    {
-      const toCartData = {
-        product: productToAdd,
-      };
-      try {
-        await fetch("http://127.0.0.1:8000/api/add_boot_to_cart", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(toCartData),
-        });
-        console.log("Produto Adicionado ao carrinho!");
-      } catch (err) {
-        console.log(err);
-      }
-    }
+  function handleAddToCart() {
+   
   };
 
   useEffect(() => {
