@@ -47,8 +47,8 @@ const CheckProducts: React.FC = () => {
         <p className="cart-label-price-check">Preço</p>
         <p className="cart-label-amount-check">Quantidade</p>
       </div>
-      {cartItems?.map((boot) => (
-        <div className="boots-in-cart-container-check" key={boot.product.id}>
+      {cartItems?.map((boot, index) => (
+        <div className="boots-in-cart-container-check" key={index}>
           <div className="boots-in-cart-info-container-check">
             <img
               className="boots-in-cart-img-check"
