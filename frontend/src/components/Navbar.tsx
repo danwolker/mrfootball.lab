@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Plus, Minus, Trash } from "@phosphor-icons/react";
-import {
-  FaBars,
-  FaShoppingCart,
-  FaSearch,
-  FaTimes,
-} from "react-icons/fa";
+import { FaBars, FaShoppingCart, FaSearch, FaTimes } from "react-icons/fa";
 import "../styles/Navbar.css";
 import { useProducts } from "../contexts/ProductsContext";
 
@@ -36,6 +31,7 @@ const Navbar: React.FC = () => {
     handleIncreaseBootAmountInCart,
     handleDecreaseBootAmountInCart,
     handleOpenCart,
+    handleRemoveBootFromCart,
   } = useProducts();
 
   function increaseBootAmountInCart(boot: CartItem) {
@@ -45,7 +41,9 @@ const Navbar: React.FC = () => {
   function decreaseBootAmountInCart(boot: CartItem) {
     handleDecreaseBootAmountInCart(boot);
   }
-
+  function removeBootFromCart(boot: CartItem) {
+    handleRemoveBootFromCart(boot);
+  }
   function openCloseCart(value: boolean) {
     handleOpenCart(value);
   }
@@ -109,9 +107,15 @@ const Navbar: React.FC = () => {
               </button>
             </div>
             <ul className="mobile-header-links">
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/about-us">Sobre nós</Link></li>
-              <li><Link to="/faq">FAQ</Link></li>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/about-us">Sobre nós</Link>
+              </li>
+              <li>
+                <Link to="/faq">FAQ</Link>
+              </li>
             </ul>
           </div>
         )}
@@ -139,7 +143,8 @@ const Navbar: React.FC = () => {
                     alt=""
                   />
                   <p>
-                    {boot.product.brand} {boot.product.line} {boot.product.color} T: {boot.size}
+                    {boot.product.brand} {boot.product.line}{" "}
+                    {boot.product.color} T: {boot.size}
                   </p>
                 </div>
                 <div className="boots-in-cart-price">
@@ -160,15 +165,23 @@ const Navbar: React.FC = () => {
                     >
                       <Minus size={16} color="#ff6600" />
                     </button>
-                    <button className="plus-minus-trash-button">
+                    <button
+                      className="plus-minus-trash-button"
+                      onClick={() => removeBootFromCart(boot)}
+                    >
                       <Trash size={16} color="#858282" />
                     </button>
                   </div>
                 </div>
               </div>
             ))}
-            <button onClick={() => openCloseCart(false)} className="finish-shopping-button">
-              <Link to="/finish"><span>Finalizar Compra</span></Link>
+            <button
+              onClick={() => openCloseCart(false)}
+              className="finish-shopping-button"
+            >
+              <Link to="/finish">
+                <span>Finalizar Compra</span>
+              </Link>
             </button>
           </div>
         </div>

@@ -164,3 +164,11 @@ def finish_order(request):
     except Exception as e:
         address.delete()  
         return Response({'error': f'Erro ao criar pedido: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def remove_boot_from_cart(request):
+    cart_id = request.data.get('cart_id')
+    product = request.data.get('boot_id')
+    boot = BootInCart.objects.filter(cart_id=cart_id, product=product).first()
+    boot.delete()
+    return Response('Produto Excluído com sucesso!', status=status.HTTP_200_OK)

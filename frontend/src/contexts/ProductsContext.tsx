@@ -15,7 +15,6 @@ export interface Product {
   rating: number;
   color: string;
   amount: number;
-  
 }
 
 export interface Color {
@@ -49,6 +48,7 @@ interface ProductsContextType {
   handleAddToCartContext: (productToadd: Product, size: number) => void;
   handleIncreaseBootAmountInCart: (bootToIncrease: CartItem) => void;
   handleDecreaseBootAmountInCart: (bootToDecrease: CartItem) => void;
+  handleRemoveBootFromCart: (bootToRemove: CartItem) => void;
   handleOpenCart: (value: boolean) => void;
 }
 
@@ -80,13 +80,12 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const clearCartItems = async () => {
-    setCartItems([])
-  }
+    setCartItems([]);
+  };
 
   const handleAddToCartContext = async (
     productToAdd: Product,
-    size: number,
-    
+    size: number
   ) => {
     const getOrCreateCartId = () => {
       let cartId = localStorage.getItem("cartId");
@@ -152,13 +151,34 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       cart_id: bootToDecrease.cart_id,
       boot_id: bootToDecrease.product.id,
       amount: bootToDecrease.amount,
-      
     };
     try {
       const response = await fetch(
         "http://127.0.0.1:8000/api/decrease_boot_amount_in_cart",
         {
           method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      await fetchCartItems();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleRemoveBootFromCart = async (bootToRemove: CartItem) => {
+    const data = {
+      cart_id: bootToRemove.cart_id,
+      boot_id: bootToRemove.product.id,
+    };
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/remove_boot_from_cart",
+        {
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
           },
@@ -225,6 +245,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
         handleAddToCartContext,
         handleIncreaseBootAmountInCart,
         handleDecreaseBootAmountInCart,
+        handleRemoveBootFromCart,
         handleOpenCart,
         products,
         cartItems,
