@@ -48,8 +48,6 @@
   color: #ff6600;
 }
 
-
-
 /* Botão de Menu */
 .menu-btn {
   background: none;
@@ -178,9 +176,11 @@
   z-index: 100;
   transition: all 0.3s ease-in-out;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
   justify-content: space-between;
   min-width: 60%;
+  overflow-y: scroll;
+  max-height: 80%;
 }
 
 /* Botão finalizar compra*/
@@ -220,6 +220,7 @@
   border-bottom: 1px solid black;
   padding-bottom: 0.25rem;
   margin-bottom: 0.875rem;
+  margin-top: 0.5rem;
 }
 
 .cart-label-price,
@@ -446,5 +447,52 @@
 
   .login-box {
     width: 90%;
+  }
+
+  .boots-in-cart-container {
+    height: 100px;
+  }
+
+  .boots-in-cart-info-container {
+    align-content: center;
+  }
+
+  .boots-in-cart-info-container p {
+    margin-bottom: 25px;
+  }
+
+  .buttons-in-cart-container {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: top;
+  }
+
+  .buttons-in-cart-container svg {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  .cart-sidebar {
+    display: flex;
+    flex-flow: column nowrap;
+    overflow-y: scroll;
+    max-height: 80%;
+  }
+
+  .cart-sidebar p {
+    font-size: 0.5rem;
+  }
+
+  .boots-in-cart-price {
+    font-size: 0.5rem;
+    align-self: center;
+  }
+
+  .boots-in-cart-amount-container p {
+    margin-bottom: 40px;
+  }
+
+  .cart-labels {
+    margin-top: 0.5rem;
   }
 }

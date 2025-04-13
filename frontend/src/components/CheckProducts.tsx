@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Plus, Minus, Trash } from "@phosphor-icons/react";
 import "../styles/CheckProducts.css";
+import { Plus, Minus, Trash } from "@phosphor-icons/react";
 import { useProducts } from "../contexts/ProductsContext";
 
 interface Product {

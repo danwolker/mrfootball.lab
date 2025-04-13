@@ -35,13 +35,13 @@ const AboutUs: React.FC = () => {
           <h3>Conecte-se com a gente:</h3>
           <div className="social-icons">
             <a href="https://instagram.com/mrfootball.lab" target="_blank" rel="noreferrer">
-              <FaInstagram className="social-icon insta" />
+              <FaInstagram className="social-icon insta" size={40}/>
             </a>
             <a href="https://facebook.com/mrfootball.lab" target="_blank" rel="noreferrer">
-              <FaFacebookF className="social-icon face" />
+              <FaFacebookF className="social-icon face" size={40}/>
             </a>
             <a href="https://wa.me/5547999999999" target="_blank" rel="noreferrer">
-              <FaWhatsapp className="social-icon whats" />
+              <FaWhatsapp className="social-icon whats" size={40}/>
             </a>
           </div>
         </div>

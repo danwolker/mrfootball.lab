@@ -2,8 +2,10 @@ import React, { FormEvent, useEffect } from "react";
 import "../styles/AddressForm.css";
 import { useProducts } from "../contexts/ProductsContext";
 
+
+
 const AddressForm: React.FC = () => {
-  const { cartItems, fetchCartItems, clearCartItems} = useProducts();
+  const { cartItems, clearCartItems} = useProducts();
 
   const handleFinishOrder = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,7 +44,11 @@ const AddressForm: React.FC = () => {
       console.error("Erro:", err);
       alert("Erro ao conectar com o servidor");
     }
-
+    const valor_total = cartItems.reduce((total, item) => {
+      const amount = Number(item.amount);
+      const price = Number(item.product.price);
+      return total + (amount * price);
+    }, 0);
     const pedido = cartItems
       .map(
         (i) =>
@@ -57,7 +63,8 @@ const AddressForm: React.FC = () => {
       `*Complemento:* ${data.address_complement}` +
       `${data.neighborhood}, ${data.city}/${data.state}\n` +
       `CEP: ${data.cep}\n\n` +
-      `*Produtos:*\n${pedido}\n\n`;
+      `*Produtos:*\n${pedido}\n\n` +
+      `*Valor Total da Compra:*\n${valor_total.toFixed(2)}\n`;
 
     const phoneNumber = "5548988770408";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
