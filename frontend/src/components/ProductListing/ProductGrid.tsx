@@ -10,6 +10,7 @@ const ProductGrid: React.FC = () => {
     handleAddToCartContext(productToAdd, size);
     handleOpenCart(true);
   }
+  
 
   function handleSizeChange(e:React.ChangeEvent<HTMLSelectElement>) {
     setSize(parseInt(e.target.value))

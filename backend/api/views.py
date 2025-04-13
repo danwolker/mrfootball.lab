@@ -172,3 +172,4 @@ def remove_boot_from_cart(request):
     boot = BootInCart.objects.filter(cart_id=cart_id, product=product).first()
     boot.delete()
     return Response('Produto Excluído com sucesso!', status=status.HTTP_200_OK)
+
