@@ -3,8 +3,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color, BootInCart, Order, Address
 from .serializer import NewsLetterSerializer, SoccerBootSerializer, BrandSerializer, ColorSerializer, BootInCartSerializer
+from django.conf import settings
+import mercadopago
 
- 
 @api_view(['GET'])
 def see_news_consumer(request):
     news_consumer = NewsLetter.objects.all()
@@ -170,6 +171,8 @@ def finish_order(request):
         address.delete()  
         return Response({'error': f'Erro ao criar pedido: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
 
+
+
 @api_view(['DELETE'])
 def remove_boot_from_cart(request):
     cart_id = request.data.get('cart_id')
@@ -178,3 +181,73 @@ def remove_boot_from_cart(request):
     boot.delete()
     return Response('Produto Excluído com sucesso!', status=status.HTTP_200_OK)
 
+
+
+
+@api_view(['POST'])
+def create_mercado_pago_preference(request):
+    data = request.data
+    boots = data.get('boots', [])
+    for boot in boots:
+        if boot['amount'] <= 0 or boot['product']['price'] <= 0:
+            return Response({"error": "Dados inválidos"}, status=400)
+    try:
+        order = Order.objects.create(
+            name=data.get('name'),
+            last_name=data.get('last_name'),
+            total_price=sum(boot['amount'] * boot['product']['price'] for boot in boots),
+            status='PENDING'  # Aguardando pagamento
+        )
+    except Exception as e:
+        return Response({"error": str(e)}, status=400)
+    sdk = mercadopago.SDK('TEST-5227787845718697-091413-0965163face555922a2cd71d78afa2f5-1982894105')
+    preference_data = {
+        "items": [
+            {
+                "title": boot['product']['brand'],
+                "quantity": boot['amount'],
+                "unit_price": float(boot['product']['price']),
+            }
+            for boot in boots
+        ],
+        "external_reference": str(order.id),  
+        "back_urls": {
+            "success": "http://127.0.0.1:5173/catalog",
+            "failure": "http://127.0.0.1:5173/",
+            "pending": "http://127.0.0.1:5173/",
+        },
+        "auto_return": "approved",  
+    }
+    try:
+        # Create preference
+        preference_response = sdk.preference().create(preference_data)
+        
+        # Check if response is valid
+        if not isinstance(preference_response, dict) or 'response' not in preference_response:
+            order.delete()
+            return Response(
+                {"error": "Invalid response from Mercado Pago"},
+                status=500
+            )
+        
+        preference = preference_response['response']
+        
+        if 'id' not in preference:
+            order.delete()
+            return Response(
+                {"error": "Failed to create payment preference"},
+                status=500
+            )
+        
+        return Response({
+            "preference_id": preference['id'],
+            "init_point": preference['init_point'],
+            "sandbox_init_point": preference.get('sandbox_init_point', ''),
+        })
+        
+    except Exception as e:
+        order.delete()
+        return Response(
+            {"error": f"Error communicating with Mercado Pago: {str(e)}"},
+            status=500
+        )
