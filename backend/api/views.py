@@ -152,13 +152,10 @@ def finish_order(request):
     
         for product_data in data.get('boots', []):
             product = product_data['product']
-            print(product)
             pid = product.get('id')
             boot = SoccerBoot.objects.get(id=pid)
             order.boots.add(boot)
             cart_id = product_data['cart_id']
-            print(cart_id)
-        print(cart_id)
         boots_to_delete = BootInCart.objects.filter(cart_id=cart_id)
         boots_to_delete.delete()
         return Response({
@@ -231,7 +228,10 @@ def create_mercado_pago_preference(request):
             )
         
         preference = preference_response['response']
-        
+        print(preference)
+        print(preference['id'])
+        print(preference['init_point'])
+        print( preference.get('sandbox_init_point', ''))
         if 'id' not in preference:
             order.delete()
             return Response(
