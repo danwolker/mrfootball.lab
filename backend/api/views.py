@@ -117,6 +117,11 @@ def get_boots_in_cart(request):
 @api_view(['POST'])
 def finish_order(request):
     data = request.data
+    for boot in data.get('boots', []):
+        if boot['amount'] <= 0:
+            return Response({"error": "Quantidade inválida"}, status=400)
+        if boot['product']['price'] <= 0:
+            return Response({"error": "Preço inválido"}, status=400)
     
     try:
         address = Address.objects.create(

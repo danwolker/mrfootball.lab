@@ -64,7 +64,7 @@ class Order(models.Model):
     address = models.ForeignKey(Address, related_name='order_address', on_delete=models.SET_NULL, null=True)
     total_price = models.FloatField(null=True)
     status = models.CharField(max_length=12, default='pending')
-    
+    payment_id = models.CharField(max_length=100, blank=True, null=True)
     def __str__(self):
         return f'{self.name} | {self.last_name}'
     
