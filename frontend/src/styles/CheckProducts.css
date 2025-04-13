@@ -13,7 +13,7 @@
 
 /* Títulos carrinho */
 h2 {
-    margin-top: 0.875rem;
+  margin-top: 0.875rem;
 }
 
 .cart-labels-check {
@@ -28,19 +28,17 @@ h2 {
   margin-top: 0.875rem;
 }
 
-
 .cart-label-price-check,
 .cart-label-product {
   justify-self: start;
   font-size: 0.7rem;
 }
 
-.cart-label-procuct-check{
+.cart-label-procuct-check {
   justify-self: start;
   font-size: 0.7rem;
   margin-left: 10%;
 }
-
 
 .cart-label-amount-check {
   justify-self: center;
@@ -137,4 +135,33 @@ h2 {
 
 .close-btn:hover {
   color: #ff6600;
+}
+
+.finish-shopping-button-mp {
+  max-width: 200px;
+  margin: 1rem auto;
+  
+  padding: 1.2rem;
+  border: none;
+  background-color: rgb(39, 37, 37);
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.finish-shopping-button-mp:hover {
+  background-color: #ff6600;
+  color: rgb(39, 37, 37);
+}
+
+@media screen and (max-width: 768px) {
+  .item-div-personal-data > div {
+    display: flex;
+    flex-flow: column wrap;
+  }
+
+  .item-div {
+    display: flex;
+    flex-flow: column wrap;
+  }
 }

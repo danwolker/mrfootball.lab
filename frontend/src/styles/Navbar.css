@@ -67,9 +67,10 @@
   margin-left: 5px;
 }
 
-.cart-btn:hover {
+.cart-btn:hover > * {
   color: #ff6600;
 }
+
 
 /* CAMPO DE BUSCA */
 .center-section {
