@@ -48,16 +48,22 @@ def get_soccer_boots(request):
     serialized_soccer_boots = SoccerBootSerializer(soccer_boots, many=True).data
     return Response(serialized_soccer_boots)   
 
-    
 @api_view(['GET'])
-def get_cart_products(request):
-    pass
+def get_filtered_boot(request):
+    print(request)
+    print(request.data)
+    boot_id = request.GET.get('boot_id')
+    boot = SoccerBoot.objects.get(id=boot_id)
+    serialized_boot = SoccerBootSerializer(boot).data
+    return Response(serialized_boot)
+    
+    
 
 @api_view(['GET'])
 def get_brands(request):
     brands = Brand.objects.all()
-    serialized_soccer_boots = BrandSerializer(brands, many=True).data
-    return Response(serialized_soccer_boots)
+    serialized_brands = BrandSerializer(brands, many=True).data
+    return Response(serialized_brands)
 
 @api_view(['GET'])
 def get_colors(request):

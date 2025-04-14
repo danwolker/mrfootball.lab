@@ -6,29 +6,36 @@ const AddressForm: React.FC = () => {
   const { cartItems, clearCartItems } = useProducts();
 
   const handleMercadoPagoPayment = async () => {
-    const formData = new FormData(document.getElementById('form') as HTMLFormElement);
+    const formData = new FormData(
+      document.getElementById("form") as HTMLFormElement
+    );
     const data = {
-        name: formData.get("nome"),
-        last_name: formData.get("sobrenome"),
-        boots: cartItems,
+      name: formData.get("nome"),
+      last_name: formData.get("sobrenome"),
+      boots: cartItems,
     };
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/api/create_mercado_pago_preference", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-        });
-        const result = await response.json();
-        if (response.ok) {
-            window.location.href = result.init_point;
-        } else {
-            alert(`Erro: ${result.error}`);
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/create_mercado_pago_preference",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
         }
+      );
+      const result = await response.json();
+      console.log(result);
+      if (response.ok) {
+        alert("Redirecionando para o Mercado Pago");
+        window.location.href = result.init_point;
+      } else {
+        alert(`Erro: ${result.error}`);
+      }
     } catch (err) {
-        alert("Erro ao conectar com o servidor");
+      alert("Erro ao conectar com o servidor");
     }
-};
+  };
 
   const handleFinishOrder = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -94,7 +101,7 @@ const AddressForm: React.FC = () => {
 
   return (
     <div className="form-container">
-      <form className="form" id='form'>
+      <form className="form" id="form">
         <h2>Dados Pessoais</h2>
         <div className="item-div-personal-data">
           <div className="item-div">
@@ -138,16 +145,20 @@ const AddressForm: React.FC = () => {
             <input name="cep" id="cep" type="text" required />
           </div>
         </div>
-        <button onClick={() => handleFinishOrder} className="finish-shopping-button" type="submit">
+        <button
+          onClick={() => handleFinishOrder}
+          className="finish-shopping-button"
+          type="submit"
+        >
           Finalizar Compra no WhatsApp
         </button>
-        <button
-          onClick={handleMercadoPagoPayment}
-          className="mercado-pago-button"
-        >
-          Pagar com Mercado Pago
-        </button>
       </form>
+      <button
+        onClick={handleMercadoPagoPayment}
+        className="finish-shopping-button-mp"
+      >
+        Pagar com Mercado Pago
+      </button>
     </div>
   );
 };
