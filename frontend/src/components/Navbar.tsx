@@ -41,9 +41,11 @@ const Navbar: React.FC = () => {
   function decreaseBootAmountInCart(boot: CartItem) {
     handleDecreaseBootAmountInCart(boot);
   }
+
   function removeBootFromCart(boot: CartItem) {
     handleRemoveBootFromCart(boot);
   }
+
   function openCloseCart(value: boolean) {
     handleOpenCart(value);
   }
@@ -52,7 +54,6 @@ const Navbar: React.FC = () => {
     <>
       <nav className="navbar">
         <div className="navbar-container">
-          {/* Topo: Menu, Logo, Carrinho (fora do menu se o menu estiver fechado) */}
           <div className="top-bar">
             <div className="left-section">
               <button
@@ -64,6 +65,19 @@ const Navbar: React.FC = () => {
               <Link to="/" className="logo">
                 <img src="/imagens/logo.jpeg" alt="Logo" />
               </Link>
+            </div>
+
+            <div className="search-desktop">
+              <div className="search-container">
+                <input
+                  type="text"
+                  className="search-input"
+                  placeholder="O que você procura?"
+                />
+                <button className="search-btn">
+                  <FaSearch />
+                </button>
+              </div>
             </div>
 
             {!isMobileMenuOpen && (
@@ -79,7 +93,6 @@ const Navbar: React.FC = () => {
             )}
           </div>
 
-          {/* Campo de busca */}
           <div className="center-section">
             <div className="search-container">
               <input
@@ -94,7 +107,6 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Menu Mobile com carrinho dentro */}
         {isMobileMenuOpen && (
           <div className="mobile-menu">
             <div className="cart-container inside-menu">
@@ -107,21 +119,14 @@ const Navbar: React.FC = () => {
               </button>
             </div>
             <ul className="mobile-header-links">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about-us">Sobre nós</Link>
-              </li>
-              <li>
-                <Link to="/faq">FAQ</Link>
-              </li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/about-us">Sobre nós</Link></li>
+              <li><Link to="/faq">FAQ</Link></li>
             </ul>
           </div>
         )}
       </nav>
 
-      {/* Modal Carrinho */}
       {isCartOpen && (
         <div className="cart-modal">
           <div className="cart-sidebar">
@@ -143,8 +148,7 @@ const Navbar: React.FC = () => {
                     alt=""
                   />
                   <p>
-                    {boot.product.brand} {boot.product.line}{" "}
-                    {boot.product.color} T: {boot.size}
+                    {boot.product.brand} {boot.product.line} {boot.product.color} T: {boot.size}
                   </p>
                 </div>
                 <div className="boots-in-cart-price">
@@ -175,13 +179,8 @@ const Navbar: React.FC = () => {
                 </div>
               </div>
             ))}
-            <button
-              onClick={() => openCloseCart(false)}
-              className="finish-shopping-button"
-            >
-              <Link to="/finish">
-                <span>Finalizar Compra</span>
-              </Link>
+            <button onClick={() => openCloseCart(false)} className="finish-shopping-button">
+              <Link to="/finish"><span>Finalizar Compra</span></Link>
             </button>
           </div>
         </div>
