@@ -22,13 +22,13 @@ interface CartItem {
 }
 
 const CheckProducts: React.FC = () => {
-  
   const {
     cartItems,
     handleIncreaseBootAmountInCart,
     handleDecreaseBootAmountInCart,
-    
+    handleRemoveBootFromCart
   } = useProducts();
+
 
   function increaseBootAmountInCart(boot: CartItem) {
     handleIncreaseBootAmountInCart(boot);
@@ -37,7 +37,9 @@ const CheckProducts: React.FC = () => {
   function decreaseBootAmountInCart(boot: CartItem) {
     handleDecreaseBootAmountInCart(boot);
   }
-
+  function removeBootFromCart(boot: CartItem) {
+    handleRemoveBootFromCart(boot);
+  }
   return (
     <div className="cart-sidebar-check">
   
@@ -80,7 +82,7 @@ const CheckProducts: React.FC = () => {
               >
                 <Minus size={16} color="#ff6600" />
               </button>
-              <button className="plus-minus-trash-button-check">
+              <button onClick={() => removeBootFromCart(boot)} className="plus-minus-trash-button-check">
                 <Trash size={16} color="#858282" />
               </button>
             </div>

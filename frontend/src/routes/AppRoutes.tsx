@@ -6,7 +6,7 @@ import AboutUs from "../pages/AboutUs";
 import FAQ from "../pages/FAQ";
 import Favorites from "../pages/Favorites";
 import Finish from "../pages/Finish";
-
+import ProductDetail from "../components/ProductListing/ProductDetail";
 // Páginas de marcas
 
 
@@ -21,6 +21,8 @@ const AppRoutes = () => (
       <Route path="/about-us" element={<AboutUs />} />
       <Route path="/faq" element={<FAQ />} />
       <Route path="/favorites" element={<Favorites />} />
+
+      <Route path="/product-detail/:id" element={<ProductDetail/>}/>
 
       <Route path="/finish" element={<Finish />} />
     </Routes>
