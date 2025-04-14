@@ -49,6 +49,7 @@ label {
 }
 
 .product-card {
+  color:black;
   background: #fff;
   padding: 16px;
   border-radius: 10px;
@@ -60,9 +61,11 @@ label {
 }
 
 select {
+  color:black;
   width: 40px;
   border-radius: 4px;
   margin-left: 2px;
+  background-color: white;
 }
 
 .product-price {
