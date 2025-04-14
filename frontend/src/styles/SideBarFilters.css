@@ -2,17 +2,6 @@ label {
   color: black;
 }
 
-h4 {
-  color: black;
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-.type-form {
-  display: flex;
-  flex-flow: row wrap;
-}
-
 .sidebar {
   width: 250px;
   background-color: #fff;
@@ -21,52 +10,76 @@ h4 {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+.display-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.button-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .filter-group {
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  justify-content: center;
   font-size: 1rem;
 }
 
 .filter-group-colors {
   margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-  font-size: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  justify-items: center;
+}
+
+.list-left {
+  align-items: flex-start;
 }
 
 .radio-container {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 5px;
+  gap: 8px;
 }
 
+.hidden {
+  display: none !important;
+}
+
+/* Responsividade */
 @media screen and (max-width: 768px) {
   .sidebar {
     width: 100%;
-    display: flex;
-    flex-flow: row nowrap;
-    width: 100%;
-    align-items: start;
-  }
-  .sidebar > div > div{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    width: 100%;
+    padding: 15px;
   }
 
-  .button-title {
-    font-size: 1rem;
-    margin: auto;
+  .filter-group-colors {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
-  .filter-group {
-    margin-top: 0.5rem;
+  .filter-group-colors::-webkit-scrollbar {
+    display: none;
+  }
+
+  .radio-container {
+    flex: 0 0 auto;
   }
 }

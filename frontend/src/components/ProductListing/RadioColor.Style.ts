@@ -1,23 +1,28 @@
+// RadioColor.Style.ts
 import { styled } from "styled-components";
 
 interface RadioButtonProps {
-  buttoncolor: string;
+  $buttoncolor: string;
 }
 
 export const RadioButtonColor = styled.input<RadioButtonProps>`
   appearance: none;
-  border: 1px solid black;
+  border: 2px solid #ccc;
   border-radius: 50%;
   cursor: pointer;
-  width: 1rem;
-  height: 1rem;
-  gap: 10px;
-  background: ${(props) => props.buttoncolor};
-  text-align: center;
-  line-height: 1.6;
+  width: 2.2rem;
+  height: 2.2rem;
+  background-color: ${(props) => props.$buttoncolor};
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, border 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    border-color: #555;
+  }
 
   &:checked {
-    border: 2px solid black;
+    border: 3px solid black;
   }
 `;
 
@@ -28,19 +33,15 @@ export const BaseRadioButton = styled.input`
   cursor: pointer;
   width: 1rem;
   height: 1rem;
-  gap: 10px;
-  text-align: center;
-  line-height: 1.6;
   position: relative;
-  
 
   &:checked {
     border: 2px solid black;
-    background-color: #0e72ae;
+    background-color: black;
   }
 
   &::before {
-    content:'';
+    content: '';
     position: absolute;
     top: 1px;
     left: 4px;
@@ -52,7 +53,7 @@ export const BaseRadioButton = styled.input`
     transform: rotate(45deg);
   }
 
-  &:checked:before {
+  &:checked::before {
     border-color: white;
   }
 `;

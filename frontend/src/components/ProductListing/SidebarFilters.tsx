@@ -1,8 +1,9 @@
 import "../../styles/SideBarFilters.css";
 import { useProducts } from "../../contexts/ProductsContext";
 import { BaseRadioButton, RadioButtonColor } from "./RadioColor.Style";
-
 import { FaAngleDown } from "react-icons/fa";
+import { useState } from "react";
+
 const SidebarFilters: React.FC = () => {
   const {
     changeBootType,
@@ -13,73 +14,46 @@ const SidebarFilters: React.FC = () => {
     brands,
   } = useProducts();
 
-  function handleColorFilter(selectedColor: string) {
-    changeSelectedColor(selectedColor);
-  }
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
+  const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [selectedBootie, setSelectedBootie] = useState<string | null>(null);
 
-  function handleBrandFilter(selectedBrand: string) {
-    changeSelectedBrand(selectedBrand);
-  }
+  const toggleDisplay = (id: string) => {
+    const el = document.getElementById(id) as HTMLElement;
+    el.classList.toggle("hidden");
+  };
 
-  function handleSelectedType(selectedBootType: string) {
-    changeBootType(selectedBootType);
-  }
+  const handleColorFilter = (color: string) => {
+    const newColor = selectedColor === color ? null : color;
+    setSelectedColor(newColor);
+    changeSelectedColor(newColor ?? "");
+  };
 
-  function handleSelectedBootie(selectedValue: string) {
-    changeBootie(selectedValue);
-  }
+  const handleBrandFilter = (brand: string) => {
+    const newBrand = selectedBrand === brand ? null : brand;
+    setSelectedBrand(newBrand);
+    changeSelectedBrand(newBrand ?? "");
+  };
 
-  function handleColorsDisplay() {
-    const filtersColorsDiv = document.getElementById(
-      "filters-colors"
-    ) as HTMLElement;
-    if (filtersColorsDiv.style.display == "flex") {
-      filtersColorsDiv.style.display = "none";
-    } else {
-      filtersColorsDiv.style.display = "flex";
-    }
-  }
+  const handleSelectedType = (type: string) => {
+    const newType = selectedType === type ? null : type;
+    setSelectedType(newType);
+    changeBootType(newType ?? "");
+  };
 
-  function handleBrandsDisplay() {
-    const filtersBrandsDiv = document.getElementById(
-      "filters-brands"
-    ) as HTMLElement;
-    if (filtersBrandsDiv.style.display == "flex") {
-      filtersBrandsDiv.style.display = "none";
-    } else {
-      filtersBrandsDiv.style.display = "flex";
-    }
-  }
-
-  function handleTypesDisplay() {
-    const filtersBrandsDiv = document.getElementById(
-      "filters-types"
-    ) as HTMLElement;
-    if (filtersBrandsDiv.style.display == "flex") {
-      filtersBrandsDiv.style.display = "none";
-    } else {
-      filtersBrandsDiv.style.display = "flex";
-    }
-  }
-
-  function handleBootieDisplay() {
-    const filtersBrandsDiv = document.getElementById(
-      "bootie-type"
-    ) as HTMLElement;
-    if (filtersBrandsDiv.style.display == "flex") {
-      filtersBrandsDiv.style.display = "none";
-    } else {
-      filtersBrandsDiv.style.display = "flex";
-    }
-  }
+  const handleSelectedBootie = (value: string) => {
+    const newBootie = selectedBootie === value ? null : value;
+    setSelectedBootie(newBootie);
+    changeBootie(newBootie ?? "");
+  };
 
   return (
     <aside className="sidebar">
       <div>
-        <button className="display-button" onClick={handleColorsDisplay}>
+        <button className="display-button" onClick={() => toggleDisplay("filters-colors")}>
           <h2 className="button-title">
-            Cores
-            <FaAngleDown />
+            Cores <FaAngleDown />
           </h2>
         </button>
         <div id="filters-colors" className="filter-group-colors">
@@ -88,31 +62,31 @@ const SidebarFilters: React.FC = () => {
               <RadioButtonColor
                 type="radio"
                 name="color"
-                onChange={() => handleColorFilter(color.color)}
                 id={color.color}
-                buttoncolor={color.color_code}
+                $buttoncolor={color.color_code}
+                checked={selectedColor === color.color}
+                onChange={() => handleColorFilter(color.color)}
               />
-              <label className="label" htmlFor={color.color}>
-                {color.color}
-              </label>
             </div>
           ))}
         </div>
       </div>
+
       <div>
-        <button className="display-button" onClick={handleBrandsDisplay}>
+        <button className="display-button" onClick={() => toggleDisplay("filters-brands")}>
           <h2 className="button-title">
             Marcas <FaAngleDown />
           </h2>
         </button>
-        <div id="filters-brands" className="filter-group">
-          {brands.map((brand) => (
+        <div id="filters-brands" className="filter-group list-left">
+          {brands.sort((a, b) => a.brand.localeCompare(b.brand)).map((brand) => (
             <div className="radio-container" key={brand.brand}>
               <BaseRadioButton
                 type="radio"
                 name="brand"
-                onChange={() => handleBrandFilter(brand.brand)}
                 id={brand.brand}
+                checked={selectedBrand === brand.brand}
+                onChange={() => handleBrandFilter(brand.brand)}
               />
               <label className="label" htmlFor={brand.brand}>
                 {brand.brand}
@@ -123,101 +97,63 @@ const SidebarFilters: React.FC = () => {
       </div>
 
       <div>
-        <button className="display-button" onClick={handleTypesDisplay}>
+        <button className="display-button" onClick={() => toggleDisplay("filters-types")}>
           <h2 className="button-title">
             Tipos <FaAngleDown />
           </h2>
         </button>
-        <div id="filters-types" className="filter-group">
-          <div className="radio-container">
-            <BaseRadioButton
-              onChange={() => handleSelectedType("Campo")}
-              type="radio"
-              name="type"
-              id="campo"
-            />
-            <label className="label" htmlFor="campo">
-              Campo
-            </label>
-          </div>
-          <div className="radio-container">
-            <BaseRadioButton
-              onChange={() => handleSelectedType("Salao")}
-              type="radio"
-              name="type"
-              id="salao"
-            />
-            <label className="label" htmlFor="salao">
-              Salão
-            </label>
-          </div>
-          <div className="radio-container">
-            <BaseRadioButton
-              onChange={() => handleSelectedType("Suico")}
-              type="radio"
-              name="type"
-              id="suico"
-            />
-            <label className="label" htmlFor="suico">
-              Suiço
-            </label>
-          </div>
-          <div className="radio-container">
-            <BaseRadioButton
-              onChange={() => handleSelectedType("Trava-Mista")}
-              className="label"
-              type="radio"
-              name="type"
-              id="mista"
-            />
-            <label htmlFor="mista">Trava Mista</label>
-          </div>
-          <div className="radio-container">
-            <BaseRadioButton
-              onChange={() => handleSelectedType("Todas")}
-              className="label"
-              type="radio"
-              name="type"
-              id="all"
-            />
-            <label htmlFor="all">Todas</label>
-          </div>
+        <div id="filters-types" className="filter-group list-left">
+          {["Campo", "Salao", "Suico", "Trava-Mista", "Todas"].sort().map((type) => (
+            <div className="radio-container" key={type}>
+              <BaseRadioButton
+                type="radio"
+                name="type"
+                id={type}
+                checked={selectedType === type}
+                onChange={() => handleSelectedType(type)}
+              />
+              <label htmlFor={type}>{type}</label>
+            </div>
+          ))}
         </div>
       </div>
 
       <div>
-        <button className="display-button" onClick={handleBootieDisplay}>
+        <button className="display-button" onClick={() => toggleDisplay("bootie-type")}>
           <h2 className="button-title">
             Botinha <FaAngleDown />
           </h2>
         </button>
-        <div id="bootie-type" className="filter-group">
+        <div id="bootie-type" className="filter-group list-left">
           <div className="radio-container">
             <BaseRadioButton
+              type="radio"
+              name="bootie"
+              id="com"
+              checked={selectedBootie === "com"}
               onChange={() => handleSelectedBootie("com")}
-              type="radio"
-              name="bootie"
-              id="with"
             />
-            <label htmlFor="with">Com Botinha</label>
+            <label htmlFor="com">Com Botinha</label>
           </div>
           <div className="radio-container">
             <BaseRadioButton
+              type="radio"
+              name="bootie"
+              id="sem"
+              checked={selectedBootie === "sem"}
               onChange={() => handleSelectedBootie("sem")}
-              type="radio"
-              name="bootie"
-              id="without"
             />
-            <label htmlFor="without">Sem Botinha</label>
+            <label htmlFor="sem">Sem Botinha</label>
           </div>
           <div className="radio-container">
             <BaseRadioButton
-              onChange={() => handleSelectedBootie("todas")}
               type="radio"
               name="bootie"
-              id="with-and-without"
+              id="todas"
+              checked={selectedBootie === "todas"}
+              onChange={() => handleSelectedBootie("todas")}
             />
-            <label htmlFor="with-and-without">Todas</label>
+            <label htmlFor="todas">Todas</label>
           </div>
         </div>
       </div>
