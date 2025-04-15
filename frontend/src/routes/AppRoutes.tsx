@@ -6,7 +6,6 @@ import AboutUs from "../pages/AboutUs";
 import FAQ from "../pages/FAQ";
 import Favorites from "../pages/Favorites";
 import Finish from "../pages/Finish";
-import ProductDetail from "../components/ProductListing/ProductDetail";
 import DetailProduct from "../pages/DetailProduct";
 // Páginas de marcas
 

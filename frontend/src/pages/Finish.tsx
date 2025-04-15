@@ -5,19 +5,20 @@ import Footer from "../components/Footer";
 import FooterInfo from "../components/FooterInfo";
 import AddressForm from "../components/AddresForm";
 import CheckProducts from "../components/CheckProducts";
-
+import { PaymentsProvider } from "../contexts/PaymentsContext";
 const Finish: React.FC = () => {
-    return (
-        <div>
-            <Navbar />
-            <Header />
-            <CheckProducts />
-            <AddressForm />
-            <FooterInfo />
-            <Footer />
-
-        </div>
-    )
-}
+  return (
+    <div>
+      <PaymentsProvider>
+        <Navbar />
+        <Header />
+        <CheckProducts />
+        <AddressForm />
+        <FooterInfo />
+        <Footer />
+      </PaymentsProvider>
+    </div>
+  );
+};
 
 export default Finish;

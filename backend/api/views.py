@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color, BootInCart, Order, Address
 from .serializer import NewsLetterSerializer, SoccerBootSerializer, BrandSerializer, ColorSerializer, BootInCartSerializer, QuestionSerializer
-from django.conf import settings
+
 import mercadopago
 
 

@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect } from "react";
 import "../styles/AddressForm.css";
 import { useProducts } from "../contexts/ProductsContext";
-import { Wallet } from "@mercadopago/sdk-react";
+
 
 const AddressForm: React.FC = () => {
   const { cartItems, clearCartItems } = useProducts();
@@ -12,6 +12,7 @@ const AddressForm: React.FC = () => {
       return total + (item.product.price * item.amount);
     }, 0);
   };
+
 
   const handleFinishOrder = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
