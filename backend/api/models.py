@@ -65,6 +65,7 @@ class Order(models.Model):
     total_price = models.FloatField(null=True)
     status = models.CharField(max_length=12, default='pending')
     payment_id = models.CharField(max_length=100, blank=True, null=True)
+    
     def __str__(self):
         return f'{self.name} | {self.last_name}'
     
@@ -86,6 +87,7 @@ class SoccerBoot(models.Model):
     sold = models.IntegerField(null=True, blank=True)
     stock = models.IntegerField(null=True, blank=True)
     boot_type = models.CharField(max_length=11, choices=BOOT_TYPES, null=True)
+    description = models.CharField(max_length=1000, null=True, blank=True)
     oders = models.ForeignKey(Order, related_name='boots', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
@@ -107,3 +109,11 @@ class BootInCart(models.Model):
     
     def __str__(self):
         return f'{self.cart_id}   ||  {self.product}'
+
+class Question(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField()
+    question = models.CharField(max_length=1000)
+    
+    def __str__(self):
+        return f'{self.name} | {self.question}'

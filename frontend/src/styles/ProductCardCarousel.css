@@ -63,6 +63,7 @@
   flex-flow: column wrap;
   align-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .product-info-caroussel {
@@ -100,9 +101,17 @@
 }
 
 .card-buttons-caroussel {
+  width: 80%;
+  border-radius: 8px;
+  padding: 5px;
+  background-color: #ff6600;
   display: flex;
-  justify-content: center;
   flex-flow: column wrap;
+  align-items: center;
+  justify-self: center;
+}
+.link-button-carroussel {
+  color: white;
 }
 
 .fav-btn,
