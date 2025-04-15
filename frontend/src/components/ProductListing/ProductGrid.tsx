@@ -1,7 +1,7 @@
 import { FaShoppingCart } from "react-icons/fa";
 import { Product, useProducts } from "../../contexts/ProductsContext";
 import React, { useState } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const ProductGrid: React.FC = () => {
   const { products, handleAddToCartContext, handleOpenCart } = useProducts();
@@ -24,30 +24,20 @@ const ProductGrid: React.FC = () => {
             <img
               src={`http://127.0.0.1:8000${product.image}`}
               alt={product.brand}
+              className="product-image"
             />
           </Link>
-          <h4>
-            {product.brand} {product.line}
-          </h4>
+          <h4>{product.brand} {product.line}</h4>
           <p className="product-price">R$ {product.price.toFixed(2)}</p>
           <p className="size-label">
             Tamanho:
             <select defaultValue={"40"} onChange={handleSizeChange}>
-              <option value="35">35</option>
-              <option value="36">36</option>
-              <option value="37">37</option>
-              <option value="38">38</option>
-              <option value="39">39</option>
-              <option value="40">40</option>
-              <option value="41">41</option>
-              <option value="42">42</option>
-              <option value="43">43</option>
-              <option value="44">44</option>
-              <option value="45">45</option>
-              <option value="46">46</option>
+              {[...Array(12)].map((_, i) => {
+                const sizeValue = 35 + i;
+                return <option key={sizeValue} value={sizeValue}>{sizeValue}</option>;
+              })}
             </select>
           </p>
-
           <button
             onClick={() => handleAddToCart(product, size)}
             className="cartshoes-btn"
