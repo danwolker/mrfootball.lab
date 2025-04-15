@@ -7,7 +7,7 @@ import {
 import { useProducts } from './ProductsContext'
 
 interface PaymentsContextType {
-    handleCreatePreference: (name:string, last_name: string) => void;
+    createPreference: (name:string, last_name: string) => void;
 }
 
 
@@ -15,13 +15,11 @@ const PaymentsContext = createContext<PaymentsContextType | undefined>(
   undefined
 );
 
-
-
 export const PaymentsProvider = ({ children }: { children: ReactNode }) => {
     const {cartItems } = useProducts()
     
     
-    const handleCreatePreference = async (name:string, last_name: string) => {
+    const createPreference = async (name:string, last_name: string) => {
     const data = {
       name,
       last_name,
@@ -58,7 +56,7 @@ export const PaymentsProvider = ({ children }: { children: ReactNode }) => {
 
 
   return (
-    <PaymentsContext.Provider value={{handleCreatePreference}}>{children}</PaymentsContext.Provider>
+    <PaymentsContext.Provider value={{createPreference}}>{children}</PaymentsContext.Provider>
   );
 };
 

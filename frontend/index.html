@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mr Football Lab</title>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script>
+      // Inicializa o Mercado Pago com sua chave pública
+      const mp = new MercadoPago('TEST-b09e1c27-3111-4e6c-86a3-ff2036312f46', {
+        locale: 'pt-BR' // Opcional: define o idioma
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>

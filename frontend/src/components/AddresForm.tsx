@@ -1,10 +1,11 @@
 import React, { FormEvent, useEffect } from "react";
 import "../styles/AddressForm.css";
 import { useProducts } from "../contexts/ProductsContext";
-
+import { usePayments } from "../contexts/PaymentsContext"
 
 const AddressForm: React.FC = () => {
   const { cartItems, clearCartItems } = useProducts();
+  const { createPreference } = usePayments()
   const prefID = "1982894105-15b2873d-e8d6-45c9-8622-2ed22203d3e4"
   
   const calculateTotal = () => {
@@ -77,6 +78,8 @@ const AddressForm: React.FC = () => {
     window.open(whatsappUrl, "_blank");
     clearCartItems();
   };
+
+  
 
   return (
     <div className="form-container">

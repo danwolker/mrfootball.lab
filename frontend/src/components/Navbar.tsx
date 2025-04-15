@@ -36,6 +36,10 @@ const Navbar: React.FC = () => {
     handleRemoveBootFromCart,
   } = useProducts();
 
+
+
+ 
+
   function increaseBootAmountInCart(boot: CartItem) {
     handleIncreaseBootAmountInCart(boot);
   }
