@@ -1,16 +1,23 @@
 import React, { FormEvent, useEffect } from "react";
 import "../styles/AddressForm.css";
 import { useProducts } from "../contexts/ProductsContext";
+import { Wallet } from "@mercadopago/sdk-react";
 
 const AddressForm: React.FC = () => {
   const { cartItems, clearCartItems } = useProducts();
-
- 
+  const prefID = "1982894105-15b2873d-e8d6-45c9-8622-2ed22203d3e4"
+  
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => {
+      return total + (item.product.price * item.amount);
+    }, 0);
+  };
 
   const handleFinishOrder = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const formData = new FormData(e.currentTarget);
+    const totalValue = calculateTotal();
+
     const data = {
       name: formData.get("nome") as string,
       last_name: formData.get("sobrenome") as string,
@@ -59,7 +66,8 @@ const AddressForm: React.FC = () => {
       `*Complemento:* ${data.address_complement}` +
       `${data.neighborhood}, ${data.city}/${data.state}\n` +
       `CEP: ${data.cep}\n\n` +
-      `*Produtos:*\n${pedido}\n\n`;
+      `*Produtos:*\n${pedido}\n\n` +
+      `*TOTAL DO PEDIDO: R$ ${totalValue.toFixed(2)}*`;
 
     const phoneNumber = "5548988770408";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
@@ -71,7 +79,7 @@ const AddressForm: React.FC = () => {
 
   return (
     <div className="form-container">
-      <form className="form" id="form">
+      <form className="form" id="form" onSubmit={handleFinishOrder}>
         <h2>Dados Pessoais</h2>
         <div className="item-div-personal-data">
           <div className="item-div">
@@ -116,14 +124,13 @@ const AddressForm: React.FC = () => {
           </div>
         </div>
         <button
-          onClick={() => handleFinishOrder}
           className="finish-shopping-button"
           type="submit"
         >
           Finalizar Compra no WhatsApp
         </button>
       </form>
-  
+     
     </div>
   );
 };
