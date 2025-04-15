@@ -13,9 +13,8 @@ urlpatterns = [
     path('increase_boot_amount_in_cart', increase_boot_amount_in_cart, name='increase_boot_amount_in_cart'),
     path('decrease_boot_amount_in_cart', decrease_boot_amount_in_cart, name='decrease_boot_amount_in_cart'),
     path('finish_order', finish_order, name='finish_order'),
-    path('create_mercado_pago_preference', create_mercado_pago_preference, name='create_mercado_pago_preference'),
     path('remove_boot_from_cart', remove_boot_from_cart, name='remove_boot_from_cart'),
     path('get_filtered_boots', get_filtered_boot, name='get_filtered_boot' ),
-    path('send_question', register_new_question, name='register_newquestion')
-
+    path('send_question', register_new_question, name='register_newquestion'),
+    path('create_mercado_pago_preference', create_mercado_pago_preference, name='create_mercado_pago_preference'),
 ]

@@ -14,8 +14,10 @@ export interface Product {
   rating: number;
   color: string;
   amount: number;
+  type: string; // Ex: "Campo", "Futsal"
+  boot: boolean; // Se tem botinha ou não
+  description?: string; // Descrição do produto, opcional
 }
-
 interface CartItem {
   cart_id: string;
   product: Product;
@@ -180,7 +182,7 @@ const Navbar: React.FC = () => {
               </div>
             ))}
             <button onClick={() => openCloseCart(false)} className="finish-shopping-button">
-              <Link to="/finish"><span>Finalizar Compra</span></Link>
+              <Link to="/finish" /*onClick={ criar Preferência aqui? }*/><span>Finalizar Compra</span></Link>
             </button>
           </div>
         </div>

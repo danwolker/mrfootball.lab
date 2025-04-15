@@ -182,6 +182,10 @@ def finish_order(request):
             'total_price': total_price
         }, status=status.HTTP_201_CREATED)
         
+        ### Adicionar preference_id
+        ### Adicionar
+        
+        
     except Exception as e:
         address.delete()  
         return Response({'error': f'Erro ao criar pedido: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
