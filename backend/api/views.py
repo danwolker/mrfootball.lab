@@ -189,11 +189,14 @@ def remove_boot_from_cart(request):
 
 @api_view(['POST'])
 def create_mercado_pago_preference(request):
+    #verificando dados do pedido
     data = request.data
     boots = data.get('boots', [])
     for boot in boots:
         if boot['amount'] <= 0 or boot['product']['price'] <= 0:
             return Response({"error": "Dados inválidos"}, status=400)
+        
+    #criando pedido
     try:
         order = Order.objects.create(
             name=data.get('name'),
