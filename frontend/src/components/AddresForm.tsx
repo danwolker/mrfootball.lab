@@ -8,7 +8,7 @@ const AddressForm: React.FC = () => {
   const [payerLastName, setLastName] = useState("");
   const { cartItems, clearCartItems } = useProducts();
   const { createPreference } = usePayments();
-  const prefID = "1982894105-15b2873d-e8d6-45c9-8622-2ed22203d3e4";
+  
 
   function handleCreatePreference() {
     createPreference(payerName, payerLastName)
@@ -136,6 +136,7 @@ const AddressForm: React.FC = () => {
             <input name="cep" id="cep" type="text" required />
           </div>
         </div>
+        <div><h1>Aqui precisa ter um link de ir para o pagamento, daí vai pra outra página para escolher a forma de pagamento - Via wpp ou via Mercados pago</h1></div>
         <button className="finish-shopping-button" type="submit">
           Finalizar Compra no WhatsApp
         </button>

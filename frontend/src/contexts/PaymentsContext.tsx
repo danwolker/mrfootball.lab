@@ -17,7 +17,7 @@ const PaymentsContext = createContext<PaymentsContextType | undefined>(
 
 export const PaymentsProvider = ({ children }: { children: ReactNode }) => {
     const {cartItems } = useProducts()
-    
+
     
     const createPreference = async (name:string, last_name: string) => {
     const data = {

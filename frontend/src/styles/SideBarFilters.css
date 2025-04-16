@@ -75,8 +75,10 @@ label {
     -ms-overflow-style: none;
   }
 
-  .filter-group-colors::-webkit-scrollbar {
-    display: none;
+  .filter-group-colors {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem;
   }
 
   .radio-container {

@@ -12,7 +12,7 @@ export const RadioButtonColor = styled.input<RadioButtonProps>`
   cursor: pointer;
   width: 2.2rem;
   height: 2.2rem;
-  background-color: ${(props) => props.$buttoncolor};
+  background-image: ${(props) => props.$buttoncolor};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s ease, border 0.2s ease;
 
