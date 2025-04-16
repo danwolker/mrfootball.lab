@@ -1,19 +1,25 @@
-import React, { FormEvent, useEffect } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import "../styles/AddressForm.css";
 import { useProducts } from "../contexts/ProductsContext";
-import { usePayments } from "../contexts/PaymentsContext"
-
+import { usePayments } from "../contexts/PaymentsContext";
+import { Wallet } from '@mercadopago/sdk-react'
 const AddressForm: React.FC = () => {
+  const [payerName, setName] = useState("");
+  const [payerLastName, setLastName] = useState("");
   const { cartItems, clearCartItems } = useProducts();
-  const { createPreference } = usePayments()
-  const prefID = "1982894105-15b2873d-e8d6-45c9-8622-2ed22203d3e4"
-  
+  const { createPreference } = usePayments();
+  const prefID = "1982894105-15b2873d-e8d6-45c9-8622-2ed22203d3e4";
+
+  function handleCreatePreference() {
+    createPreference(payerName, payerLastName)
+  }
+
+
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
-      return total + (item.product.price * item.amount);
+      return total + item.product.price * item.amount;
     }, 0);
   };
-
 
   const handleFinishOrder = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -79,8 +85,6 @@ const AddressForm: React.FC = () => {
     clearCartItems();
   };
 
-  
-
   return (
     <div className="form-container">
       <form className="form" id="form" onSubmit={handleFinishOrder}>
@@ -88,11 +92,16 @@ const AddressForm: React.FC = () => {
         <div className="item-div-personal-data">
           <div className="item-div">
             <label htmlFor="nome">Nome: </label>
-            <input name="nome" id="nome" type="text" />
+            <input name="nome" id="nome" type="text" onChange={(e) => setName(e.target.value)}/>
           </div>
           <div className="item-div">
             <label htmlFor="sobrenome">Sobrenome: </label>
-            <input name="sobrenome" id="sobrenome" type="text" />
+            <input
+              name="sobrenome"
+              id="sobrenome"
+              type="text"
+              onChange={(e) => setLastName(e.target.value)}
+            />
           </div>
         </div>
 
@@ -127,14 +136,13 @@ const AddressForm: React.FC = () => {
             <input name="cep" id="cep" type="text" required />
           </div>
         </div>
-        <button
-          className="finish-shopping-button"
-          type="submit"
-        >
+        <button className="finish-shopping-button" type="submit">
           Finalizar Compra no WhatsApp
         </button>
       </form>
-     
+      <div>
+        <Wallet initialization={{ preferenceId: 'YOUR_PREFERENCE_ID' }} />
+      </div>
     </div>
   );
 };
