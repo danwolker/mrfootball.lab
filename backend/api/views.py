@@ -197,7 +197,7 @@ def create_mercado_pago_preference(request):
         print(preference)
         print(preference['id'])
         print(preference['init_point'])
-        print( preference.get('sandbox_init_point', ''))
+        print(preference.get('sandbox_init_point', ''))
         if 'id' not in preference:
             order.delete()
             return Response(
@@ -222,7 +222,7 @@ def create_mercado_pago_preference(request):
 
 @api_view(['POST'])
 def finish_order(request):
-    create_mercado_pago_preference(request)
+    
     data = request.data
     for boot in data.get('boots', []):
         if boot['amount'] <= 0:
@@ -254,7 +254,7 @@ def finish_order(request):
             name=data.get('name'),
             last_name=data.get('last_name'),
             address=address,
-            total_price=total_price
+            total_price=total_price 
         )
     
         for product_data in data.get('boots', []):

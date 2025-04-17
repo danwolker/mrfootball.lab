@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 import { useProducts } from "./ProductsContext";
 
@@ -9,11 +9,12 @@ interface Addres {
   neighborhood: string;
   city: string;
   state: string;
-  addresComplement: string;
+  addres_complement: string;
   cep: String;
 }
 
 interface PaymentsContextType {
+  preferenceId: string;
   createPreference: (name: string, last_name: string, address: Addres) => void;
 }
 
@@ -23,6 +24,7 @@ const PaymentsContext = createContext<PaymentsContextType | undefined>(
 
 export const PaymentsProvider = ({ children }: { children: ReactNode }) => {
   const { cartItems } = useProducts();
+  const [ preferenceId, setPreferenceID] = useState("")
 
   const createPreference = async (name: string, last_name: string ,addres: Addres) => {
     const data = {
@@ -44,8 +46,8 @@ export const PaymentsProvider = ({ children }: { children: ReactNode }) => {
       const result = await response.json();
       console.log(result);
       if (response.ok) {
-        alert("Redirecionando para o Mercado Pago");
-        window.location.href = result.init_point;
+        const preferenceInitPonint = result.init_point;
+        setPreferenceID(result.id)
       } else {
         alert(`Erro: ${result.error}`);
       }
@@ -55,7 +57,7 @@ export const PaymentsProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <PaymentsContext.Provider value={{ createPreference }}>
+    <PaymentsContext.Provider value={{ createPreference, preferenceId }}>
       {children}
     </PaymentsContext.Provider>
   );

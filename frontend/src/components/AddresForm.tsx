@@ -4,7 +4,6 @@ import { useProducts } from "../contexts/ProductsContext";
 import { usePayments } from "../contexts/PaymentsContext";
 import { Wallet } from "@mercadopago/sdk-react";
 
-
 const AddressForm: React.FC = () => {
   const [payerName, setName] = useState("");
   const [payerLastName, setLastName] = useState("");
@@ -18,9 +17,11 @@ const AddressForm: React.FC = () => {
   const [phonePreference, setPhonePreference] = useState(0);
   const [cepPreference, SetCepPreference] = useState("");
   const { cartItems, clearCartItems } = useProducts();
-  const { createPreference } = usePayments();
+  const { createPreference, preferenceId } = usePayments();
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
 
+
+  // Cria preferencia e pega o PreferenceID
   const handleStartPayment = async () => {
     const addres = {
       street: streetPreference,
@@ -28,7 +29,7 @@ const AddressForm: React.FC = () => {
       neighborhood: neighborhoodPreference,
       city: cityPreference,
       state: statePreference,
-      addresComplement: addresComplementPreference,
+      addres_complement: addresComplementPreference,
       phone: phonePreference,
       cep: cepPreference,
     };
@@ -42,23 +43,24 @@ const AddressForm: React.FC = () => {
     }, 0);
   };
 
-  const handleFinishOrder = async (e: FormEvent<HTMLFormElement>) => {
+  // Chama o caminho finish_order e fecha o pedido no wpp
+
+  const handleFinishOrderOnWhatsApp = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const totalValue = calculateTotal();
 
     const data = {
-      name: formData.get("nome") as string,
-      last_name: formData.get("sobrenome") as string,
-      phone: formData.get("phone"),
-      street: formData.get("street") as string,
-      number: formData.get("number"),
-      neighborhood: formData.get("neighborhood") as string,
-      city: formData.get("city") as string,
-      state: formData.get("state") as string,
-      address_complement: formData.get("complement") as string,
-      cep: formData.get("cep") as string,
-      boots: cartItems,
+      name: payerName,
+      last_name: payerLastName,
+      street: streetPreference,
+      number: numberPreference,
+      neighborhood: neighborhoodPreference,
+      city: cityPreference,
+      state: statePreference,
+      addres_complement: addresComplementPreference,
+      phone: phonePreference,
+      cep: cepPreference,
     };
 
     try {
@@ -82,18 +84,20 @@ const AddressForm: React.FC = () => {
       alert("Erro ao conectar com o servidor");
     }
 
+    //Pedido para enviar ao Wpp
+
     const pedido = cartItems
       .map(
         (i) =>
           `${i.product.brand} ${i.product.line} ${i.product.color} http://localhost:8000${i.product.image} \nQuantidade: ${i.amount}\n------------------`
       )
-      .join("\n"); // Adiciona quebra entre itens
+      .join("\n");
 
     const defaultMessage =
       `*NOVO PEDIDO*\n\n` +
       `*Cliente:* ${data.name} ${data.last_name}\n` +
       `*Endereço:* ${data.street}, ${data.number}\n` +
-      `*Complemento:* ${data.address_complement}` +
+      `*Complemento:* ${data.addres_complement}` +
       `${data.neighborhood}, ${data.city}/${data.state}\n` +
       `CEP: ${data.cep}\n\n` +
       `*Produtos:*\n${pedido}\n\n` +
@@ -109,7 +113,7 @@ const AddressForm: React.FC = () => {
 
   return (
     <div className="form-container">
-      <form className="form" id="form" onSubmit={handleFinishOrder}>
+      <form className="form" id="form" onSubmit={handleFinishOrderOnWhatsApp}>
         <h2>Dados Pessoais</h2>
         <div className="item-div-personal-data">
           <div className="item-div">
@@ -136,8 +140,7 @@ const AddressForm: React.FC = () => {
               name="phone"
               id="phone"
               type="tel"
-              maxLength={11}
-              pattern="[0-9]{2}-[0-9]{1}-[0-9]{4}-[0-9]4"
+              pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}"
               onChange={(e) => setPhonePreference(Number(e.target.value))}
             />
           </div>
@@ -224,7 +227,7 @@ const AddressForm: React.FC = () => {
               Finalizar Compra no WhatsApp
             </button>
             <div>
-              <Wallet initialization={{ preferenceId: "YOUR_PREFERENCE_ID" }} />
+              <Wallet initialization={{ preferenceId: preferenceId }} />
             </div>
           </div>
         )}
