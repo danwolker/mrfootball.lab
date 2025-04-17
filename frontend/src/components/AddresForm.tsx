@@ -2,18 +2,39 @@ import React, { FormEvent, useEffect, useState } from "react";
 import "../styles/AddressForm.css";
 import { useProducts } from "../contexts/ProductsContext";
 import { usePayments } from "../contexts/PaymentsContext";
-import { Wallet } from '@mercadopago/sdk-react'
+import { Wallet } from "@mercadopago/sdk-react";
+
+
 const AddressForm: React.FC = () => {
   const [payerName, setName] = useState("");
   const [payerLastName, setLastName] = useState("");
+  const [streetPreference, setStreetPreference] = useState("");
+  const [numberPreference, setNumberPreference] = useState(0);
+  const [neighborhoodPreference, setNeiborhoodPreference] = useState("");
+  const [cityPreference, setCityPreference] = useState("");
+  const [statePreference, setStatePreference] = useState("");
+  const [addresComplementPreference, setAddresComplementPreference] =
+    useState("");
+  const [phonePreference, setPhonePreference] = useState(0);
+  const [cepPreference, SetCepPreference] = useState("");
   const { cartItems, clearCartItems } = useProducts();
   const { createPreference } = usePayments();
-  
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
 
-  function handleCreatePreference() {
-    createPreference(payerName, payerLastName)
-  }
-
+  const handleStartPayment = async () => {
+    const addres = {
+      street: streetPreference,
+      number: numberPreference,
+      neighborhood: neighborhoodPreference,
+      city: cityPreference,
+      state: statePreference,
+      addresComplement: addresComplementPreference,
+      phone: phonePreference,
+      cep: cepPreference,
+    };
+    createPreference(payerName, payerLastName, addres);
+    setIsPaymentOpen(true);
+  };
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
@@ -29,6 +50,7 @@ const AddressForm: React.FC = () => {
     const data = {
       name: formData.get("nome") as string,
       last_name: formData.get("sobrenome") as string,
+      phone: formData.get("phone"),
       street: formData.get("street") as string,
       number: formData.get("number"),
       neighborhood: formData.get("neighborhood") as string,
@@ -92,7 +114,12 @@ const AddressForm: React.FC = () => {
         <div className="item-div-personal-data">
           <div className="item-div">
             <label htmlFor="nome">Nome: </label>
-            <input name="nome" id="nome" type="text" onChange={(e) => setName(e.target.value)}/>
+            <input
+              name="nome"
+              id="nome"
+              type="text"
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
           <div className="item-div">
             <label htmlFor="sobrenome">Sobrenome: </label>
@@ -103,47 +130,105 @@ const AddressForm: React.FC = () => {
               onChange={(e) => setLastName(e.target.value)}
             />
           </div>
+          <div className="item-div">
+            <label htmlFor="phone">Celular: </label>
+            <input
+              name="phone"
+              id="phone"
+              type="tel"
+              maxLength={11}
+              pattern="[0-9]{2}-[0-9]{1}-[0-9]{4}-[0-9]4"
+              onChange={(e) => setPhonePreference(Number(e.target.value))}
+            />
+          </div>
         </div>
 
         <h2>Endereço</h2>
         <div className="address-container">
           <div className="item-div">
             <label htmlFor="street">Rua: </label>
-            <input name="street" id="street" type="text" required />
+            <input
+              name="street"
+              id="street"
+              type="text"
+              required
+              onChange={(e) => setStreetPreference(e.target.value)}
+            />
           </div>
           <div className="item-div">
             <label htmlFor="number">Número: </label>
-            <input name="number" id="number" type="number" required />
+            <input
+              name="number"
+              id="number"
+              type="number"
+              required
+              onChange={(e) => setNumberPreference(Number(e.target.value))}
+            />
           </div>
           <div className="item-div">
             <label htmlFor="neighborhood">Bairro: </label>
-            <input name="neighborhood" id="neighborhood" type="text" required />
+            <input
+              name="neighborhood"
+              id="neighborhood"
+              type="text"
+              required
+              onChange={(e) => setNeiborhoodPreference(e.target.value)}
+            />
           </div>
           <div className="item-div">
             <label htmlFor="city">Cidade: </label>
-            <input name="city" id="city" type="text" required />
+            <input
+              name="city"
+              id="city"
+              type="text"
+              required
+              onChange={(e) => setCityPreference(e.target.value)}
+            />
           </div>
           <div className="item-div">
             <label htmlFor="state">Estado: </label>
-            <input name="state" id="state" type="text" required />
+            <input
+              name="state"
+              id="state"
+              type="text"
+              required
+              onChange={(e) => setStatePreference(e.target.value)}
+            />
           </div>
           <div className="item-div">
             <label htmlFor="complement">Complemento: </label>
-            <input name="complement" id="complement" type="text" />
+            <input
+              name="complement"
+              id="complement"
+              type="text"
+              onChange={(e) => setAddresComplementPreference(e.target.value)}
+            />
           </div>
           <div className="item-div">
             <label htmlFor="cep">CEP: </label>
-            <input name="cep" id="cep" type="text" required />
+            <input
+              name="cep"
+              id="cep"
+              type="text"
+              required
+              onChange={(e) => SetCepPreference(e.target.value)}
+            />
           </div>
         </div>
-        <div><h1>Aqui precisa ter um link de ir para o pagamento, daí vai pra outra página para escolher a forma de pagamento - Via wpp ou via Mercados pago</h1></div>
-        <button className="finish-shopping-button" type="submit">
-          Finalizar Compra no WhatsApp
+        <button onClick={() => handleStartPayment()}>
+          Finalizar Pagamento
         </button>
+        {isPaymentOpen && (
+          <div>
+            <button className="finish-shopping-button" type="submit">
+              Finalizar Compra no WhatsApp
+            </button>
+            <div>
+              <Wallet initialization={{ preferenceId: "YOUR_PREFERENCE_ID" }} />
+            </div>
+          </div>
+        )}
       </form>
-      <div>
-        <Wallet initialization={{ preferenceId: 'YOUR_PREFERENCE_ID' }} />
-      </div>
     </div>
   );
 };

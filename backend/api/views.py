@@ -232,6 +232,7 @@ def finish_order(request):
     
     try:
         address = Address.objects.create(
+            phone=data.get('phone'),
             state=data.get('state'),
             city=data.get('city'),
             street=data.get('street'),

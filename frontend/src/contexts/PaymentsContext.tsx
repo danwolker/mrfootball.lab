@@ -1,29 +1,35 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-} from "react";
+import { createContext, ReactNode, useContext } from "react";
 
-import { useProducts } from './ProductsContext'
+import { useProducts } from "./ProductsContext";
 
-interface PaymentsContextType {
-    createPreference: (name:string, last_name: string) => void;
+interface Addres {
+  phone: number,
+  street: string;
+  number: number;
+  neighborhood: string;
+  city: string;
+  state: string;
+  addresComplement: string;
+  cep: String;
 }
 
+interface PaymentsContextType {
+  createPreference: (name: string, last_name: string, address: Addres) => void;
+}
 
 const PaymentsContext = createContext<PaymentsContextType | undefined>(
   undefined
 );
 
 export const PaymentsProvider = ({ children }: { children: ReactNode }) => {
-    const {cartItems } = useProducts()
+  const { cartItems } = useProducts();
 
-    
-    const createPreference = async (name:string, last_name: string) => {
+  const createPreference = async (name: string, last_name: string ,addres: Addres) => {
     const data = {
       name,
       last_name,
-      boots: cartItems
+      addres,
+      boots: cartItems,
     };
 
     try {
@@ -48,19 +54,14 @@ export const PaymentsProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-
-
-
-
-
-
-
   return (
-    <PaymentsContext.Provider value={{createPreference}}>{children}</PaymentsContext.Provider>
+    <PaymentsContext.Provider value={{ createPreference }}>
+      {children}
+    </PaymentsContext.Provider>
   );
 };
 
-export const usePayments = ():PaymentsContextType => {
+export const usePayments = (): PaymentsContextType => {
   const context = useContext(PaymentsContext);
   if (!context) {
     throw new Error("Erro no Provider");
