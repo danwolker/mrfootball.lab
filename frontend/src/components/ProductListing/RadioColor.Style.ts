@@ -24,6 +24,13 @@ export const RadioButtonColor = styled.input<RadioButtonProps>`
   &:checked {
     border: 3px solid black;
   }
+
+  @media screen and (max-width: 768px) {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  
+
 `;
 
 export const BaseRadioButton = styled.input`

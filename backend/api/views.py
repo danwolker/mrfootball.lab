@@ -133,62 +133,6 @@ def get_boots_in_cart(request):
     return Response(serialized_boots_in_cart)    
 
 
-@api_view(['POST'])
-def finish_order(request):
-    data = request.data
-    for boot in data.get('boots', []):
-        if boot['amount'] <= 0:
-            return Response({"error": "Quantidade inválida"}, status=400)
-        if boot['product']['price'] <= 0:
-            return Response({"error": "Preço inválido"}, status=400)
-    
-    try:
-        address = Address.objects.create(
-            state=data.get('state'),
-            city=data.get('city'),
-            street=data.get('street'),
-            number=int(data.get('number')),
-            neighborhood=data.get('neighborhood'),
-            address_complement=data.get('complement', ''),
-            cep=data.get('cep'),
-            user=None,
-        )
-    except Exception as e:
-        return Response({'error': f'Erro ao criar endereço: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
-    
-    total_price = sum(boot['amount'] * boot['product']['price']
-        for boot in data.get('boots', [])
-    )
-    
-    try:
-        order = Order.objects.create(
-            name=data.get('name'),
-            last_name=data.get('last_name'),
-            address=address,
-            total_price=total_price
-        )
-    
-        for product_data in data.get('boots', []):
-            product = product_data['product']
-            pid = product.get('id')
-            boot = SoccerBoot.objects.get(id=pid)
-            order.boots.add(boot)
-            cart_id = product_data['cart_id']
-        boots_to_delete = BootInCart.objects.filter(cart_id=cart_id)
-        boots_to_delete.delete()
-        return Response({
-            'success': True,
-            'order_id': order.id,
-            'total_price': total_price
-        }, status=status.HTTP_201_CREATED)
-        
-        ### Adicionar preference_id
-        ### Adicionar
-        
-        
-    except Exception as e:
-        address.delete()  
-        return Response({'error': f'Erro ao criar pedido: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -273,3 +217,63 @@ def create_mercado_pago_preference(request):
             {"error": f"Error communicating with Mercado Pago: {str(e)}"},
             status=500
         )
+        
+
+
+@api_view(['POST'])
+def finish_order(request):
+    create_mercado_pago_preference(request)
+    data = request.data
+    for boot in data.get('boots', []):
+        if boot['amount'] <= 0:
+            return Response({"error": "Quantidade inválida"}, status=400)
+        if boot['product']['price'] <= 0:
+            return Response({"error": "Preço inválido"}, status=400)
+    
+    try:
+        address = Address.objects.create(
+            state=data.get('state'),
+            city=data.get('city'),
+            street=data.get('street'),
+            number=int(data.get('number')),
+            neighborhood=data.get('neighborhood'),
+            address_complement=data.get('complement', ''),
+            cep=data.get('cep'),
+            user=None,
+        )
+    except Exception as e:
+        return Response({'error': f'Erro ao criar endereço: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    total_price = sum(boot['amount'] * boot['product']['price']
+        for boot in data.get('boots', [])
+    )
+    
+    try:
+        order = Order.objects.create(
+            name=data.get('name'),
+            last_name=data.get('last_name'),
+            address=address,
+            total_price=total_price
+        )
+    
+        for product_data in data.get('boots', []):
+            product = product_data['product']
+            pid = product.get('id')
+            boot = SoccerBoot.objects.get(id=pid)
+            order.boots.add(boot)
+            cart_id = product_data['cart_id']
+        boots_to_delete = BootInCart.objects.filter(cart_id=cart_id)
+        boots_to_delete.delete()
+        return Response({
+            'success': True,
+            'order_id': order.id,
+            'total_price': total_price
+        }, status=status.HTTP_201_CREATED)
+        
+        ### Adicionar preference_id
+        ### Adicionar
+        
+        
+    except Exception as e:
+        address.delete()  
+        return Response({'error': f'Erro ao criar pedido: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)

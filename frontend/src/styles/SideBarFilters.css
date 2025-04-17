@@ -58,6 +58,10 @@ label {
   display: none !important;
 }
 
+.hidden-filter-button {
+  display: none !important;
+}
+
 /* Responsividade */
 @media screen and (max-width: 768px) {
   .sidebar {
@@ -84,4 +88,11 @@ label {
   .radio-container {
     flex: 0 0 auto;
   }
+  
+  .hidden-filter-button {
+    display: block !important;
+    justify-self: center;
+    max-width: 50%;
+  }
+
 }

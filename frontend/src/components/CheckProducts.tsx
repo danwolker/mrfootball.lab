@@ -12,6 +12,9 @@ interface Product {
   rating: number;
   color: string;
   amount: number;
+  type: string; // Ex: "Campo", "Futsal"
+  boot: boolean; // Se tem botinha ou não
+  description?: string; // Descrição do produto, opcional
 }
 
 interface CartItem {
