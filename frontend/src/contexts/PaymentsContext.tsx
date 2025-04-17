@@ -26,6 +26,7 @@ export const PaymentsProvider = ({ children }: { children: ReactNode }) => {
   const { cartItems } = useProducts();
   const [ preferenceId, setPreferenceID] = useState("")
 
+
   const createPreference = async (name: string, last_name: string ,addres: Addres) => {
     const data = {
       name,
@@ -47,7 +48,7 @@ export const PaymentsProvider = ({ children }: { children: ReactNode }) => {
       console.log(result);
       if (response.ok) {
         const preferenceInitPonint = result.init_point;
-        setPreferenceID(result.id)
+        setPreferenceID(result.preference_id)
       } else {
         alert(`Erro: ${result.error}`);
       }

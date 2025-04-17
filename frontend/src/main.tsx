@@ -18,9 +18,9 @@ initMercadoPago('TEST-b09e1c27-3111-4e6c-86a3-ff2036312f46', {
 
 
 ReactDOM.createRoot(rootElement).render(
-  <React.StrictMode>
+
     <ProductProvider>
       <App />
     </ProductProvider>
-  </React.StrictMode>
+
 );

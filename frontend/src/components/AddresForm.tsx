@@ -20,8 +20,7 @@ const AddressForm: React.FC = () => {
   const { createPreference, preferenceId } = usePayments();
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
 
-
-  // Cria preferencia e pega o PreferenceID
+  // Cria preferencia e pega o PreferenceID para mostrar o botão de pagar no mercado pago
   const handleStartPayment = async () => {
     const addres = {
       street: streetPreference,
@@ -45,9 +44,7 @@ const AddressForm: React.FC = () => {
 
   // Chama o caminho finish_order e fecha o pedido no wpp
 
-  const handleFinishOrderOnWhatsApp = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+  const handleFinishOrderOnWhatsApp = async () => {
     const totalValue = calculateTotal();
 
     const data = {
@@ -61,6 +58,7 @@ const AddressForm: React.FC = () => {
       addres_complement: addresComplementPreference,
       phone: phonePreference,
       cep: cepPreference,
+      boots: cartItems,
     };
 
     try {
@@ -113,7 +111,7 @@ const AddressForm: React.FC = () => {
 
   return (
     <div className="form-container">
-      <form className="form" id="form" onSubmit={handleFinishOrderOnWhatsApp}>
+      <form className="form" id="form">
         <h2>Dados Pessoais</h2>
         <div className="item-div-personal-data">
           <div className="item-div">
@@ -218,17 +216,19 @@ const AddressForm: React.FC = () => {
             />
           </div>
         </div>
-        <button onClick={() => handleStartPayment()}>
-          Finalizar Pagamento
-        </button>
-        {isPaymentOpen && (
-          <div>
-            <button className="finish-shopping-button" type="submit">
-              Finalizar Compra no WhatsApp
-            </button>
-            <div>
-              <Wallet initialization={{ preferenceId: preferenceId }} />
-            </div>
+        <div className="payment-options">
+          <button type="button" onClick={handleStartPayment}>
+            Pagar com Mercado Pago
+          </button>
+
+          <button type="button" onClick={handleFinishOrderOnWhatsApp} className="whatsapp-button">
+            Finalizar no WhatsApp
+          </button>
+        </div>
+
+        {isPaymentOpen && preferenceId && (
+          <div className="mercado-pago-container">
+            <Wallet initialization={{ preferenceId: preferenceId }} />
           </div>
         )}
       </form>
