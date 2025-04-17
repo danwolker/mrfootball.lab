@@ -27,7 +27,7 @@ class Profile(models.Model):
         return self.name
 
 class Address(models.Model):
-    phone = models.IntegerField()
+    phone = models.IntegerField(null=True, blank=True)
     state = models.CharField(max_length=15)
     city = models.CharField(max_length=30)
     street = models.CharField(max_length=50)
@@ -66,6 +66,7 @@ class Order(models.Model):
     total_price = models.FloatField(null=True)
     status = models.CharField(max_length=12, default='pending')
     payment_id = models.CharField(max_length=100, blank=True, null=True)
+    preference_id = models.CharField(max_length=100, blank=True, null=True)
     
     def __str__(self):
         return f'{self.name} | {self.last_name}'

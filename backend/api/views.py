@@ -151,18 +151,13 @@ def remove_boot_from_cart(request):
 def create_mercado_pago_preference(request):
     data = request.data
     boots = data.get('boots', [])
+    
+    #Validação dos dados
     for boot in boots:
         if boot['amount'] <= 0 or boot['product']['price'] <= 0:
             return Response({"error": "Dados inválidos"}, status=400)
-    try:
-        order = Order.objects.create(
-            name=data.get('name'),
-            last_name=data.get('last_name'),
-            total_price=sum(boot['amount'] * boot['product']['price'] for boot in boots),
-            status='PENDING'  # Aguardando pagamento
-        )
-    except Exception as e:
-        return Response({"error": str(e)}, status=400)
+   
+    #Criar preferencia 
     sdk = mercadopago.SDK('TEST-5227787845718697-091413-0965163face555922a2cd71d78afa2f5-1982894105')
     preference_data = {
         "items": [
@@ -173,7 +168,7 @@ def create_mercado_pago_preference(request):
             }
             for boot in boots
         ],
-        "external_reference": str(order.id),  
+         
         "back_urls": {
             "success": "http://127.0.0.1:5173/catalog",
             "failure": "http://127.0.0.1:5173/",
@@ -181,30 +176,37 @@ def create_mercado_pago_preference(request):
         },
         "auto_return": "approved",  
     }
+    #Pegar resposta da preferência
     try:
-        # Create preference
         preference_response = sdk.preference().create(preference_data)
         
-        # Check if response is valid
+        
         if not isinstance(preference_response, dict) or 'response' not in preference_response:
-            order.delete()
             return Response(
                 {"error": "Invalid response from Mercado Pago"},
                 status=500
             )
-        
         preference = preference_response['response']
-        print(preference)
-        print(preference['id'])
-        print(preference['init_point'])
-        print(preference.get('sandbox_init_point', ''))
+       
+        
         if 'id' not in preference:
-            order.delete()
             return Response(
                 {"error": "Failed to create payment preference"},
                 status=500
             )
         
+        #Criando objeto Order para salvar dados do pedido e da preferência
+        try:
+            order = Order.objects.create(
+                name=data.get('name'),
+                last_name=data.get('last_name'),
+                total_price=sum(boot['amount'] * boot['product']['price'] for boot in boots),
+                status='PENDING',
+                preference_id= preference['id']
+            )
+        except Exception as e:
+            return Response({"error": str(e)}, status=400)
+          
         return Response({
             "preference_id": preference['id'],
             "init_point": preference['init_point'],
