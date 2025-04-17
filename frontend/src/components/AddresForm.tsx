@@ -216,12 +216,12 @@ const AddressForm: React.FC = () => {
             />
           </div>
         </div>
-        <div className="payment-options">
-          <button type="button" onClick={handleStartPayment}>
+        <div >
+          <button className="finish-shopping-button" type="button" onClick={handleStartPayment}>
             Pagar com Mercado Pago
           </button>
 
-          <button type="button" onClick={handleFinishOrderOnWhatsApp} className="whatsapp-button">
+          <button className="finish-shopping-button"  type="button" onClick={handleFinishOrderOnWhatsApp}>
             Finalizar no WhatsApp
           </button>
         </div>

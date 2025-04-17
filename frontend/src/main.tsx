@@ -5,7 +5,7 @@ import "./index.css";
 import "@fortawesome/fontawesome-free/css/all.min.css"; // Importação correta do FontAwesome
 import { ProductProvider } from "./contexts/ProductsContext";
 import { initMercadoPago } from '@mercadopago/sdk-react'
-import  {useEffect} from "react"
+
 
 const rootElement = document.getElementById("root");
 

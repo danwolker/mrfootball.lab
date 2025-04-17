@@ -45,9 +45,7 @@ export const PaymentsProvider = ({ children }: { children: ReactNode }) => {
         }
       );
       const result = await response.json();
-      console.log(result);
       if (response.ok) {
-        const preferenceInitPonint = result.init_point;
         setPreferenceID(result.preference_id)
       } else {
         alert(`Erro: ${result.error}`);

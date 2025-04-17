@@ -16,15 +16,16 @@
 
   padding: 0.5rem;
   border: none;
-  background-color: rgb(39, 37, 37);
+  background-color: #ff6600;
   border-radius: 5px;
   cursor: pointer;
-  color: white;
+  color: rgb(39, 37, 37);
+  margin: 0.5rem 0.5rem 0.875rem 0.5rem;
 }
 
 .finish-shopping-button:hover {
-  background-color: #ff6600;
-  color: rgb(39, 37, 37);
+  background-color: rgb(39, 37, 37);
+  color: white;
 }
 
 .item-div-personal-data {
