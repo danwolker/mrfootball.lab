@@ -7,6 +7,7 @@ import FAQ from "../pages/FAQ";
 import Favorites from "../pages/Favorites";
 import Finish from "../pages/Finish";
 import DetailProduct from "../pages/DetailProduct";
+import ProductRegistration from "../pages/ProductRegistrationForm";
 // Páginas de marcas
 
 
@@ -22,6 +23,7 @@ const AppRoutes = () => (
       <Route path="/faq" element={<FAQ />} />
       <Route path="/favorites" element={<Favorites />} />
 
+      <Route path="/product-registration" element={<ProductRegistration/>} />
       <Route path="/product-detail/:id" element={<DetailProduct />} />
 
       <Route path="/finish" element={<Finish />} />
