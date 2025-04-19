@@ -25,37 +25,24 @@ const ProductRegistrationForm: React.FC = () => {
   };
   
 
-  const handleRegistryProduct = async () => {
-    const formData = new FormData()
+  const handleRegistryProduct = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const form = e.currentTarget as HTMLFormElement
+    const formData = new FormData(form)
     if (selectedType) formData.append('type', selectedType);
     if (image) formData.append('boot_image', image);
-      
-    const productData: Product = {
-      brand: formData.get('brand') as string,
-      line: formData.get('line') as string,
-      image: urlPreview || '',
-      price: Number(formData.get('price')),
-      color: formData.get('color') as string,
-      type: selectedType || '',
-      bootie: formData.get('bootie') === 'on',
-      description: formData.get('description') as string,
-      boot_image: image as File
-    };
+    const bootieValue = formData.get('bootie') ? 'on' : 'off';
+    formData.set('bootie', bootieValue);
 
-  try {
-    const response = fetch(
-      'http://127.0.0.1:8000/registry-product', 
-      {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/registry_product', {
         method: "POST",
-        headers: {
-          "Content-type": "application/json"
-        },
-        body: JSON.stringify(productData)
-      },
-    )
-  } catch(e) {
-    console.log(e)
-  }
+        body: formData
+      })        
+      console.log(formData)
+    } catch(e) {
+      console.log(e)
+    }
 
   }
 

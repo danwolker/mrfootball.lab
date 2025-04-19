@@ -271,11 +271,7 @@ def finish_order(request):
             'success': True,
             'order_id': order.id,
             'total_price': total_price
-        }, status=status.HTTP_201_CREATED)
-        
-        ### Adicionar preference_id
-        ### Adicionar
-        
+        }, status=status.HTTP_201_CREATED)    
         
     except Exception as e:
         address.delete()  
@@ -283,6 +279,6 @@ def finish_order(request):
 
 @api_view(['POST'])
 def registry_products(request):
+   
     print(request.data)
-    print(request.get.GET)
     return Response(status=status.HTTP_201_CREATED)
