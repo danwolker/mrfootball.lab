@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import register_news_consumer, see_news_consumer, get_soccer_boots,add_boot_to_cart, get_brands, get_colors, get_boots_in_cart, increase_boot_amount_in_cart, decrease_boot_amount_in_cart,finish_order,remove_boot_from_cart, create_mercado_pago_preference,get_filtered_boot,register_new_question
+from .views import register_news_consumer, see_news_consumer, get_soccer_boots,add_boot_to_cart, get_brands, get_colors, get_boots_in_cart, increase_boot_amount_in_cart, decrease_boot_amount_in_cart,finish_order,remove_boot_from_cart, create_mercado_pago_preference,get_filtered_boot,register_new_question, registry_products
 
 
 urlpatterns = [
@@ -17,4 +17,5 @@ urlpatterns = [
     path('get_filtered_boots', get_filtered_boot, name='get_filtered_boot' ),
     path('send_question', register_new_question, name='register_newquestion'),
     path('create_mercado_pago_preference', create_mercado_pago_preference, name='create_mercado_pago_preference'),
+    path('registry_product', registry_products, name="registry_products")
 ]

@@ -280,3 +280,9 @@ def finish_order(request):
     except Exception as e:
         address.delete()  
         return Response({'error': f'Erro ao criar pedido: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def registry_products(request):
+    print(request.data)
+    print(request.get.GET)
+    return Response(status=status.HTTP_201_CREATED)

@@ -7,7 +7,7 @@ import FAQ from "../pages/FAQ";
 import Favorites from "../pages/Favorites";
 import Finish from "../pages/Finish";
 import DetailProduct from "../pages/DetailProduct";
-import ProductRegistration from "../pages/ProductRegistrationForm";
+import ProductRegistration from "../components/ProductRegistration/ProductRegistrationForm";
 // Páginas de marcas
 
 
