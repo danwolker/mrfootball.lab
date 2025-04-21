@@ -1,0 +1,11 @@
+.main-container {
+    background-color: white;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.registration-container {
+    display: flex;
+    flex-flow: row nowrap;
+    max-width: 30%;
+}
