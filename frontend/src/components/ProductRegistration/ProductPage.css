@@ -1,11 +1,18 @@
-.main-container {
+.registration-page {
     background-color: white;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.main-container {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: row wrap;
 }
 
 .registration-container {
-    display: flex;
-    flex-flow: row nowrap;
-    max-width: 30%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin: 1rem;
 }

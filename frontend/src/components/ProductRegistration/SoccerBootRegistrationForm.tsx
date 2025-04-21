@@ -48,7 +48,7 @@ const SoccerBootRegistrationForm: React.FC = () => {
 
   return (
     <div className="registration-form-container">
-      <h1>Resgistrar Produtos</h1>
+      
       <form className="registration-form" onSubmit={handleRegistryProduct}>
           <h2>Chuteiras</h2>
 

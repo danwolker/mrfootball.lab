@@ -1,7 +1,9 @@
 
-sidebar {
-    background-color: white;
+.sidebar {
+    margin: 1rem;
     display: flex;
-    flex-flow: row wrap;
-    max-width: 30%;
+    flex-flow: column wrap;
+    width: 90%;
+    align-content: center;
+    height: 500px;  
 }
