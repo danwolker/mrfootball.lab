@@ -29,6 +29,10 @@ export interface Brand {
   brand: string;
 }
 
+export interface Line {
+  line:string;
+}
+
 interface CartItem {
   cart_id: string;
   product: Product;
@@ -40,6 +44,7 @@ interface ProductsContextType {
   products: Product[];
   colors: Color[];
   brands: Brand[];
+  lines: Line[];
   cartItems: CartItem[];
   isCartOpen: boolean;
   fetchCartItems: () => void;
@@ -65,6 +70,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [color, setColor] = useState("");
   const [brands, setBrands] = useState<Brand[]>([]);
   const [brand, setBrand] = useState("");
+  const [lines, setLines] = useState<Line[]>([]);
   const [type, setType] = useState("");
   const [bootie, setBootie] = useState("");
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -228,6 +234,10 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       .then((res) => res.json())
       .then((data) => setBrands(data))
       .catch((err) => console.error(err));
+    fetch("http://127.0.0.1:8000/api/get_lines")
+      .then((res) => res.json())
+      .then((data) => setLines(data))
+      .catch((err) => console.error(err));
     fetch("http://127.0.0.1:8000/api/get_colors")
       .then((res) => res.json())
       .then((data) => setColors(data))
@@ -254,6 +264,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
         cartItems,
         colors,
         brands,
+        lines,
         isCartOpen,
       }}
     >

@@ -1,8 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color, BootInCart, Order, Address
-from .serializer import NewsLetterSerializer, SoccerBootSerializer, BrandSerializer, ColorSerializer, BootInCartSerializer, QuestionSerializer
+from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color, BootInCart, Order, Address, Line
+from .serializer import NewsLetterSerializer, SoccerBootSerializer, BrandSerializer, ColorSerializer, BootInCartSerializer, QuestionSerializer, LineSerializer
 
 import mercadopago
 
@@ -76,6 +76,14 @@ def get_brands(request):
     brands = Brand.objects.all()
     serialized_brands = BrandSerializer(brands, many=True).data
     return Response(serialized_brands)
+
+@api_view(['GET'])
+def get_lines(request):
+    lines = Line.objects.all()
+    serialized_lines = LineSerializer(lines, many=True).data
+    return Response(serialized_lines)
+    
+    
 
 @api_view(['GET'])
 def get_colors(request):

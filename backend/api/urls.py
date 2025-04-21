@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import register_news_consumer, see_news_consumer, get_soccer_boots,add_boot_to_cart, get_brands, get_colors, get_boots_in_cart, increase_boot_amount_in_cart, decrease_boot_amount_in_cart,finish_order,remove_boot_from_cart, create_mercado_pago_preference,get_filtered_boot,register_new_question, registry_products
+from .views import register_news_consumer, see_news_consumer, get_soccer_boots,add_boot_to_cart, get_brands, get_colors, get_boots_in_cart, increase_boot_amount_in_cart, decrease_boot_amount_in_cart,finish_order,remove_boot_from_cart, create_mercado_pago_preference,get_filtered_boot,register_new_question, registry_products, get_lines
 
 
 urlpatterns = [
@@ -9,6 +9,7 @@ urlpatterns = [
     path('add_boot_to_cart', add_boot_to_cart, name='add_to_cart'),
     path('get_brands', get_brands, name='get_brands'),
     path('get_colors', get_colors, name='get_colors'),
+    path('get_lines', get_lines, name='get_lines'),
     path('get_boots_in_cart', get_boots_in_cart, name='get_boots_in_cart' ),
     path('increase_boot_amount_in_cart', increase_boot_amount_in_cart, name='increase_boot_amount_in_cart'),
     path('decrease_boot_amount_in_cart', decrease_boot_amount_in_cart, name='decrease_boot_amount_in_cart'),
