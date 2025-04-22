@@ -13,6 +13,8 @@ const SoccerBootRegistrationForm: React.FC = () => {
     setSelectedType(newType);
   };
 
+  const types = ["Campo", "Salao", "Suico", "Trava-Mista", "Todas"];
+
   const handleRegistryProduct = async (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
@@ -37,91 +39,88 @@ const SoccerBootRegistrationForm: React.FC = () => {
   };
 
   return (
-    <div className="registration-form-container">
-      <form className="registration-form" onSubmit={handleRegistryProduct}>
-        <h2>Chuteiras</h2>
+    <form className="registration-form" onSubmit={handleRegistryProduct}>
+      <h2>Chuteiras</h2>
 
-        <div>
-          <label htmlFor="image">Imagem: </label>
-          <input
-            className="input-img"
-            type="file"
-            name="image"
-            id="image"
-            required
-            onChange={(e) => {
-              if (e.target.files && e.target.files[0]) {
-                setImage(e.target.files[0]);
-                setUrlPreview(URL.createObjectURL(e.target.files[0]));
-              }
-            }}
-          />
-          {urlPreview && <img src={urlPreview} alt="prévia da imagem" />}
-        </div>
+      <div className="input-div">
+        <label htmlFor="image">Imagem: </label>
+        <input
+          className="input-img"
+          type="file"
+          name="image"
+          id="image"
+          required
+          onChange={(e) => {
+            if (e.target.files && e.target.files[0]) {
+              setImage(e.target.files[0]);
+              setUrlPreview(URL.createObjectURL(e.target.files[0]));
+            }
+          }}
+        />
+        {urlPreview && <img src={urlPreview} alt="prévia da imagem" />}
+      </div>
 
-        <div>
-          <label htmlFor="brands">Marca: </label>
-          <select name="brands" id="brands">
-            {brands.map((brand) => (
-              <option value={brand.brand}>{brand.brand}</option>
-            ))}
-          </select>
-        </div>
+      <div className="input-div">
+        <label htmlFor="brands">Marca: </label>
+        <select required name="brands" id="brands">
+          {brands.map((brand) => (
+            <option key={brand.brand} value={brand.brand}>
+              {brand.brand}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        <div>
+      <div className="input-div">
         <label htmlFor="lines">Linha: </label>
-          <select name="lines" id="lines">
-            {lines.map((line) => (
-              <option value={line.line}>{line.line}</option>
-            ))}
-          </select>
-        </div>
+        <select required name="lines" id="lines">
+          {lines.map((line) => (
+            <option key={line.line} value={line.line}>
+              {line.line}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        <div>
-          <label htmlFor="colors">Cor: </label>
-          <select name="colors" id="colors">
-            {colors.map((color) => (
-              <option value={color.color}>{color.color}</option>
-            ))}
-          </select>
-        </div>
+      <div className="input-div">
+        <label htmlFor="colors">Cor: </label>
+        <select required name="colors" id="colors">
+          {colors.map((color) => (
+            <option key={color.color} value={color.color}>
+              {color.color}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        <div>
-          <label htmlFor="bootie">Botinha: </label>
-          <input type="radio" id="bootie" name="bootie" />
-        </div>
+      <div className="input-div">
+        <label htmlFor="bootie">Botinha: </label>
+        <input required type="radio" id="bootie" name="bootie" />
+      </div>
 
-        <div>
-          <label htmlFor="price">Preço: </label>
-          <input type="number" id="price" name="price" />
-        </div>
+      <div className="input-div">
+        <label htmlFor="price">Preço: </label>
+        <input required type="number" id="price" name="price" />
+      </div>
 
-        <div id="filters-types">
-          <p>Tipo: </p>
-          {["Campo", "Salao", "Suico", "Trava-Mista", "Todas"]
-            .sort()
-            .map((type) => (
-              <div className="radio-container" key={type}>
-                <label htmlFor={type}>{type}</label>
-                <BaseRadioButton
-                  type="radio"
-                  name="type"
-                  id={type}
-                  checked={selectedType === type}
-                  onChange={() => handleSelectedType(type)}
-                />
-              </div>
-            ))}
-        </div>
+      <div className="input-div" id="filters-types">
+        <label htmlFor="types">Tipo: </label>
+        <select required name="types" id="types">
+          {types.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        <div>
-          <label htmlFor="description">Descrição: </label>
-          <input type="text" id="description" name="description" />
-        </div>
+      <div className="input-div">
+        <label htmlFor="description">Descrição: </label>
+        <textarea id="description" name="description" rows={5} cols={50} required/>
+      </div>
 
-        <button type="submit">Salvar Produto</button>
-      </form>
-    </div>
+      <button type="submit">Salvar Produto</button>
+    </form>
   );
 };
 
