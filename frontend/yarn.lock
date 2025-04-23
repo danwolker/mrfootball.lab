@@ -1520,7 +1520,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:*, axios@npm:^1.8.3":
+"axios@npm:*, axios@npm:^1.8.4":
   version: 1.8.4
   resolution: "axios@npm:1.8.4"
   dependencies:
@@ -2250,7 +2250,7 @@ __metadata:
     "@types/react-navigation": "npm:^3.4.0"
     "@types/styled-components": "npm:^5.1.34"
     "@vitejs/plugin-react": "npm:^4.3.4"
-    axios: "npm:^1.8.3"
+    axios: "npm:^1.8.4"
     eslint: "npm:^9.21.0"
     eslint-plugin-react-hooks: "npm:^5.1.0"
     eslint-plugin-react-refresh: "npm:^0.4.19"

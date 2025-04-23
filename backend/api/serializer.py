@@ -1,5 +1,8 @@
 from rest_framework import serializers
 from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color, BootInCart, Address, Order, Question, Line, Profile
+from django.contrib.auth.models import User
+
+
 
 class NewsLetterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -65,9 +68,25 @@ class LineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Line
         fields = '__all__'
+
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
         
+    def create(self, validated_data):
+        user = User(
+            username = validated_data['username'],
+            email = validated_data['email']
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
 class ProfileSerializer(serializers.ModelSerializer):
     username = serializers.SlugRelatedField(slug_field='username', read_only=True)
     class Meta:
         model = Profile
-        fields = ['id','username']
+        fields = ['username']
+        

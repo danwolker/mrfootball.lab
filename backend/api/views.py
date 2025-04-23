@@ -3,7 +3,11 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color, BootInCart, Order, Address, Line
-from .serializer import NewsLetterSerializer, SoccerBootSerializer, BrandSerializer, ColorSerializer, BootInCartSerializer, QuestionSerializer, LineSerializer
+from .serializer import NewsLetterSerializer, SoccerBootSerializer, BrandSerializer, ColorSerializer, BootInCartSerializer, QuestionSerializer, LineSerializer, UserRegistrationSerializer
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 import mercadopago
 
@@ -301,9 +305,89 @@ def finish_order(request):
         address.delete()  
         return Response({'error': f'Erro ao criar pedido: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def registry_products(request):
-   
     print(request.data)
     return Response(status=status.HTTP_201_CREATED)
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    def post(self, request, *args, **kwargs):
+        try:
+            response = super().post(request, *args, **kwargs)
+            tokens = response.data
+            
+            access_token = tokens['access']
+            refresh_token = tokens['refresh']
+            
+            res = Response()
+            res.data = {'success':True}
+            
+            res.set_cookie(
+                key="access_token",
+                value=access_token,
+                httponly=True,
+                secure=True,
+                samesite=None,
+                path='/'
+            )
+            
+            res.set_cookie(
+                key="refresh_token",
+                value=refresh_token,
+                httponly=True,
+                secure=True,
+                samesite=None,
+                path='/'
+            )
+            
+            return res
+            
+        except:
+            return Response({'success':False})
+        
+class CustomRefreshTokenView(TokenRefreshView):
+    def post(self, request, *args, **kwargs):
+        try:
+            refresh_token = request.COOKIES.get('refresh_token')
+            
+            request.data['refresh'] = refresh_token
+            
+            response = super().post(request, *args, **kwargs)
+            
+            tokens = response.data
+            access_token = tokens['access_token']
+
+            res = Response()
+            
+            res.data = {'refreshed':True}
+            
+            res.set_cookie(
+                key='access_token',
+                value=access_token,
+                httponly=True,
+                secure=True,
+                samesite=None,
+                path='/',
+                
+            )
+            
+            return res
+                                
+        except:
+            return Response({'refreshed':False})
+        
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def is_authenticated(request):
+    return Response({'authenticated':True})
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def register(request):
+    serializer = UserRegistrationSerializer(data=request.data)
+    
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.error)
