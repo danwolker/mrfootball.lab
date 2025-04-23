@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom"
 
 const NavAdmin: React.FC = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const nav = useNavigate()
   
   const handleLogin = () => {
-    login(email,password)
+    login(username,password)
   };
 
   const handleLogout = async () => {
@@ -19,6 +19,8 @@ const NavAdmin: React.FC = () => {
     if (success) {
       nav("/catalog")
       window.alert('voce foi desconectado')
+    } else {
+      console.log('Erro ao deslogar')
     }
   }
 
@@ -38,7 +40,7 @@ const NavAdmin: React.FC = () => {
         <div className="login">
           <div className="login-input-div">
             <label htmlFor="username">E-mail: </label>
-            <input onChange={(e) => setEmail(e.target.value)} id="email" name="email" type="text" />
+            <input onChange={(e) => setUsername(e.target.value)} id="email" name="email" type="text" />
           </div>
           <div className="login-input-div">
             <label htmlFor="password">Senha: </label>

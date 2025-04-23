@@ -62,6 +62,13 @@ REST_FRAMEWORK = {
     ],
 }
 
+SIMPLE_JWT = {
+    'AUTH_COOKIE': 'access_token',
+    'AUTH_COOKIE_SECURE': True,
+    'AUTH_COOKIE_HTTP_ONLY': True,
+    'AUTH_COOKIE_SAMESITE': 'None',  # Necessário se o frontend estiver em outro domínio
+}
+
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
@@ -143,3 +150,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
+

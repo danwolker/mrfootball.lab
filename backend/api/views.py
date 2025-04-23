@@ -339,8 +339,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 secure=True,
                 samesite=None,
                 path='/'
-            )
-            
+            )     
             return res
             
         except:
@@ -359,7 +358,6 @@ class CustomRefreshTokenView(TokenRefreshView):
             access_token = tokens['access_token']
 
             res = Response()
-            
             res.data = {'refreshed':True}
             
             res.set_cookie(
@@ -368,10 +366,8 @@ class CustomRefreshTokenView(TokenRefreshView):
                 httponly=True,
                 secure=True,
                 samesite=None,
-                path='/',
-                
+                path='/',      
             )
-            
             return res
                                 
         except:
@@ -402,6 +398,7 @@ def logout(request):
         res.data = {'success': True}
         res.delete_cookie('access_token', path='/', samesite='None')
         res.delete_cookie('refresh_token', path='/', samesite='None')
+        print('done')
         return res
     except:
         return Response({'success':False})
