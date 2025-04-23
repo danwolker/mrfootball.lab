@@ -1,28 +1,59 @@
-
 .nav-admin-container {
-    background-color: black;
-    width: 100%;
-    max-height: 200px;    
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-end;
-    padding: 1rem 0.5rem;
+  background-color: black;
+  width: 100%;
+  max-height: 200px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  padding: 1rem 0.5rem;
 }
 
 .login-logout-container {
-    display: flex;
-    flex-flow: row wrap;
-    padding: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 10px;
 }
 
 .login-logout-container > li {
-    display: inline;
-    text-decoration: none;
-    margin: 1.5rem;
-
-    
-    
+  display: inline;
+  text-decoration: none;
+  margin: 1.5rem;
 }
 .nav-link {
-    color: white;
+  color: white;
+}
+
+.login {
+  padding: 1rem;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  display: flex;
+  flex-flow: column wrap;
+  width: 500px;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  gap: 2px;
+  background-color: rgb(161, 165, 165);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.login-input-div {
+  margin: 0.5rem;
+}
+
+.submit-login-button {
+  padding: 0.5rem;
+  margin: 1rem;
+  width: 100px;
+  background-color: #ff6600;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
 }
