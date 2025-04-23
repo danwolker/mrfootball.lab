@@ -1,5 +1,5 @@
 
-.nav-container {
+.nav-admin-container {
     background-color: black;
     width: 100%;
     max-height: 200px;    
@@ -15,7 +15,7 @@
     padding: 10px;
 }
 
-ul > li {
+.login-logout-container > li {
     display: inline;
     text-decoration: none;
     margin: 1.5rem;

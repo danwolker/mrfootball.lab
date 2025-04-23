@@ -12,12 +12,8 @@
     height: 100%;
 }
 
-P {
-    color: black;
-    font-size: 1rem;
-}
 
-img {
+.prev {
     width: 210px;
     height: 200px;
 }
@@ -32,7 +28,7 @@ img {
     justify-content: center;
 }
 
-select {
+.registry-select {
     width: 50%;
 }
 

@@ -3,7 +3,7 @@ import "../ProductRegistration/NavAdmin.css"
 
 const NavAdmin: React.FC = () => {
     return(
-        <nav className="nav-container">
+        <nav className="nav-admin-container">
             <ul className="login-logout-container">
                 <li><Link className="nav-link" to={"/loginAdmin"}> Login </Link> </li>
                 <li><Link className="nav-link" to={"/logoutAdmin"}> Logout </Link> </li>

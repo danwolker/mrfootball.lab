@@ -1,6 +1,7 @@
 // src/components/Title.tsx
 import React, { useEffect, useState } from "react";
 import "../styles/Title.css";
+import { Link } from "react-router-dom"
 
 const slides = [
   {
@@ -58,7 +59,7 @@ const Title: React.FC = () => {
         <div className="title-content">
           <h1>{slides[currentSlide].title}</h1>
           <p>{slides[currentSlide].subtitle}</p>
-          <button className="title-btn">Ver Chuteiras</button>
+          <button className="title-btn"><Link to="/catalog">Ver Chuteiras</Link></button>
         </div>
         <div className="title-image">
           <img src={slides[currentSlide].image} alt="Chuteira" />

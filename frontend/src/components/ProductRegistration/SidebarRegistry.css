@@ -6,7 +6,8 @@
   align-content: center;
   height: 500px;
 }
-h2 {
+
+.registry-title {
     text-align: center;
     font-size: 2rem;
     margin: 1rem;

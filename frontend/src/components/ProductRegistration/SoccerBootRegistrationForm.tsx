@@ -69,12 +69,12 @@ const SoccerBootRegistrationForm: React.FC = () => {
                 }
               }}
             />
-            {urlPreview && <img src={urlPreview} alt="prévia da imagem" />}
+            {urlPreview && <img className="prev" src={urlPreview} alt="prévia da imagem" />}
           </div>
 
           <div className="input-div">
             <label htmlFor="brands">Marca: </label>
-            <select required name="brands" id="brands">
+            <select className="registry-select" required name="brands" id="brands">
               {brands.map((brand) => (
                 <option key={brand.brand} value={brand.brand}>
                   {brand.brand}
@@ -85,7 +85,7 @@ const SoccerBootRegistrationForm: React.FC = () => {
 
           <div className="input-div">
             <label htmlFor="lines">Linha: </label>
-            <select required name="lines" id="lines">
+            <select className="registry-select" required name="lines" id="lines">
               {lines.map((line) => (
                 <option key={line.line} value={line.line}>
                   {line.line}
@@ -96,7 +96,7 @@ const SoccerBootRegistrationForm: React.FC = () => {
 
           <div className="input-div">
             <label htmlFor="colors">Cor: </label>
-            <select required name="colors" id="colors">
+            <select className="registry-select" required name="colors" id="colors">
               {colors.map((color) => (
                 <option key={color.color} value={color.color}>
                   {color.color}
@@ -117,7 +117,7 @@ const SoccerBootRegistrationForm: React.FC = () => {
 
           <div className="input-div" id="filters-types">
             <label htmlFor="types">Tipo: </label>
-            <select required name="types" id="types">
+            <select className="registry-select" required name="types" id="types">
               {types.map((type) => (
                 <option key={type} value={type}>
                   {type}

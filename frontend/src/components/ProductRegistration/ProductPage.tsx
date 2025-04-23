@@ -8,7 +8,7 @@ const ProductRegistrationPage: React.FC = () => {
   return (
     <RegistryProvider>
       <div className="registration-page">
-        <div className="main-container">
+        <div className="main-container-registration">
           <NavAdmin />
         </div>
         <div className="registration-container">

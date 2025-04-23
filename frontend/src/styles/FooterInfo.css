@@ -2,14 +2,14 @@
   display: flex;
   justify-content: space-between;
   background-color: #0e72ae;
-
-  flex-wrap: wrap;
+  flex-flow: row nowrap;
   font-size: 13px;
   margin: auto;
 }
 
 .footer-column {
-  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
   min-width: 180px;
   margin: 3rem;
 }
@@ -24,6 +24,9 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
 }
 
 .footer-column span {
@@ -41,9 +44,25 @@ span {
   color: #555;
 }
 
+h4 {
+  text-align: center;
+}
+
+ul > li {
+  margin: 0.5rem;
+}
+
 @media screen and (max-width: 768px) {
   .footer-info {
     display: flex;
     flex-flow: row wrap;
+    align-items: center;
+  }
+  .footer-column {
+    width: 100%;
+  }
+
+  li {
+    margin: 0.5rem;
   }
 }

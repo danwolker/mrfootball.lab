@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import "../styles/ProductCardCarousel.css";
-import { useProducts } from "../contexts/ProductsContext";
+
 import { Link } from 'react-router-dom'
 
 interface Product {
@@ -17,11 +17,7 @@ const ProductCardCarousel: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [fade, setFade] = useState<"fade-in" | "fade-out">("fade-in");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const { handleAddToCartContext } = useProducts();
 
-  function handleAddToCart(product: Product) {
-  
-}
 
   useEffect(() => {
     fetchProducts();

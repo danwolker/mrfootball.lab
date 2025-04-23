@@ -39,7 +39,7 @@ const SidebarRegistration: React.FC = () => {
 
   return (
     <div className="sidebar-registry">
-      <h2>Registrar</h2>
+      <h2 className="registry-title">Registrar</h2>
       <button className="open-registry-button" onClick={() => handleOpenCloseSoccerBoot(true)}>
         Registrar Chuteiras
       </button>
