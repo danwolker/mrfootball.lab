@@ -9,7 +9,7 @@
     padding: 1rem 0.5rem;
 }
 
-login-logout-container {
+.login-logout-container {
     display: flex;
     flex-flow: row wrap;
     padding: 10px;

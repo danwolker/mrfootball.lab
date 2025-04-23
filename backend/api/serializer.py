@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color, BootInCart, Address, Order, Question, Line
+from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color, BootInCart, Address, Order, Question, Line, Profile
 
 class NewsLetterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -65,3 +65,9 @@ class LineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Line
         fields = '__all__'
+        
+class ProfileSerializer(serializers.ModelSerializer):
+    username = serializers.SlugRelatedField(slug_field='username', read_only=True)
+    class Meta:
+        model = Profile
+        fields = ['id','username']

@@ -1,5 +1,5 @@
 import { useRegistry } from "../../contexts/RegistryContext";
-import "../ProductRegistration/Sidebar.css";
+import "../ProductRegistration/SidebarRegistry.css";
 
 const SidebarRegistration: React.FC = () => {
   const {
@@ -38,7 +38,7 @@ const SidebarRegistration: React.FC = () => {
   }
 
   return (
-    <div className="sidebar">
+    <div className="sidebar-registry">
       <h2>Registrar</h2>
       <button className="open-registry-button" onClick={() => handleOpenCloseSoccerBoot(true)}>
         Registrar Chuteiras

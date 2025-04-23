@@ -1,5 +1,5 @@
 import NavAdmin from "./NavAdmin";
-import SidebarRegistration from "./Sidebar";
+import SidebarRegistration from "./SidebarRegistry";
 import SoccerBootRegistrationForm from "./SoccerBootRegistrationForm";
 import "../ProductRegistration/ProductPage.css";
 import { RegistryProvider } from "../../contexts/RegistryContext";

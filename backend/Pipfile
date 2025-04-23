@@ -9,6 +9,7 @@ pillow = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
 mercadopago = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 

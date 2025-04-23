@@ -1,8 +1,13 @@
 from django.urls import path
 from .views import register_news_consumer, see_news_consumer, get_soccer_boots,add_boot_to_cart, get_brands, get_colors, get_boots_in_cart, increase_boot_amount_in_cart, decrease_boot_amount_in_cart,finish_order,remove_boot_from_cart, create_mercado_pago_preference,get_filtered_boot,register_new_question, registry_products, get_lines
-
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('list_newsletter_consumers', see_news_consumer, name='list_news_consumer'),
     path('create_newsletter_consumer', register_news_consumer, name='create_news_consumer'),
     path('get_soccer_boots', get_soccer_boots, name='get_soccer_boots'),

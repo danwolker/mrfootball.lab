@@ -1,4 +1,5 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from .models import NewsLetter, SoccerBoot, BootInCart, Brand, Color, BootInCart, Order, Address, Line
@@ -9,6 +10,7 @@ import mercadopago
 
 
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def register_new_question(request):
     data = request.data
     serializer = QuestionSerializer(data=data)
@@ -19,6 +21,7 @@ def register_new_question(request):
 
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def see_news_consumer(request):
     news_consumer = NewsLetter.objects.all()
     serialized_data = NewsLetterSerializer(news_consumer, many=True).data
@@ -26,6 +29,7 @@ def see_news_consumer(request):
 
 
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def register_news_consumer(request):
     data = request.data
     serializer = NewsLetterSerializer(data=data)
@@ -35,6 +39,7 @@ def register_news_consumer(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def get_soccer_boots(request):
     filters = {} 
     if request.GET.get('color') and request.GET.get('color') != 'Todas':
@@ -61,6 +66,7 @@ def get_soccer_boots(request):
     return Response(serialized_soccer_boots)   
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def get_filtered_boot(request):
     print(request)
     print(request.data)
@@ -72,12 +78,14 @@ def get_filtered_boot(request):
     
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def get_brands(request):
     brands = Brand.objects.all()
     serialized_brands = BrandSerializer(brands, many=True).data
     return Response(serialized_brands)
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def get_lines(request):
     lines = Line.objects.all()
     serialized_lines = LineSerializer(lines, many=True).data
@@ -86,6 +94,7 @@ def get_lines(request):
     
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def get_colors(request):
     colors = Color.objects.all()
     serialized_colors = ColorSerializer(colors, many=True).data
@@ -93,6 +102,7 @@ def get_colors(request):
 
 
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def add_boot_to_cart(request):
     product_id = request.data.get('product', {}).get('id')
     cart_id = request.data.get('cart_id')
@@ -113,6 +123,7 @@ def add_boot_to_cart(request):
     
     
 @api_view(['PATCH'])
+@permission_classes([AllowAny])
 def increase_boot_amount_in_cart(request):
     cart_id = request.data.get('cart_id')
     product = request.data.get('boot_id')
@@ -123,6 +134,7 @@ def increase_boot_amount_in_cart(request):
     
     
 @api_view(['PATCH'])
+@permission_classes([AllowAny])
 def decrease_boot_amount_in_cart(request):
     cart_id = request.data.get('cart_id')
     product = request.data.get('boot_id')
@@ -135,6 +147,7 @@ def decrease_boot_amount_in_cart(request):
         return Response('Quantidade de itens no carrinho não pode ser menores que 1', status=status.HTTP_200_OK)
         
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def get_boots_in_cart(request):
     boot_in_chart = BootInCart.objects.all()
     serialized_boots_in_cart = BootInCartSerializer(boot_in_chart, many=True).data
@@ -145,6 +158,7 @@ def get_boots_in_cart(request):
 
 
 @api_view(['DELETE'])
+@permission_classes([AllowAny])
 def remove_boot_from_cart(request):
     cart_id = request.data.get('cart_id')
     product = request.data.get('boot_id')
@@ -156,6 +170,7 @@ def remove_boot_from_cart(request):
 
 
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def create_mercado_pago_preference(request):
     data = request.data
     boots = data.get('boots', [])
@@ -231,6 +246,7 @@ def create_mercado_pago_preference(request):
 
 
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def finish_order(request):
     
     data = request.data
@@ -286,6 +302,7 @@ def finish_order(request):
         return Response({'error': f'Erro ao criar pedido: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def registry_products(request):
    
     print(request.data)

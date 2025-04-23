@@ -4,6 +4,7 @@ label {
 
 .sidebar {
   width: 250px;
+  height: 100%;
   background-color: #fff;
   padding: 20px;
   border-radius: 12px;
