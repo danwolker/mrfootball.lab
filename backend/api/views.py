@@ -376,18 +376,32 @@ class CustomRefreshTokenView(TokenRefreshView):
                                 
         except:
             return Response({'refreshed':False})
+    
+    
         
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def is_authenticated(request):
     return Response({'authenticated':True})
 
+
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register(request):
     serializer = UserRegistrationSerializer(data=request.data)
-    
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
-    return Response(serializer.error)
+    return Response(serializer.errors)
+
+@api_view(['POST'])
+def logout(request):
+    try:
+        res = Response()
+        res.data = {'success': True}
+        res.delete_cookie('access_token', path='/', samesite='None')
+        res.delete_cookie('refresh_token', path='/', samesite='None')
+        return res
+    except:
+        return Response({'success':False})

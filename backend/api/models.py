@@ -6,10 +6,10 @@ from django.conf import settings
     
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    display_name = models.CharField(max_length=20)
-    image = models.ImageField(upload_to='avatars/')
-    birth_date = models.DateField()
-    cpf = models.IntegerField()
+    display_name = models.CharField(max_length=20, null=True, blank=True)
+    image = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    cpf = models.IntegerField(null=True, blank=True)
 
     @property
     def name(self):

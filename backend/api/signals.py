@@ -7,6 +7,6 @@ from .models import Profile
 def user_postsave(sender, instance, created, **kwargs):
     user = instance
     if created:
-        Profile.user.object.create(
+        Profile.objects.create(
             user=user
         )

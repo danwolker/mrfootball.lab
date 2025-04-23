@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import register_news_consumer, see_news_consumer, get_soccer_boots,add_boot_to_cart, get_brands, get_colors, get_boots_in_cart, increase_boot_amount_in_cart
-from .views import registry_products, get_lines, CustomTokenObtainPairView,CustomRefreshTokenView, is_authenticated, register
+from .views import registry_products, get_lines, CustomTokenObtainPairView,CustomRefreshTokenView, is_authenticated, register, logout
 from .views import decrease_boot_amount_in_cart,finish_order,remove_boot_from_cart, create_mercado_pago_preference,get_filtered_boot,register_new_question
 urlpatterns = [
     #auth
@@ -8,6 +8,7 @@ urlpatterns = [
     path('token/refresh/', CustomRefreshTokenView.as_view(), name='token_refresh'),
     path('is_authenticated', is_authenticated),
     path('register', register),
+    path('logout/', logout),
     
     path('list_newsletter_consumers', see_news_consumer, name='list_news_consumer'),
     path('create_newsletter_consumer', register_news_consumer, name='create_news_consumer'),

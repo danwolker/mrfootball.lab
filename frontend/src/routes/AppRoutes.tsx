@@ -24,6 +24,8 @@ const AppRoutes = () => (
       <Route path="/favorites" element={<Favorites />} />
 
       <Route path="/product-registration" element={<ProductRegistrationPage/>} />
+
+      
       <Route path="/product-detail/:id" element={<DetailProduct />} />
 
       <Route path="/finish" element={<Finish />} />

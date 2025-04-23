@@ -1,15 +1,26 @@
-import { Link } from "react-router-dom";
 import "../ProductRegistration/NavAdmin.css";
 import React, { useState } from "react";
-import { login } from "./AuthApi";
+import { login, logout } from "./AuthApi";
+import { useNavigate } from "react-router-dom"
+
+
 const NavAdmin: React.FC = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const nav = useNavigate()
   
   const handleLogin = () => {
     login(email,password)
   };
+
+  const handleLogout = async () => {
+    const success = await logout();
+    if (success) {
+      nav("/catalog")
+      window.alert('voce foi desconectado')
+    }
+  }
 
   return (
     <div>
@@ -19,10 +30,7 @@ const NavAdmin: React.FC = () => {
             <button onClick={() => setIsLoginOpen(true)}>Login</button>
           </li>
           <li>
-            <Link className="nav-link" to={"/logoutAdmin"}>
-              {" "}
-              Logout{" "}
-            </Link>{" "}
+            <button onClick={handleLogout}>Logout</button>
           </li>
         </ul>
       </nav>
@@ -34,12 +42,11 @@ const NavAdmin: React.FC = () => {
           </div>
           <div className="login-input-div">
             <label htmlFor="password">Senha: </label>
-            <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" />
+            <input onChange={(e) => setPassword(e.target.value)} type="text" name="password" id="password" />
           </div>
           <button
             onClick={handleLogin}
             className="submit-login-button"
-            type="submit"
           >
             Entrar
           </button>
