@@ -5,7 +5,7 @@ import "./index.css";
 import "@fortawesome/fontawesome-free/css/all.min.css"; // Importação correta do FontAwesome
 import { ProductProvider } from "./contexts/ProductsContext";
 import { initMercadoPago } from "@mercadopago/sdk-react";
-import { AuthProvider } from "./components/ProductRegistration/useAuth";
+
 
 const rootElement = document.getElementById("root");
 
@@ -17,9 +17,9 @@ initMercadoPago("TEST-b09e1c27-3111-4e6c-86a3-ff2036312f46", {
 });
 
 ReactDOM.createRoot(rootElement).render(
-  <AuthProvider>
+
     <ProductProvider>
       <App />
     </ProductProvider>
-  </AuthProvider>
+
 );
