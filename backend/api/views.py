@@ -305,12 +305,35 @@ def finish_order(request):
         address.delete()  
         return Response({'error': f'Erro ao criar pedido: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+@permission_classes([AllowAny])
 def registry_products(request):
-    print(request.data)
+    data = request.data
+    
+    brand_name = data.get('brands')
+    brand = Brand.objects.get(brand=brand_name)
+    
+    line_name = data.get('lines')
+    line = Line.objects.get(line=line_name)
+    
+    color_name = data.get('colors')
+    color = Color.objects.get(color=color_name)
+        
+    bootie = False
+    if data.get('bootie') == 'on':
+        bootie = True
+        
+    SoccerBoot.objects.create(
+        brand = brand,
+        line = line,
+        color = color,
+        bootie = bootie,
+        price = float(data.get('price')),
+        boot_type = data.get('types'),
+        description = data.get('description'),
+        image=request.FILES.get('image')
+    )
     return Response(status=status.HTTP_201_CREATED)
-
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
