@@ -9,10 +9,7 @@ const SoccerBootRegistrationForm: React.FC = () => {
   const [image, setImage] = useState<File | null>();
   const [urlPreview, setUrlPreview] = useState<string | null>(null);
   const { colors, brands, lines } = useProducts();
-  const handleSelectedType = (type: string) => {
-    const newType = selectedType === type ? null : type;
-    setSelectedType(newType);
-  };
+
   const {
     isSoccerBootOpen,
     openCloseSoccerBoot,

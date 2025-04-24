@@ -310,7 +310,6 @@ def finish_order(request):
 def registry_products(request):
     print(request.data)
     return Response(status=status.HTTP_201_CREATED)
-
 class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
         try:
@@ -320,16 +319,19 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             access_token = tokens['access']
             refresh_token = tokens['refresh']
             
-            res = Response()
-            res.data = {'success':True}
+            res = Response({'success': True})
+            
+            # 7 dias em segundos (60*60*24*7)
+            max_age = 604800
             
             res.set_cookie(
                 key="access_token",
                 value=access_token,
                 httponly=True,
                 secure=True,
-                samesite=None,
-                path='/'
+                samesite='Lax',  # Ou 'None' se estiver usando HTTPS em domínios diferentes
+                path='/',
+                max_age=max_age
             )
             
             res.set_cookie(
@@ -337,41 +339,47 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 value=refresh_token,
                 httponly=True,
                 secure=True,
-                samesite=None,
-                path='/'
+                samesite='Lax',
+                path='/',
+                max_age=max_age
             )     
             return res
             
-        except:
-            return Response({'success':False})
+        except Exception as e:
+            print(e)
+            return Response({'success': False}, status=400)
         
 class CustomRefreshTokenView(TokenRefreshView):
     def post(self, request, *args, **kwargs):
         try:
             refresh_token = request.COOKIES.get('refresh_token')
             
+            if not refresh_token:
+                return Response({'refreshed': False}, status=401)
+                
             request.data['refresh'] = refresh_token
             
             response = super().post(request, *args, **kwargs)
             
             tokens = response.data
-            access_token = tokens['access_token']
+            access_token = tokens['access']
 
-            res = Response()
-            res.data = {'refreshed':True}
+            res = Response({'refreshed': True})
             
             res.set_cookie(
                 key='access_token',
                 value=access_token,
                 httponly=True,
                 secure=True,
-                samesite=None,
-                path='/',      
+                samesite='Lax',
+                path='/',
+                max_age=604800
             )
             return res
                                 
-        except:
-            return Response({'refreshed':False})
+        except Exception as e:
+            print(e)
+            return Response({'refreshed': False}, status=401)
     
     
         
