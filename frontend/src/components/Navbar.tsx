@@ -185,7 +185,7 @@ const Navbar: React.FC = () => {
                 </div>
               </div>
             ))}
-            <button onClick={() => openCloseCart(false)} className="finish-shopping-button">
+            <button onClick={() => openCloseCart(false)} className="finish-shopping-button-cart">
               <Link to="/finish" /*onClick={ criar Preferência aqui? }*/><span>Finalizar Compra</span></Link>
             </button>
           </div>
