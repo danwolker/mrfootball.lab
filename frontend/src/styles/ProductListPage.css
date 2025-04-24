@@ -7,7 +7,6 @@
   background-color: #f5f5f5;
 }
 
-
 label {
   cursor: pointer;
 }
@@ -49,7 +48,7 @@ label {
 }
 
 .product-card {
-  color:black;
+  color: black;
   background: #fff;
   padding: 16px;
   border-radius: 10px;
@@ -61,7 +60,7 @@ label {
 }
 
 select {
-  color:black;
+  color: black;
   width: 40px;
   border-radius: 4px;
   margin-left: 2px;
@@ -83,6 +82,7 @@ select {
   color: black;
   padding: 0.5rem;
 }
+
 .product-card img {
   width: 100%;
   height: 160px;
@@ -106,6 +106,7 @@ select {
   height: 30px;
 }
 
+/* ========== RESPONSIVO (MOBILE) ========== */
 @media screen and (max-width: 768px) {
   .product-listing-container {
     display: flex;
@@ -114,75 +115,84 @@ select {
     background-color: #f5f5f5;
     padding: 40px 20px;
   }
+
   .product-main-content {
     flex: 1;
     display: flex;
     flex-direction: row wrap;
   }
+
   .product-grid {
     display: flex;
-    flex-flow: row wrap;
-    gap: 10px;
-    justify-content: center;
-  }
- 
-  .product-card {
-    width: 150px;
-    height: 210px;
-    padding: 2rem 10px;
-    justify-self: center;
-    padding: 5px;
-    font-size: 0.5rem;
-    align-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 12px;
   }
 
-  .product-price {
-    font-size: 0.875rem;
-    padding: 0px;
+  .product-card {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
   }
 
   .product-card img {
-    max-width: 90px;
-    max-height: 60px;
-    margin: 0px;
-    border: none;
-    align-self: center;
-    margin-top: 0.5rem;
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 0.75rem;
   }
 
+  .product-price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ff6600;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .product-card h4,
   .size-label {
-    font-size: 0.75rem;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .size-label select {
+    margin-left: 8px;
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  .cartshoes-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    justify-content: center;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    margin-top: 1rem;
   }
 
   select {
-    height: 1rem;
+    height: 1.5rem;
     border: none;
-    border-radius: 0px;
-    border-bottom: 0.1px solid rgb(59, 57, 57);
-    margin-left: 2px;
-    padding: 0px;
-  }
-  
-  .cartshoes-btn {
-    display: flex;
-    justify-content: center;
-    flex-flow: row wrap;
-    background-color: #ff6600;
-    border: none;
-    padding: 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: white;
-    font-size: 1rem;
-    transition: background-color 0.2s ease;
-    width: 80%;
-    max-height: 20px;
-    align-self: center;
-    margin-top: 1px;
-    margin-bottom: 5px;
-    align-content: center;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 4px;
+    margin-left: 5px;
   }
 }
 
 @media screen and (max-width: 670px) {
+  /* espaço reservado para futuras customizações abaixo de 670px */
 }

@@ -59,41 +59,68 @@ label {
   display: none !important;
 }
 
-.hidden-filter-button {
-  display: none !important;
-}
-
-/* Responsividade */
+/* RESPONSIVIDADE MOBILE */
 @media screen and (max-width: 768px) {
-  .sidebar {
+  /* botão de filtro no topo */
+  .mobile-filter-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff6600;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 14px 0;
     width: 100%;
-    padding: 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    border-radius: 0;
   }
 
+  /* esconde filtros até serem abertos */
+  .sidebar {
+    display: none;
+  }
+
+  /* exibe quando botão é clicado */
+  .sidebar.mobile-active {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+  }
+
+  /* cores horizontais roláveis */
   .filter-group-colors {
     display: flex;
-    flex-direction: row;
+    flex-wrap: nowrap;
     overflow-x: auto;
+    padding: 8px 0;
     gap: 10px;
-    padding-bottom: 10px;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
 
-  .filter-group-colors {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 1rem;
+  .filter-group {
+    padding: 8px 0;
+    font-size: 0.95rem;
+    gap: 6px;
   }
 
   .radio-container {
     flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
   }
-  
-  .hidden-filter-button {
-    display: block !important;
-    justify-self: center;
-    max-width: 50%;
-  }
+}
 
+/* ESCONDE o botão “Filtros” no DESKTOP */
+@media screen and (min-width: 769px) {
+  .mobile-filter-toggle {
+    display: none !important;
+  }
 }

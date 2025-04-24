@@ -35,20 +35,18 @@ h2 {
   width: 80%;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  align-items: center; /* ✨ Corrige alinhamento vertical */
+  align-items: center;
   padding: 8px 0;
   min-height: 80px;
   border-bottom: 0.5px solid rgb(185, 178, 178);
 }
 
-/* Corrige o alinhamento da imagem e nome na MESMA linha */
 .boots-in-cart-info-container-check {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-/* Nome do produto alinhado verticalmente ao centro */
 .boots-in-cart-info-container-check > p {
   font-size: 0.85rem;
   margin: 0;
@@ -65,7 +63,6 @@ h2 {
   text-align: center;
 }
 
-/* Quantidade + botões lado a lado */
 .boots-in-cart-amount-container-check {
   display: flex;
   flex-direction: row;
@@ -106,18 +103,71 @@ h2 {
   display: block;
 }
 
+/* ================= MOBILE CLEAN VERSION ================= */
 @media screen and (max-width: 768px) {
-  .boots-in-cart-container-check,
   .cart-labels-check {
+    display: none;
+  }
+
+  .boots-in-cart-container-check {
     grid-template-columns: 1fr;
-    text-align: center;
+    width: 95%;
+    margin: 1rem 0;
+    padding: 0.5rem 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: transparent;
   }
 
   .boots-in-cart-info-container-check {
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .boots-in-cart-info-container-check > p {
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+  }
+
+  .boots-in-cart-img-check {
+    width: 110px;
+    height: auto;
+    margin-bottom: 0.5rem;
+  }
+
+  .boots-in-cart-price-check {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
   }
 
   .boots-in-cart-amount-container-check {
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5rem;
+    gap: 10px;
+  }
+
+  .cart-amount-check {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0 8px;
+  }
+
+  .buttons-in-cart-container-check {
+    gap: 8px;
+  }
+
+  .plus-minus-trash-button-check {
+    width: 2rem;
+    height: 2rem;
+    box-shadow: none;
+    background-color: transparent;
+    border: none;
   }
 }
