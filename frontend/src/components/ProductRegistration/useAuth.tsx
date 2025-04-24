@@ -1,8 +1,15 @@
-import { createContext, useContext, useState, useEffect} from "react"
+import { createContext, useContext, useState, useEffect, ReactNode} from "react"
 import { is_authenticated } from "./AuthApi"
-const AuthContext = createContext(undefined)
 
-export const AuthProvider = ({children}) => {
+interface AuthContextType {
+    isAuthenticated: boolean;
+    loading: boolean;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined)
+
+export const AuthProvider = ({children}: {children:ReactNode}) => {
+
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [loading, setLoading] = useState(false)
     
@@ -21,7 +28,7 @@ export const AuthProvider = ({children}) => {
         get_authenticated()
     },[window.location.pathname])
     return (
-        <AuthContext.Provider>
+        <AuthContext.Provider value={{isAuthenticated, loading}}>
             {children}
         </AuthContext.Provider>
     )
