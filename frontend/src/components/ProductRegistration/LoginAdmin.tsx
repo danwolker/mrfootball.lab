@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { login, logout } from "./endpoints/api";
-
+import { useNavigate } from "react-router-dom"
 const LoginAdmin: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const nav = useNavigate()
+  
   const handleLogout = async () => {
     await logout();
   };
   const handleLogin = async () => {
     login(username, password);
+    nav('/product-registration')
+
   };
 
   return (

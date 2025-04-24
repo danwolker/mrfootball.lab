@@ -3,6 +3,7 @@ import axios from "axios";
 const LOGIN_URL = "http://127.0.0.1:8000/api/token/";
 const REFRESH_URL = "http://127.0.0.1:8000/api/token/refresh";
 const LOGOUT_URL = "http://127.0.0.1:8000/api/logout/";
+const AUTH_URL = "http://127.0.0.1:8000/api/is_authenticated";
 
 const api = axios.create({
   baseURL: "http://127.0.0.1:8000/api",
@@ -23,6 +24,8 @@ export const refresh_token = async () => {
   return response.data.refreshed;
 };
 
+
+
 export const logout = async () => {
   try {
     await api.post('logout');
@@ -31,3 +34,14 @@ export const logout = async () => {
     return false;
   }
 };
+
+
+
+export const is_authenticated = async () => {
+  try {
+    await api.post('is_authenticated', {})
+    return true
+  } catch (error) {
+    return false
+  }
+}

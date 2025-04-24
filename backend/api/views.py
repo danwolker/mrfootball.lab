@@ -412,7 +412,7 @@ def logout(request):
         res.data = {'success': True}
         res.delete_cookie('access_token', path='/', samesite='None')
         res.delete_cookie('refresh_token', path='/', samesite='None')
-        print('done')
+        
         return res
     except:
         return Response({'success':False})
