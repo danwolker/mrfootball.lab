@@ -12,9 +12,9 @@ interface Product {
   rating: number;
   color: string;
   amount: number;
-  type: string; // Ex: "Campo", "Futsal"
-  boot: boolean; // Se tem botinha ou não
-  description?: string; // Descrição do produto, opcional
+  type: string;
+  boot: boolean;
+  description?: string;
 }
 
 interface CartItem {
@@ -32,7 +32,6 @@ const CheckProducts: React.FC = () => {
     handleRemoveBootFromCart
   } = useProducts();
 
-
   function increaseBootAmountInCart(boot: CartItem) {
     handleIncreaseBootAmountInCart(boot);
   }
@@ -40,18 +39,21 @@ const CheckProducts: React.FC = () => {
   function decreaseBootAmountInCart(boot: CartItem) {
     handleDecreaseBootAmountInCart(boot);
   }
+
   function removeBootFromCart(boot: CartItem) {
     handleRemoveBootFromCart(boot);
   }
+
   return (
     <div className="cart-sidebar-check">
-  
       <h2>Conferir Produtos</h2>
+
       <div className="cart-labels-check">
-        <p className="cart-label-procuct-check">Produto</p>
-        <p className="cart-label-price-check">Preço</p>
-        <p className="cart-label-amount-check">Quantidade</p>
+        <p className="cart-label-check">Produto</p>
+        <p className="cart-label-check">Preço</p>
+        <p className="cart-label-check">Quantidade</p>
       </div>
+
       {cartItems?.map((boot, index) => (
         <div className="boots-in-cart-container-check" key={index}>
           <div className="boots-in-cart-info-container-check">
@@ -65,9 +67,9 @@ const CheckProducts: React.FC = () => {
               {boot.size}
             </p>
           </div>
+
           <div className="boots-in-cart-price-check">
-            R$:
-            {boot.product.price.toFixed(2)}{" "}
+            R$: {boot.product.price.toFixed(2)}
           </div>
 
           <div className="boots-in-cart-amount-container-check">
@@ -85,14 +87,16 @@ const CheckProducts: React.FC = () => {
               >
                 <Minus size={16} color="#ff6600" />
               </button>
-              <button onClick={() => removeBootFromCart(boot)} className="plus-minus-trash-button-check">
+              <button
+                onClick={() => removeBootFromCart(boot)}
+                className="plus-minus-trash-button-check"
+              >
                 <Trash size={16} color="#858282" />
               </button>
             </div>
           </div>
         </div>
       ))}
-   
     </div>
   );
 };

@@ -145,77 +145,41 @@ const AddressForm: React.FC = () => {
         </div>
 
         <h2>Endereço</h2>
-        <div className="address-container">
-          <div className="item-div">
-            <label htmlFor="street">Rua: </label>
-            <input
-              name="street"
-              id="street"
-              type="text"
-              required
-              onChange={(e) => setStreetPreference(e.target.value)}
-            />
-          </div>
-          <div className="item-div">
-            <label htmlFor="number">Número: </label>
-            <input
-              name="number"
-              id="number"
-              type="number"
-              required
-              onChange={(e) => setNumberPreference(Number(e.target.value))}
-            />
-          </div>
-          <div className="item-div">
-            <label htmlFor="neighborhood">Bairro: </label>
-            <input
-              name="neighborhood"
-              id="neighborhood"
-              type="text"
-              required
-              onChange={(e) => setNeiborhoodPreference(e.target.value)}
-            />
-          </div>
-          <div className="item-div">
-            <label htmlFor="city">Cidade: </label>
-            <input
-              name="city"
-              id="city"
-              type="text"
-              required
-              onChange={(e) => setCityPreference(e.target.value)}
-            />
-          </div>
-          <div className="item-div">
-            <label htmlFor="state">Estado: </label>
-            <input
-              name="state"
-              id="state"
-              type="text"
-              required
-              onChange={(e) => setStatePreference(e.target.value)}
-            />
-          </div>
-          <div className="item-div">
-            <label htmlFor="complement">Complemento: </label>
-            <input
-              name="complement"
-              id="complement"
-              type="text"
-              onChange={(e) => setAddresComplementPreference(e.target.value)}
-            />
-          </div>
-          <div className="item-div">
-            <label htmlFor="cep">CEP: </label>
-            <input
-              name="cep"
-              id="cep"
-              type="text"
-              required
-              onChange={(e) => SetCepPreference(e.target.value)}
-            />
-          </div>
-        </div>
+<div className="address-container">
+  <div className="address-column">
+    <div className="item-div">
+      <label htmlFor="street">Rua:</label>
+      <input id="street" type="text" onChange={(e) => setStreetPreference(e.target.value)} />
+    </div>
+    <div className="item-div">
+      <label htmlFor="number">Número:</label>
+      <input id="number" type="number" onChange={(e) => setNumberPreference(Number(e.target.value))} />
+    </div>
+    <div className="item-div">
+      <label htmlFor="neighborhood">Bairro:</label>
+      <input id="neighborhood" type="text" onChange={(e) => setNeiborhoodPreference(e.target.value)} />
+    </div>
+    <div className="item-div">
+      <label htmlFor="city">Cidade:</label>
+      <input id="city" type="text" onChange={(e) => setCityPreference(e.target.value)} />
+    </div>
+  </div>
+
+  <div className="address-column">
+    <div className="item-div">
+      <label htmlFor="state">Estado:</label>
+      <input id="state" type="text" onChange={(e) => setStatePreference(e.target.value)} />
+    </div>
+    <div className="item-div">
+      <label htmlFor="complement">Complemento:</label>
+      <input id="complement" type="text" onChange={(e) => setAddresComplementPreference(e.target.value)} />
+    </div>
+    <div className="item-div">
+      <label htmlFor="cep">CEP:</label>
+      <input id="cep" type="text" onChange={(e) => SetCepPreference(e.target.value)} />
+    </div>
+  </div>
+</div>
         <div >
           <button className="finish-shopping-button" type="button" onClick={handleStartPayment}>
             Pagar com Mercado Pago

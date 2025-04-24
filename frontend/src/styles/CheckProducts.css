@@ -1,19 +1,18 @@
 .cart-sidebar-check {
   color: black;
   display: flex;
-  flex-flow: column nowrap;
+  flex-direction: column;
   align-items: center;
   background: white;
-  border: 1px solid #ccc;
-  padding: 20px;
+  padding: 50px;
   box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
   width: 100%;
 }
 
-/* Títulos carrinho */
 h2 {
   margin-top: 0.875rem;
+  font-size: 1.5rem;
 }
 
 .cart-labels-check {
@@ -21,87 +20,72 @@ h2 {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   justify-items: center;
-  align-items: end;
-  border-bottom: 1px solid black;
-  padding-bottom: 0.25rem;
-  margin-bottom: 0.875rem;
-  margin-top: 0.875rem;
+  align-items: center;
+  font-weight: bold;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
 }
 
-.cart-label-price-check,
-.cart-label-product {
-  justify-self: start;
-  font-size: 0.7rem;
+.cart-label-check {
+  text-align: center;
 }
-
-.cart-label-procuct-check {
-  justify-self: start;
-  font-size: 0.7rem;
-  margin-left: 10%;
-}
-
-.cart-label-amount-check {
-  justify-self: center;
-  font-size: 0.7rem;
-}
-
-/* Containers de produtos no carrinho */
 
 .boots-in-cart-container-check {
   width: 80%;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  padding: 2px;
+  align-items: center; /* ✨ Corrige alinhamento vertical */
+  padding: 8px 0;
   min-height: 80px;
   border-bottom: 0.5px solid rgb(185, 178, 178);
 }
 
+/* Corrige o alinhamento da imagem e nome na MESMA linha */
 .boots-in-cart-info-container-check {
-  display: grid;
-  grid-template-columns: 2fr 4fr;
-  min-width: 230px;
-  padding-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
+/* Nome do produto alinhado verticalmente ao centro */
 .boots-in-cart-info-container-check > p {
-  justify-self: start;
-  align-self: self-end;
-  font-size: 0.7rem;
-  margin-bottom: 10px;
-  margin-left: 20px;
+  font-size: 0.85rem;
+  margin: 0;
 }
 
 .boots-in-cart-img-check {
-  margin: auto;
   width: 70px;
   height: 50px;
   border-radius: 8px;
-  margin-bottom: 10px;
 }
 
 .boots-in-cart-price-check {
-  align-self: self-end;
-  font-size: 0.7rem;
-  margin-bottom: 10px;
+  font-size: 0.85rem;
+  text-align: center;
 }
 
+/* Quantidade + botões lado a lado */
 .boots-in-cart-amount-container-check {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: center;
-}
-
-.buttons-in-cart-container-check {
-  justify-self: start;
-  align-self: center;
-  margin-bottom: 10px;
-  align-self: self-end;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .cart-amount-check {
-  margin: auto;
-  font-size: 0.7rem;
-  margin-bottom: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.buttons-in-cart-container-check {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
 }
 
 .plus-minus-trash-button-check {
@@ -109,59 +93,31 @@ h2 {
   border-radius: 50%;
   border: none;
   box-shadow: 0 1px 1px 0.5px rgba(201, 200, 200, 0.486);
-  padding-top: 4px;
-  margin: 2px;
+  padding: 4px;
   width: 1.5rem;
   height: 1.5rem;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .plus-minus-trash-button-check > svg {
-  justify-content: center;
-}
-
-/* Botão de fechar carrinho*/
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: #333;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.close-btn:hover {
-  color: #ff6600;
-}
-
-.finish-shopping-button-mp {
-  max-width: 200px;
-  margin: 1rem auto;
-  
-  padding: 1.2rem;
-  border: none;
-  background-color: rgb(39, 37, 37);
-  border-radius: 5px;
-  cursor: pointer;
-  color: white;
-}
-
-.finish-shopping-button-mp:hover {
-  background-color: #ff6600;
-  color: rgb(39, 37, 37);
+  display: block;
 }
 
 @media screen and (max-width: 768px) {
-  .item-div-personal-data > div {
-    display: flex;
-    flex-flow: column wrap;
+  .boots-in-cart-container-check,
+  .cart-labels-check {
+    grid-template-columns: 1fr;
+    text-align: center;
   }
 
-  .item-div {
-    display: flex;
-    flex-flow: column wrap;
+  .boots-in-cart-info-container-check {
+    flex-direction: column;
+  }
+
+  .boots-in-cart-amount-container-check {
+    flex-direction: column;
   }
 }
