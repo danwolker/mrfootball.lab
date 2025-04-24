@@ -1,27 +1,16 @@
 import "../ProductRegistration/NavAdmin.css";
 import React, { useState } from "react";
-import { login, logout } from "./AuthApi";
-import { useNavigate } from "react-router-dom"
+
+import { login } from "./endpoints/api"
 
 
 const NavAdmin: React.FC = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const nav = useNavigate()
-  
-  const handleLogin = () => {
-    login(username,password)
-  };
 
-  const handleLogout = async () => {
-    const success = await logout();
-    if (success) {
-      nav("/catalog")
-      window.alert('voce foi desconectado')
-    } else {
-      console.log('Erro ao deslogar')
-    }
+  const handleLogout = () => {
+    
   }
 
   return (
@@ -46,12 +35,6 @@ const NavAdmin: React.FC = () => {
             <label htmlFor="password">Senha: </label>
             <input onChange={(e) => setPassword(e.target.value)} type="text" name="password" id="password" />
           </div>
-          <button
-            onClick={handleLogin}
-            className="submit-login-button"
-          >
-            Entrar
-          </button>
         </div>
       )}
     </div>

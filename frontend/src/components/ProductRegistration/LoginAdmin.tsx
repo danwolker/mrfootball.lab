@@ -1,46 +1,20 @@
 import { useState } from "react";
-import { login } from "./AuthApi";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "./useAuth"; // Importe o useAuth
+import { login, logout } from "./endpoints/api";
 
 const LoginAdmin: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const nav = useNavigate();
-  const { checkAuth } = useAuth(); // Use o hook useAuth
 
-  const handleLogin = async () => {
-    setLoading(true);
-    setError("");
-    
-    try {
-      const loginSuccess = await login(username, password);
-      
-      if (loginSuccess) {
-        // Verifica a autenticação novamente para garantir
-        await checkAuth();
-        nav('/product-registration');
-      } else {
-        setError("Credenciais inválidas ou erro no servidor");
-      }
-    } catch (err) {
-      setError("Erro ao conectar com o servidor");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
+  const handleLogout = async () => {
+    await logout();
   };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    handleLogin();
+  const handleLogin = async () => {
+    login(username, password);
   };
 
   return (
     <div className="login">
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="login-input-div">
           <label htmlFor="username">Usuário: </label>
           <input
@@ -60,18 +34,16 @@ const LoginAdmin: React.FC = () => {
             type="password" // Mude para type="password" para segurança
             name="password"
             id="password"
+            autoComplete="senha"
             required
           />
         </div>
-        {error && <div className="error-message">{error}</div>}
-        <button 
-          type="submit" 
-          className="submit-login-button"
-          disabled={loading}
-        >
-          {loading ? 'Carregando...' : 'Entrar'}
+
+        <button type="button" onClick={handleLogin} className="submit-login-button">
+          Entrar
         </button>
       </form>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

@@ -4,11 +4,11 @@ from .views import registry_products, get_lines, CustomTokenObtainPairView,Custo
 from .views import decrease_boot_amount_in_cart,finish_order,remove_boot_from_cart, create_mercado_pago_preference,get_filtered_boot,register_new_question
 urlpatterns = [
     #auth
-    path('token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', CustomRefreshTokenView.as_view(), name='token_refresh'),
     path('is_authenticated', is_authenticated),
     path('register', register),
-    path('logout/', logout),
+    path('logout', logout),
     
     path('list_newsletter_consumers', see_news_consumer, name='list_news_consumer'),
     path('create_newsletter_consumer', register_news_consumer, name='create_news_consumer'),
@@ -25,6 +25,7 @@ urlpatterns = [
     path('get_filtered_boots', get_filtered_boot, name='get_filtered_boot' ),
     path('send_question', register_new_question, name='register_newquestion'),
     path('create_mercado_pago_preference', create_mercado_pago_preference, name='create_mercado_pago_preference'),
+    
     #admin
     path('registry_product', registry_products, name="registry_products")
 ]

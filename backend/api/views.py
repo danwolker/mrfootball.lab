@@ -310,11 +310,15 @@ def finish_order(request):
 def registry_products(request):
     print(request.data)
     return Response(status=status.HTTP_201_CREATED)
+
+
 class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
         try:
             response = super().post(request, *args, **kwargs)
             tokens = response.data
+            print(response.data)
+            print(response)
             
             access_token = tokens['access']
             refresh_token = tokens['refresh']
@@ -329,7 +333,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 value=access_token,
                 httponly=True,
                 secure=True,
-                samesite='Lax',  # Ou 'None' se estiver usando HTTPS em domínios diferentes
+                samesite= 'None', # Ou 'None' se estiver usando HTTPS em domínios diferentes
                 path='/',
                 max_age=max_age
             )
@@ -339,10 +343,11 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 value=refresh_token,
                 httponly=True,
                 secure=True,
-                samesite='Lax',
+                samesite='None',
                 path='/',
                 max_age=max_age
             )     
+            print(res.cookies)
             return res
             
         except Exception as e:
@@ -371,7 +376,7 @@ class CustomRefreshTokenView(TokenRefreshView):
                 value=access_token,
                 httponly=True,
                 secure=True,
-                samesite='Lax',
+                samesite='None',
                 path='/',
                 max_age=604800
             )
@@ -400,6 +405,7 @@ def register(request):
     return Response(serializer.errors)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def logout(request):
     try:
         res = Response()
