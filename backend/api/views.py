@@ -335,6 +335,27 @@ def registry_products(request):
     )
     return Response(status=status.HTTP_201_CREATED)
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def registry_line(request):
+    data = request.data
+    Line.objects.create(line=data.get('line'))
+    return Response(status=status.HTTP_201_CREATED)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def registry_brand(request):
+    data = request.data
+    Brand.objects.create(brand=data.get('brand'))
+    return Response(status=status.HTTP_201_CREATED)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def registry_color(request):
+    data = request.data
+    Color.objects.create(color=data.get('color'), color_code = data.get('color_code'))
+    return Response(status=status.HTTP_201_CREATED)
+
 class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
         try:

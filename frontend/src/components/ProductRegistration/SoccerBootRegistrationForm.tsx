@@ -6,11 +6,46 @@ import { useRegistry } from "../../contexts/RegistryContext";
 const SoccerBootRegistrationForm: React.FC = () => {
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [image, setImage] = useState<File | null>();
+  const [line, setLine] = useState("");
+  const [brand, setBrand] = useState("");
+  const [color, setColor] = useState("")
+  const [colorCode, setColorCode] = useState("")
   const [urlPreview, setUrlPreview] = useState<string | null>(null);
+
   const { colors, brands, lines } = useProducts();
   const { isSoccerBootOpen, isBrandOpen, isColorOpen, isLineOpen } =
     useRegistry();
   const types = ["Campo", "Salao", "Suico", "Trava-Mista", "Todas"];
+
+  const handleRegistryLine = async () => {
+    const response = await fetch("http://127.0.0.1:8000/api/registry_line", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({line:line}),
+    });
+    window.alert('Registro feito com sucesso!')
+  };
+
+  const handleRegistryBrand = async () => {
+    const response = await fetch("http://127.0.0.1:8000/api/registry_brand", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({brand:brand}),
+    });
+    window.alert('Registro feito com sucesso!')
+
+  };
+
+  const handleRegistryColor= async () => {
+    const response = await fetch("http://127.0.0.1:8000/api/registry_color", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({color:color, color_code:colorCode}),
+    });
+    window.alert('Registro feito com sucesso!')
+
+  };
+
 
   const handleRegistryProduct = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +55,6 @@ const SoccerBootRegistrationForm: React.FC = () => {
     if (image) formData.append("boot_image", image);
     const bootieValue = formData.get("bootie") ? "on" : "off";
     formData.set("bootie", bootieValue);
-
     try {
       const response = await fetch(
         "http://127.0.0.1:8000/api/registry_product",
@@ -29,7 +63,6 @@ const SoccerBootRegistrationForm: React.FC = () => {
           body: formData,
         }
       );
-      console.log(formData);
     } catch (e) {
       console.log(e);
     }
@@ -155,9 +188,9 @@ const SoccerBootRegistrationForm: React.FC = () => {
           <h2>Registrar Marcas</h2>
           <div className="input-div">
             <label htmlFor="brand">Marca:</label>
-            <input type="text" name="brand" id="brand" />
+            <input onChange={(e)=> setBrand(e.target.value)} type="text" name="brand" id="brand" />
           </div>
-          <button className="save-button">Salvar Marca</button>
+          <button type="button" onClick={handleRegistryBrand} className="save-button">Salvar Marca</button>
         </div>
       )}
       {isLineOpen && (
@@ -165,9 +198,20 @@ const SoccerBootRegistrationForm: React.FC = () => {
           <h2>Registrar Linhas</h2>
           <div className="input-div">
             <label htmlFor="line">Linha:</label>
-            <input type="text" name="line" id="line" />
+            <input
+              onChange={(e) => setLine(e.target.value)}
+              type="text"
+              name="line"
+              id="line"
+            />
           </div>
-          <button className="save-button">Salvar Linha</button>
+          <button
+            type="button"
+            onClick={handleRegistryLine}
+            className="save-button"
+          >
+            Salvar Linha
+          </button>
         </div>
       )}
       {isColorOpen && (
@@ -175,11 +219,11 @@ const SoccerBootRegistrationForm: React.FC = () => {
           <h2>Registrar Cores</h2>
           <div className="input-div">
             <label htmlFor="color">Cor:</label>
-            <input type="text" name="color" id="color" />
+            <input onChange={(e) => setColor(e.target.value)} type="text" name="color" id="color" />
             <label htmlFor="code">Linear Gradient:</label>
-            <input type="text" name="code" id="code" />
+            <input onChange={(e) => setColorCode(e.target.value)} type="text" name="code" id="code" />
           </div>
-          <button className="save-button">Salvar Cor</button>
+          <button onClick={handleRegistryColor} type="button" className="save-button">Salvar Cor</button>
         </div>
       )}
     </div>

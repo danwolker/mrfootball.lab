@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import register_news_consumer, see_news_consumer, get_soccer_boots,add_boot_to_cart, get_brands, get_colors, get_boots_in_cart, increase_boot_amount_in_cart
-from .views import registry_products, get_lines, CustomTokenObtainPairView,CustomRefreshTokenView, is_authenticated, register, logout
+from .views import registry_products, get_lines, CustomTokenObtainPairView,CustomRefreshTokenView, is_authenticated, register, logout, registry_line, registry_brand, registry_color
 from .views import decrease_boot_amount_in_cart,finish_order,remove_boot_from_cart, create_mercado_pago_preference,get_filtered_boot,register_new_question
 urlpatterns = [
     #auth
@@ -27,5 +27,8 @@ urlpatterns = [
     path('create_mercado_pago_preference', create_mercado_pago_preference, name='create_mercado_pago_preference'),
     
     #admin
-    path('registry_product', registry_products, name="registry_products")
+    path('registry_product', registry_products, name="registry_products"),
+    path('registry_line', registry_line),
+    path('registry_brand', registry_brand),
+    path('registry_color', registry_color)
 ]

@@ -42,7 +42,7 @@ const LoginAdmin: React.FC = () => {
           />
         </div>
 
-        <button type="button" onClick={handleLogin} className="submit-login-button">
+        <button type="button" onClick={handleLogin} className="submit-login-logout-button">
           Entrar
         </button>
       </form>

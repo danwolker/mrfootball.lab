@@ -18,7 +18,7 @@ const NavAdmin: React.FC = () => {
       <nav className="nav-admin-container">
         <ul className="login-logout-container">
           <li>
-            <button onClick={handleLogout}>Logout</button>
+            <button className="submit-login-logout-button" onClick={handleLogout}>Logout</button>
           </li>
         </ul>
       </nav>
